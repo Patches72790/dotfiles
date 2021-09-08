@@ -122,6 +122,31 @@ local function setup_servers()
     require('lspinstall').setup()
     local servers = require('lspinstall').installed_servers()
     for _, server in pairs(servers) do
+        if server == 'sumneko_lua' then
+            require('lspconfig')[server].setup({
+                settings = {
+                  Lua = {
+                    runtime = {
+                      version = 'Lua 5.3',
+                      path = {
+                        '?.lua',
+                        '?/init.lua',
+                        vim.fn.expand'~/.luarocks/share/lua/5.3/?.lua',
+                        vim.fn.expand'~/.luarocks/share/lua/5.3/?/init.lua',
+                        '/usr/share/5.3/?.lua',
+                        '/usr/share/lua/5.3/?/init.lua'
+                      }
+                    },
+                    workspace = {
+                      library = {
+                        [vim.fn.expand'~/.luarocks/share/lua/5.3'] = true,
+                        ['/usr/share/lua/5.3'] = true
+                      }
+                    }
+                  }
+                }
+            })
+        end
         require('lspconfig')[server].setup{}
     end
 end
@@ -132,7 +157,6 @@ require('lspinstall').post_install_hook = function()
     vim.cmd('bufdo e')
 end
 
-
 -- Java DT language server
 local function start_jdtls()
     local cmd = {'java-lsp.sh'}
@@ -141,19 +165,20 @@ local function start_jdtls()
             "/home/patroclus/.java-debug/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-0.32.0.jar"
         }
     }
-    local params = {
-        ["command"] = "vscode.java.startDebugSession";
-    };
-    local on_attach = function(client, bufnr)
-        local result, err = client.request_sync("workspace/executeCommand", params, nil, bufnr)
-        if result then _G.test_result = result end
+--    local params = {
+--        ["command"] = "vscode.java.startDebugSession";
+--    };
+--    local on_attach = function(client, bufnr)
+--        local result, err = client.request_sync("workspace/executeCommand", params, nil, bufnr)
+--        if result then _G.test_result = result end
 --        vim.api.nvim_exec("[[ call vimspector#LaunchWithSettings({ 'DAPPort': result })]]", true);
-    end
+--    end
 
-    require('lspconfig').jdtls.setup{ cmd = cmd, init_options = init_options, on_attach = on_attach }
+    require('lspconfig').jdtls.setup{ cmd = cmd, init_options = init_options }
 end
 
 start_jdtls()
+
 
 -- miscellaneous ui customization
 -- show box when cursor is over diagnostic

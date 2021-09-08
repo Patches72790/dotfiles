@@ -1,6 +1,5 @@
 let g:vimspector_enable_mappings = 'HUMAN'
 
-
 let s:jdt_ls_debugger_port = 0
 function! s:StartDebugging()
   if s:jdt_ls_debugger_port <= 0
