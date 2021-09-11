@@ -1,12 +1,12 @@
 local packer = require('packer')
 local use = packer.use
 
-local function plugins_startup() 
+local function plugins_startup()
     -- auto-update packer
     use { 'wbthomason/packer.nvim' }
 
-    -- file explorer tree 
-    use { 'kyazdani42/nvim-tree.lua', 
+    -- file explorer tree
+    use { 'kyazdani42/nvim-tree.lua',
            requires = { 'kyazdani42/nvim-web-devicons' },
            config = function() require('config.nvim-tree') end }
 
@@ -16,18 +16,34 @@ local function plugins_startup()
 
     -- lsp config
     use {   'neovim/nvim-lspconfig',
-            'nvim-lua/popup.nvim'
+            config = function() require('config.lsp-config') end,
         }
 
-    -- TODO lsp-install and lsp-configuration settings
-    -- Treesitter
-    -- various language tools for ts, java, rust, etc
-    -- debugger (nvim-dap or vimspector)
+    use {  'kabouzeid/nvim-lspinstall' }
 
-    -- autocomplete 
-    use { 'hrsh7th/nvim-cmp', 
+    use { 'nvim-treesitter/nvim-treesitter',
+          run = ':TSUpdate',
+        }
+
+    -- general language packages
+    use {
+        'leafgarland/typescript-vim',
+        'peitalin/vim-jsx-typescript',
+        'rust-lang/rust.vim',
+        { 'prettier/vim-prettier', run = 'npm install' },
+        'mfussenegger/nvim-jdtls',
+    }
+
+    -- TODO debugger (nvim-dap)
+    -- resolve configuration files for this... look at mbthomasons config for example
+    use {
+        'mfussenegger/nvim-dap'
+    }
+
+    -- autocomplete
+    use { 'hrsh7th/nvim-cmp',
             requires = {
-                'L3MON4D3/LuaSnip', 
+                'L3MON4D3/LuaSnip',
                 { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
                 'hrsh7th/cmp-nvim-lsp',
                 { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
@@ -35,7 +51,7 @@ local function plugins_startup()
                 { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
                 { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
             },
-            config = function() require('config.nvim-cmp') end 
+            config = function() require('config.nvim-cmp') end
         }
 
     -- colorschemes

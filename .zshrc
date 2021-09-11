@@ -116,8 +116,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME"
+export XDG_DATA_HOME="$HOME/.local/share"
 export EDITOR="nvim"
 export MYJRE="/usr/lib/jvm/java-16-openjdk-amd64/bin/java"
 export JAVA_DEBUG_JAR="/home/patroclus/.java-debug/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-0.32.0.jar"
 
+export PATH="$HOME/.local/bin:$PATH"
