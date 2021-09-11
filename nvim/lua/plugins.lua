@@ -23,6 +23,12 @@ local function plugins_startup()
 
     use { 'nvim-treesitter/nvim-treesitter',
           run = ':TSUpdate',
+          setup = function() require('nvim-treesitter.configs').setup{
+              highlight = {
+                enable = true
+              },
+          }
+      end
         }
 
     -- general language packages
