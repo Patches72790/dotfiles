@@ -23,7 +23,7 @@ local function plugins_startup()
 
     use { 'nvim-treesitter/nvim-treesitter',
           run = ':TSUpdate',
-          setup = function() require('nvim-treesitter.configs').setup{
+          config = function() require('nvim-treesitter.configs').setup{
               highlight = {
                 enable = true
               },
@@ -46,6 +46,10 @@ local function plugins_startup()
         'mfussenegger/nvim-dap'
     }
 
+    -- linters
+    use { 'mfussenegger/nvim-lint',
+        }
+
     -- autocomplete
     use { 'hrsh7th/nvim-cmp',
             requires = {
@@ -66,7 +70,7 @@ local function plugins_startup()
 
     -- git
     use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' },
-            setup = function() require('gitsigns').setup() end,
+            config = function() require('gitsigns').setup() end,
         }
 
 end

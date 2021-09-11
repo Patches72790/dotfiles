@@ -17,6 +17,7 @@ local utils = require('config.util')
 local opt = utils.opt
 local cmd = vim.cmd
 local map = utils.map
+local autocmd = utils.autocmd
 
 -- general options
 opt('number', true, window)
@@ -60,3 +61,7 @@ map('n', '<c-l>', '<c-w>l')
 -- closing buffers
 map('n', '<leader>q', '<cmd>qa<CR>', silent)
 map('n', '<leader>x', '<cmd>x!<CR>', silent)
+
+-- autocmd for triggering linting
+-- autocmd('LintCmd', [[BufWritePost <buffer> lua require('lint').try_lint()]])
+

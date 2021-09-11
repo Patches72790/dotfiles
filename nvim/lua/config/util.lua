@@ -7,6 +7,15 @@ local function opt(o, v, scopes)
   for _, s in ipairs(scopes) do s[o] = v end
 end
 
+local function autocmd(group, cmds, clear)
+  clear = clear == nil and false or clear
+  if type(cmds) == 'string' then cmds = {cmds} end
+  cmd('augroup ' .. group)
+  if clear then cmd [[au!]] end
+  for _, c in ipairs(cmds) do cmd('autocmd ' .. c) end
+  cmd [[augroup END]]
+end
+
 local function map(modes, lhs, rhs, opts)
   opts = opts or {}
   opts.noremap = opts.noremap == nil and true or opts.noremap
@@ -14,4 +23,4 @@ local function map(modes, lhs, rhs, opts)
   for _, mode in ipairs(modes) do map_key(mode, lhs, rhs, opts) end
 end
 
-return { opt = opt, map = map } 
+return { opt = opt, map = map, autocmd = autocmd }
