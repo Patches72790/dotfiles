@@ -118,10 +118,9 @@ nvim_lsp.diagnosticls.setup {
 }
 
 local lua_settings = {
-      settings = {
        Lua = {
          runtime = {
-           version = 'Lua 5.3',
+           version = 'LuaJIT',
            path = {
              '?.lua',
              '?/init.lua',
@@ -138,10 +137,10 @@ local lua_settings = {
            library = {
              [vim.fn.expand'~/.luarocks/share/lua/5.3'] = true,
              ['/usr/share/lua/5.3'] = true
-           }
+           },
+           checkThirdParty = false,
          }
        }
-     }
 }
 
 -- config that activates keymaps and enables snippet support
