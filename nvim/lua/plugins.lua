@@ -59,7 +59,9 @@ local function plugins_startup()
     use { 'doums/darcula' }
 
     -- git
-    use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+    use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' },
+            setup = function() require('gitsigns').setup() end,
+        }
 
 end
 

@@ -117,41 +117,64 @@ nvim_lsp.diagnosticls.setup {
     }
 }
 
+local lua_settings = {
+      settings = {
+       Lua = {
+         runtime = {
+           version = 'Lua 5.3',
+           path = {
+             '?.lua',
+             '?/init.lua',
+             vim.fn.expand'~/.luarocks/share/lua/5.3/?.lua',
+             vim.fn.expand'~/.luarocks/share/lua/5.3/?/init.lua',
+             '/usr/share/5.3/?.lua',
+             '/usr/share/lua/5.3/?/init.lua'
+           }
+         },
+         diagnostics = {
+             globals = {'vim'},
+         },
+         workspace = {
+           library = {
+             [vim.fn.expand'~/.luarocks/share/lua/5.3'] = true,
+             ['/usr/share/lua/5.3'] = true
+           }
+         }
+       }
+     }
+}
+
+-- config that activates keymaps and enables snippet support
+local function make_config()
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  return {
+    -- enable snippet support
+    capabilities = capabilities,
+    -- map buffer local keybindings when the language server attaches
+    on_attach = on_attach,
+  }
+end
+
 -- Setup LspInstall language servers
 local function setup_servers()
     require('lspinstall').setup()
     local servers = require('lspinstall').installed_servers()
+
     for _, server in pairs(servers) do
-        if server == 'sumneko_lua' then
-            require('lspconfig')[server].setup({
-                settings = {
-                  Lua = {
-                    runtime = {
-                      version = 'Lua 5.3',
-                      path = {
-                        '?.lua',
-                        '?/init.lua',
-                        vim.fn.expand'~/.luarocks/share/lua/5.3/?.lua',
-                        vim.fn.expand'~/.luarocks/share/lua/5.3/?/init.lua',
-                        '/usr/share/5.3/?.lua',
-                        '/usr/share/lua/5.3/?/init.lua'
-                      }
-                    },
-                    workspace = {
-                      library = {
-                        [vim.fn.expand'~/.luarocks/share/lua/5.3'] = true,
-                        ['/usr/share/lua/5.3'] = true
-                      }
-                    }
-                  }
-                }
-            })
+        local config = make_config()
+
+        -- lua specific settings
+        if server == 'lua' then
+            config.settings = lua_settings
         end
-        require('lspconfig')[server].setup{}
+
+        require('lspconfig')[server].setup{config}
     end
 end
 
 setup_servers()
+
 require('lspinstall').post_install_hook = function()
     setup_servers()
     vim.cmd('bufdo e')
