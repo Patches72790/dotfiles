@@ -1,4 +1,4 @@
--- call plugins file
+-- initialize plugins
 require('plugins')
 
 -- local utility vars
