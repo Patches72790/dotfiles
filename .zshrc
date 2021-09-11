@@ -99,16 +99,11 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias classes="cd ~/Classes"
-alias uwvpnc="globalprotect connect --portal uwmadison.vpn.wisc.edu"
-alias uwvpndc="globalprotect disconnect"
 alias gdec="git log --decorate=full --oneline --graph"
 
 # Antlr 4 Aliases
 alias antlr4='java -jar /usr/local/lib/antlr-4.9.2-complete.jar'
 alias grun='java org.antlr.v4.gui.TestRig'
-
-
 export CLASSPATH=".:/usr/local/lib/antlr-4.9.2-complete.jar:$CLASSPATH"
 
 export NVM_DIR="$HOME/.nvm"
