@@ -8,7 +8,8 @@ local function plugins_startup()
     -- file explorer tree
     use { 'kyazdani42/nvim-tree.lua',
            requires = { 'kyazdani42/nvim-web-devicons' },
-           config = function() require('config.nvim-tree') end }
+           config = function()  require('config.nvim-tree')  require('nvim-tree').setup{ open_on_setup = true} end,
+       }
 
     -- telescope search tool
     use { 'nvim-telescope/telescope.nvim',
