@@ -116,4 +116,9 @@ export EDITOR="nvim"
 export MYJRE="/usr/lib/jvm/java-16-openjdk-amd64/bin/java"
 export JAVA_DEBUG_JAR="$HOME/.java-debug/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-0.32.0.jar"
 
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.pyenv/shims:$HOME/.pyenv/bin:$HOME/.local/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+PYENV_VERSION=3.7.9
+
+export python3="$HOME/.pyenv/versions/3.7.9/bin/python3.7"
