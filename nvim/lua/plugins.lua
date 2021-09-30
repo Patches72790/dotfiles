@@ -13,7 +13,12 @@ local function plugins_startup()
 
     -- telescope search tool
     use { 'nvim-telescope/telescope.nvim',
-           requires = { 'nvim-lua/plenary.nvim' } }
+           requires = { 'nvim-lua/plenary.nvim' },
+           config = function() require('config.telescope') end,
+       }
+
+    use { 'nvim-telescope/telescope-dap.nvim',
+        }
 
     -- lsp config
     use {   'neovim/nvim-lspconfig',
@@ -41,10 +46,15 @@ local function plugins_startup()
         'mfussenegger/nvim-jdtls',
     }
 
-    -- TODO debugger (nvim-dap)
-    -- resolve configuration files for this... look at mbthomasons config for example
+    -- debugger (nvim-dap)
     use {
-        'mfussenegger/nvim-dap'
+        'mfussenegger/nvim-dap',
+        config = function() require('config.nvim-dap') end,
+    }
+
+    use {
+        'rcarriga/nvim-dap-ui',
+        requires = {'mfussenegger/nvim-dap'}
     }
 
     -- linters
