@@ -84,6 +84,15 @@ local function plugins_startup()
             config = function() require('gitsigns').setup() end,
         }
 
+    -- status line
+    use { 'hoob3rt/lualine.nvim',
+            requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+            config = function() require('lualine').setup({
+                options = {
+                    theme = 'jellybeans',
+                },
+            }) end,
+        }
 end
 
 return packer.startup(plugins_startup);
