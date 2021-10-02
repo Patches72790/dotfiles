@@ -117,3 +117,4 @@ export MYJRE="/usr/lib/jvm/java-16-openjdk-amd64/bin/java"
 export JAVA_DEBUG_JAR="/home/patroclus/.java-debug/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-0.32.0.jar"
 
 export PATH="$HOME/.local/bin:$PATH"
+export REACT_EDITOR="none"
