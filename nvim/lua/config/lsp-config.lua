@@ -13,7 +13,10 @@ local format_async = function(err, _, result, _, bufnr)
     end
 end
 
+-- let telescope use this LSP stuff
 vim.lsp.handlers["textDocument/formatting"] = format_async
+vim.lsp.handlers["textDocument/references"] = require('telescope.builtin').lsp_references;
+vim.lsp.handlers["textDocument/definition"] = require('telescope.builtin').lsp_definitions;
 
 _G.lsp_organize_imports = function()
     local params = {
@@ -37,9 +40,10 @@ local on_attach = function(client, bufnr)
     vim.cmd("command! LspImplementation lua vim.lsp.buf.implementation()")
     vim.cmd("command! LspDiagPrev lua vim.lsp.diagnostic.goto_prev()")
     vim.cmd("command! LspDiagNext lua vim.lsp.diagnostic.goto_next()")
-    vim.cmd(
-        "command! LspDiagLine lua vim.lsp.diagnostic.show_line_diagnostics()")
-    vim.cmd("command! LspSignatureHelp lua vim.lsp.buf.signature_help()")buf_map(bufnr, "n", "gd", ":LspDef<CR>", {silent = true})
+    vim.cmd("command! LspDiagLine lua vim.lsp.diagnostic.show_line_diagnostics()")
+    vim.cmd("command! LspSignatureHelp lua vim.lsp.buf.signature_help()")
+
+    buf_map(bufnr, "n", "gd", ":LspDef<CR>", {silent = true})
     buf_map(bufnr, "n", "gr", ":LspRename<CR>", {silent = true})
     buf_map(bufnr, "n", "gR", ":LspRefs<CR>", {silent = true})
     buf_map(bufnr, "n", "gy", ":LspTypeDef<CR>", {silent = true})
@@ -49,8 +53,8 @@ local on_attach = function(client, bufnr)
     buf_map(bufnr, "n", "]a", ":LspDiagNext<CR>", {silent = true})
     buf_map(bufnr, "n", "ga", ":LspCodeAction<CR>", {silent = true})
     buf_map(bufnr, "n", "<Leader>a", ":LspDiagLine<CR>", {silent = true})
-    buf_map(bufnr, "i", "<C-x><C-x>", "<cmd> LspSignatureHelp<CR>",
-              {silent = true})
+    buf_map(bufnr, "i", "<C-x><C-x>", "<cmd> LspSignatureHelp<CR>", {silent = true})
+
     if client.resolved_capabilities.document_formatting then
         vim.api.nvim_exec([[
          augroup LspAutocommands
@@ -181,6 +185,7 @@ local function make_config()
     capabilities = capabilities,
     -- map buffer local keybindings when the language server attaches
     on_attach = on_attach,
+    settings = {},
   }
 end
 
@@ -197,7 +202,11 @@ local function setup_servers()
             config.settings = lua_settings
         end
 
-        require('lspconfig')[server].setup{config}
+        require('lspconfig')[server].setup{ 
+            on_attach = config.on_attach,
+            capabilities = config.capabilities,
+            settings = config.settings,
+        }
     end
 end
 
@@ -216,15 +225,6 @@ local function start_jdtls()
             "/home/patroclus/.java-debug/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-0.32.0.jar"
         }
     }
---    local params = {
---        ["command"] = "vscode.java.startDebugSession";
---    };
---    local on_attach = function(client, bufnr)
---        local result, err = client.request_sync("workspace/executeCommand", params, nil, bufnr)
---        if result then _G.test_result = result end
---        vim.api.nvim_exec("[[ call vimspector#LaunchWithSettings({ 'DAPPort': result })]]", true);
---    end
-
     require('lspconfig').jdtls.setup{ cmd = cmd, init_options = init_options }
 end
 

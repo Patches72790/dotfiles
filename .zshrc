@@ -2,7 +2,7 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/patroclus/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -114,7 +114,16 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export EDITOR="nvim"
 export MYJRE="/usr/lib/jvm/java-16-openjdk-amd64/bin/java"
-export JAVA_DEBUG_JAR="/home/patroclus/.java-debug/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-0.32.0.jar"
+export JAVA_DEBUG_JAR="$HOME/.java-debug/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-0.32.0.jar"
 
+<<<<<<< HEAD
 export PATH="$HOME/.local/bin:$PATH"
 export REACT_EDITOR="none"
+=======
+export PATH="$HOME/.pyenv/shims:$HOME/.pyenv/bin:$HOME/.local/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+PYENV_VERSION=3.7.9
+
+export python3="$HOME/.pyenv/versions/3.7.9/bin/python3.7"
+>>>>>>> 48e2ad61fa7fbb57c80a7c8db5f48ef434cecb24
