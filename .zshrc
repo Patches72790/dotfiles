@@ -60,5 +60,6 @@ export REACT_EDITOR="none"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 PYENV_VERSION=3.7.9
+export PYENV_ROOT="$(pyenv root)"
 
 #export python3="$HOME/.pyenv/versions/3.7.9/bin/python3.7"

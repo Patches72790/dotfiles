@@ -60,6 +60,7 @@ local on_attach = function(client, bufnr)
          augroup LspAutocommands
              autocmd! * <buffer>
              autocmd BufWritePost <buffer> LspFormatting
+             autocmd BufWritePost <buffer> Prettier
          augroup END
          ]], true)
     end
@@ -69,16 +70,18 @@ end
 local filetypes = {
     typescript = "eslint",
     typescriptreact = "eslint",
+    javascript = "eslint",
+    javascriptreact = "eslint",
     python = "pylint",
 }
 
 local linters = {
     eslint = {
         sourceName = "eslint",
-        command = "eslint_d",
-        rootPatterns = {".eslintrc.js", "package.json"},
+        command = "./node_modules/.bin/eslint",
+        rootPatterns = {".eslintrc.js", ".eslintrc.json", "package.json"},
         debounce = 100,
-        args = {"--stdin", "--stdin-filename", "%filepath", "--format", "json"},
+        args = {"--stdin", "--stdin-filename", "%filepath"},
         parseJson = {
             errorsRoot = "[0].messages",
             line = "line",
@@ -87,8 +90,8 @@ local linters = {
             endColumn = "endColumn",
             message = "${message} [${ruleId}]",
             security = "severity"
-        }, 
-        indent = {"error", 4},
+        },
+        indent = {"error", 2},
         securities = {[2] = "error", [1] = "warning"}
     },
     pylint = {
@@ -120,22 +123,32 @@ local linters = {
 }
 
 local formatters = {
-    prettier = {command = "prettier", args = {"--stdin-filepath", "%filepath"}},
+    prettier = {
+        command = "prettier",
+        args = {"--stdin-filepath", "%filepath"},
+        rootPatterns = {
+            ".prettierrc",
+            ".prettierrc.json",
+            ".prettierrc.toml",
+            ".prettierrc.json",
+            ".prettierrc.yml",
+            ".prettierrc.yaml",
+            ".prettierrc.json5",
+            ".prettierrc.js",
+            ".prettierrc.cjs",
+            "prettier.config.js",
+            "prettier.config.cjs"
+        },
+    },
     black = {command = "black", args = {"--quiet", "-"}},
 }
 
 local formatFiletypes = {
     typescript = "prettier",
     typescriptreact =  "prettier",
+    javascript = "prettier",
+    javascriptreact = "prettier",
     python = "black",
-}
-
--- typescript server setup
-nvim_lsp.tsserver.setup{
-    on_attach = function(client)
-        client.resolved_capabilities.document_formatting = false
-        on_attach(client)
-    end
 }
 
 -- diagnostic language server setup
@@ -196,10 +209,16 @@ local function setup_servers()
 
     for _, server in pairs(servers) do
         local config = make_config()
-
         -- lua specific settings
         if server == 'lua' then
             config.settings = lua_settings
+        end
+
+        if server == 'typescript' then
+            config.on_attach = function(client)
+                client.resolved_capabilities.document_formatting = false
+                on_attach(client)
+            end
         end
 
         require('lspconfig')[server].setup{ 
