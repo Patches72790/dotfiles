@@ -60,7 +60,6 @@ local on_attach = function(client, bufnr)
          augroup LspAutocommands
              autocmd! * <buffer>
              autocmd BufWritePost <buffer> LspFormatting
-             autocmd BufWritePost <buffer> Prettier
          augroup END
          ]], true)
     end
