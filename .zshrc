@@ -37,6 +37,7 @@ fi
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 alias gdec="git log --decorate=full --oneline --graph"
+alias atlas="cd $HOME/Projects/atlas-webapp/app/webapp/app"
 
 # Antlr 4 Aliases
 alias antlr4='java -jar /usr/local/lib/antlr-4.9.2-complete.jar'
@@ -53,13 +54,28 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export MYJRE="/usr/lib/jvm/java-16-openjdk-amd64/bin/java"
 export JAVA_DEBUG_JAR="$HOME/.java-debug/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-0.32.0.jar"
+export PATH="$HOME/.cargo/bin:$HOME/.local/bin:$PATH"
 
 # pyenv stuff
-export PATH="$HOME/.cargo/bin:$HOME/.pyenv/shims:$HOME/.pyenv/bin:$HOME/.local/bin:$PATH"
-export REACT_EDITOR="none"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-PYENV_VERSION=3.7.9
-export PYENV_ROOT="$(pyenv root)"
+#export PATH="$HOME/.cargo/bin:$HOME/.pyenv/shims:$HOME/.pyenv/bin:$HOME/.local/bin:$PATH"
+#export REACT_EDITOR="none"
+#eval "$(pyenv init -)"
+#eval "$(pyenv virtualenv-init -)"
+#PYENV_VERSION=3.7.9
+#export PYENV_ROOT="$(pyenv root)"
 
-#export python3="$HOME/.pyenv/versions/3.7.9/bin/python3.7"
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/PXH050/miniconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/PXH050/miniconda/etc/profile.d/conda.sh" ]; then
+        . "/Users/PXH050/miniconda/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/PXH050/miniconda/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
