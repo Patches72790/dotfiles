@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.cargo/bin:$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -37,7 +37,13 @@ fi
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 alias gdec="git log --decorate=full --oneline --graph"
-alias atlas="cd $HOME/Projects/atlas-webapp/app/webapp/app"
+
+
+# for Opterrix mac only!
+if [[ "$(whoami)" -eq "PXH050" ]]; then
+    alias atlas="conda activate env && cd $HOME/Projects/atlas-webapp/app/webapp/app"
+    alias opterrix="conda activate opterrix-env && cd $HOME/Projects/opterrix/application/webapp/app"
+fi
 
 # Antlr 4 Aliases
 alias antlr4='java -jar /usr/local/lib/antlr-4.9.2-complete.jar'
