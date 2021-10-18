@@ -220,7 +220,7 @@ local function setup_servers()
             end
         end
 
-        require('lspconfig')[server].setup{ 
+        require('lspconfig')[server].setup{
             on_attach = config.on_attach,
             capabilities = config.capabilities,
             settings = config.settings,
