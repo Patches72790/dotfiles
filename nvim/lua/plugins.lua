@@ -33,7 +33,11 @@ local function plugins_startup()
             config = function() require('config.lsp-config') end,
         }
 
-    use {  'kabouzeid/nvim-lspinstall' }
+    use {
+        'williamboman/nvim-lsp-installer',
+    }
+
+--    use {  'kabouzeid/nvim-lspinstall' }
 
     use { 'nvim-treesitter/nvim-treesitter',
           run = ':TSUpdate',

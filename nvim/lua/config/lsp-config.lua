@@ -1,5 +1,6 @@
 local vim = vim
 local nvim_lsp = require("lspconfig")
+local lsp_installer = require('nvim-lsp-installer')
 
 local format_async = function(err, _, result, _, bufnr)
     if err ~= nil or result == nil then return end
@@ -201,39 +202,65 @@ local function make_config()
   }
 end
 
--- Setup LspInstall language servers
-local function setup_servers()
-    require('lspinstall').setup()
-    local servers = require('lspinstall').installed_servers()
 
-    for _, server in pairs(servers) do
-        local config = make_config()
-        -- lua specific settings
-        if server == 'lua' then
-            config.settings = lua_settings
-        end
-
-        if server == 'typescript' then
-            config.on_attach = function(client)
-                client.resolved_capabilities.document_formatting = false
-                on_attach(client)
-            end
-        end
-
-        require('lspconfig')[server].setup{ 
-            on_attach = config.on_attach,
-            capabilities = config.capabilities,
-            settings = config.settings,
+-- Provide settings first!
+lsp_installer.settings {
+    ui = {
+        icons = {
+            server_installed = "✓",
+            server_pending = "➜",
+            server_uninstalled = "✗"
         }
-    end
+    }
+}
+
+local function setup_servers(server)
+    local config = make_config()
+    local opts = {
+        on_attach = on_attach,
+        capabilities = config.capabilities,
+    }
+
+    server:setup(opts)
+    vim.cmd [[ do User LspAttachBuffers ]]
 end
 
-setup_servers()
 
-require('lspinstall').post_install_hook = function()
-    setup_servers()
-    vim.cmd('bufdo e')
-end
+lsp_installer.on_server_ready(setup_servers)
+
+-- Setup LspInstall language servers
+--local function setup_servers()
+--    require('lspinstall').setup()
+--    local servers = require('lspinstall').installed_servers()
+--
+--    for _, server in pairs(servers) do
+--        local config = make_config()
+--        -- lua specific settings
+--        if server == 'lua' then
+--            config.settings = lua_settings
+--        end
+--
+--        if server == 'typescript' then
+--            config.on_attach = function(client)
+--                client.resolved_capabilities.document_formatting = false
+--                on_attach(client)
+--            end
+--        end
+--
+--        require('lspconfig')[server].setup{
+--            on_attach = config.on_attach,
+--            capabilities = config.capabilities,
+--            settings = config.settings,
+--        }
+--    end
+--end
+
+--setup_servers()
+--
+--require('lspinstall').post_install_hook = function()
+--    setup_servers()
+--    vim.cmd('bufdo e')
+--end
 
 -- Java DT language server
 local function start_jdtls()
