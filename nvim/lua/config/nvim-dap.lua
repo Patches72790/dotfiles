@@ -48,7 +48,7 @@ dap.configurations.python = {
             elseif vim.fn.executable(cwd .. '/venv/bin/python3') == 1 then
                 return cwd .. '/venv/bin/python3';
             else
-                return os.getenv("HOME") .. '/.pyenv/versions/3.7.11/bin/python3';
+                return os.getenv("HOME") .. '/miniconda/envs/env/bin/python';
             end
         end,
     },
@@ -60,15 +60,8 @@ dap.configurations.python = {
 
         name = 'Debug (attach) Remote';
         pythonPath = function()
-            local cwd = vim.fn.getcwd();
-            if vim.fn.executable(cwd .. '/env/bin/python3') == 1 then
-                return cwd .. '/env/bin/python3';
-            elseif vim.fn.executable(cwd .. '/venv/bin/python3') == 1 then
-                return cwd .. '/venv/bin/python3';
-            else
-                return os.getenv("HOME") .. '/.pyenv/versions/3.7.11/bin/python3';
-            end
-        end;
+            return os.getenv("HOME") .. '/miniconda/envs/env/bin/python';
+        end,
     }
 }
 
@@ -132,7 +125,7 @@ map("n", "<leader>B", ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint
 map("n", "<leader>lp", ":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>");
 map("n", "<leader>dr", ":lua require'dap'.repl.open()<CR>");
 map("n", "<leader>dl", ":lua require'dap'.run_last()<CR>");
-map("n", "<leader>dR", ":lua attach_vscode_debugger()<CR>");
+map("n", "<leader>dR", ":lua attach_python_debugger()<CR>");
 
 -- telescope-dap commands and mappings
 -- :Telescope dap commands
