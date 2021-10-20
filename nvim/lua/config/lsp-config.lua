@@ -92,6 +92,7 @@ local linters = {
             security = "severity"
         },
         indent = {"error", 2},
+        semi = {"error", 2},
         securities = {[2] = "error", [1] = "warning"}
     },
     pylint = {
@@ -214,7 +215,6 @@ local function setup_servers(server)
 
     if server.name == 'tsserver' then
         opts.on_attach = function(client, bufnr)
-            print("attaching to js file..." .. client.name)
             client.resolved_capabilities.document_formatting = false
             on_attach(client, bufnr)
         end
@@ -228,6 +228,10 @@ local function setup_servers(server)
             formatters = formatters,
             formatFiletypes = formatFiletypes
         }
+        opts.on_attach = function(client)
+            client.resolved_capabilities.document_formatting = false
+            on_attach(client)
+        end
     end
 
     server:setup(opts)
