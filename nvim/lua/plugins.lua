@@ -37,7 +37,7 @@ local function plugins_startup()
         'williamboman/nvim-lsp-installer',
     }
 
---    use {  'kabouzeid/nvim-lspinstall' }
+    use {  'kabouzeid/nvim-lspinstall' }
 
     use { 'nvim-treesitter/nvim-treesitter',
           run = ':TSUpdate',
