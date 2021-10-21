@@ -1,5 +1,4 @@
 local vim = vim
-local nvim_lsp = require("lspconfig")
 local lsp_installer = require('nvim-lsp-installer')
 
 local format_async = function(err, _, result, _, bufnr)
