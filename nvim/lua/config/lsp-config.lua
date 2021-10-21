@@ -232,6 +232,7 @@ local function setup_servers(server)
             client.resolved_capabilities.document_formatting = false
             on_attach(client)
         end
+    end
 
     if server.name == 'eslint' then
         opts.on_attach = function(client)
