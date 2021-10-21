@@ -1,5 +1,6 @@
 local vim = vim
 local lsp_installer = require('nvim-lsp-installer')
+local autocmd = require('config.util').autocmd
 
 local format_async = function(err, _, result, _, bufnr)
     if err ~= nil or result == nil then return end
@@ -231,6 +232,13 @@ local function setup_servers(server)
             client.resolved_capabilities.document_formatting = false
             on_attach(client)
         end
+
+    if server.name == 'eslint' then
+        opts.on_attach = function(client)
+            autocmd('EsLintCmd', [[ BufWritePost <buffer> EsLintFixAll ]])
+            on_attach(client)
+        end
+    end
     end
 
     server:setup(opts)
