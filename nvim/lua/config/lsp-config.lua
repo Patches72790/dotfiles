@@ -236,7 +236,7 @@ local function setup_servers(server)
 
     if server.name == 'eslint' then
         opts.on_attach = function(client)
-            autocmd('EsLintCmd', [[ BufWritePost <buffer> EsLintFixAll ]])
+            autocmd('EsLintCmd', [[ BufWritePost <buffer> EslintFixAll ]])
             on_attach(client)
         end
     end

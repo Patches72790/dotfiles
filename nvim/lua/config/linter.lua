@@ -4,5 +4,6 @@ lint.linters_by_ft = {
     javascript = {'eslint'},
     typescript = {'eslint'},
     python = {'pylint'},
-    lua = {'luacheck'}
+    lua = {'luacheck'},
+    json = {'eslint'}
 }
