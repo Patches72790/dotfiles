@@ -33,7 +33,9 @@ local function plugins_startup()
             config = function() require('config.lsp-config') end,
         }
 
-    use {  'kabouzeid/nvim-lspinstall' }
+    use {
+        'williamboman/nvim-lsp-installer',
+    }
 
     use { 'nvim-treesitter/nvim-treesitter',
           run = ':TSUpdate',
@@ -67,6 +69,7 @@ local function plugins_startup()
 
     -- linters
     use { 'mfussenegger/nvim-lint',
+        config = function() require('config.linter') end,
         }
 
     -- autocomplete

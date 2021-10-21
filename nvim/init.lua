@@ -61,5 +61,5 @@ map('n', '<leader>q', '<cmd>qa<CR>', silent)
 map('n', '<leader>x', '<cmd>x!<CR>', silent)
 
 -- autocmd for triggering linting
--- autocmd('LintCmd', [[BufWritePost <buffer> lua require('lint').try_lint()]])
+autocmd('LintCmd', [[BufWritePost <buffer> lua require('lint').try_lint()]])
 

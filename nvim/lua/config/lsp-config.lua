@@ -1,5 +1,6 @@
 local vim = vim
-local nvim_lsp = require("lspconfig")
+local lsp_installer = require('nvim-lsp-installer')
+local autocmd = require('config.util').autocmd
 
 local format_async = function(err, _, result, _, bufnr)
     if err ~= nil or result == nil then return end
@@ -91,6 +92,7 @@ local linters = {
             security = "severity"
         },
         indent = {"error", 2},
+        semi = {"error", 2},
         securities = {[2] = "error", [1] = "warning"}
     },
     pylint = {
@@ -150,18 +152,6 @@ local formatFiletypes = {
     python = "black",
 }
 
--- diagnostic language server setup
-nvim_lsp.diagnosticls.setup {
-    on_attach = on_attach,
-    filetypes = vim.tbl_keys(filetypes),
-    init_options = {
-        filetypes = filetypes,
-        linters = linters,
-        formatters = formatters,
-        formatFiletypes = formatFiletypes
-    }
-}
-
 local lua_settings = {
        Lua = {
          runtime = {
@@ -197,43 +187,64 @@ local function make_config()
     capabilities = capabilities,
     -- map buffer local keybindings when the language server attaches
     on_attach = on_attach,
-    settings = {},
   }
 end
 
--- Setup LspInstall language servers
-local function setup_servers()
-    require('lspinstall').setup()
-    local servers = require('lspinstall').installed_servers()
 
-    for _, server in pairs(servers) do
-        local config = make_config()
-        -- lua specific settings
-        if server == 'lua' then
-            config.settings = lua_settings
-        end
-
-        if server == 'typescript' then
-            config.on_attach = function(client)
-                client.resolved_capabilities.document_formatting = false
-                on_attach(client)
-            end
-        end
-
-        require('lspconfig')[server].setup{
-            on_attach = config.on_attach,
-            capabilities = config.capabilities,
-            settings = config.settings,
+-- Provide settings first!
+lsp_installer.settings {
+    ui = {
+        icons = {
+            server_installed = "✓",
+            server_pending = "➜",
+            server_uninstalled = "✗"
         }
+    }
+}
+
+local function setup_servers(server)
+    local config = make_config()
+    local opts = {
+        on_attach = on_attach,
+        capabilities = config.capabilities,
+    }
+
+    if server.name == 'sumneko_lua' then
+        opts.settings = lua_settings
     end
+
+    if server.name == 'tsserver' then
+        opts.on_attach = function(client, bufnr)
+            client.resolved_capabilities.document_formatting = false
+            on_attach(client, bufnr)
+        end
+    end
+
+    if server.name == 'diagnosticls' then
+        opts.filetypes = vim.tbl_keys(filetypes)
+        opts.init_options = {
+            filetypes = filetypes,
+            linters = linters,
+            formatters = formatters,
+            formatFiletypes = formatFiletypes
+        }
+        opts.on_attach = function(client)
+            client.resolved_capabilities.document_formatting = false
+            on_attach(client)
+        end
+
+    if server.name == 'eslint' then
+        opts.on_attach = function(client)
+            autocmd('EsLintCmd', [[ BufWritePost <buffer> EsLintFixAll ]])
+            on_attach(client)
+        end
+    end
+
+    server:setup(opts)
+    vim.cmd [[ do User LspAttachBuffers ]]
 end
 
-setup_servers()
-
-require('lspinstall').post_install_hook = function()
-    setup_servers()
-    vim.cmd('bufdo e')
-end
+lsp_installer.on_server_ready(setup_servers)
 
 -- Java DT language server
 local function start_jdtls()
@@ -253,4 +264,3 @@ start_jdtls()
 -- show box when cursor is over diagnostic
 vim.o.updatetime = 250
 vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false})]]
-
