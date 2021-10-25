@@ -41,8 +41,8 @@ alias gdec="git log --decorate=full --oneline --graph"
 
 # for Opterrix mac only!
 if [[ "$(whoami)" -eq "PXH050" ]]; then
-    alias atlas="conda activate env && cd $HOME/Projects/atlas-webapp/app/webapp/app"
-    alias opterrix="conda activate opterrix-env && cd $HOME/Projects/opterrix/application/webapp/app"
+    alias atlas="conda activate env && nvm use --lts && cd $HOME/Projects/atlas-webapp/app/webapp/app"
+    alias opterrix="conda activate opterrix-env && nvm use --lts && cd $HOME/Projects/opterrix/application/webapp/app"
 fi
 
 # Antlr 4 Aliases
