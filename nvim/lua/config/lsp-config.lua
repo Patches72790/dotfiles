@@ -247,20 +247,6 @@ end
 
 lsp_installer.on_server_ready(setup_servers)
 
--- Java DT language server
-local function start_jdtls()
-    local cmd = {'java-lsp.sh'}
-    local init_options = {
-        bundles = {
-            "/home/patroclus/.java-debug/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-0.32.0.jar"
-        }
-    }
-    require('lspconfig').jdtls.setup{ cmd = cmd, init_options = init_options }
-end
-
-start_jdtls()
-
-
 -- miscellaneous ui customization
 -- show box when cursor is over diagnostic
 vim.o.updatetime = 250
