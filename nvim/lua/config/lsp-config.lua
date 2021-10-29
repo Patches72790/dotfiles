@@ -16,8 +16,10 @@ end
 
 -- let telescope use this LSP stuff
 vim.lsp.handlers["textDocument/formatting"] = format_async
-vim.lsp.handlers["textDocument/references"] = require('telescope.builtin').lsp_references;
-vim.lsp.handlers["textDocument/definition"] = require('telescope.builtin').lsp_definitions;
+vim.lsp.handlers["textDocument/references"] =
+    require('telescope.builtin').lsp_references;
+vim.lsp.handlers["textDocument/definition"] =
+    require('telescope.builtin').lsp_definitions;
 
 _G.lsp_organize_imports = function()
     local params = {
@@ -41,7 +43,8 @@ local on_attach = function(client, bufnr)
     vim.cmd("command! LspImplementation lua vim.lsp.buf.implementation()")
     vim.cmd("command! LspDiagPrev lua vim.lsp.diagnostic.goto_prev()")
     vim.cmd("command! LspDiagNext lua vim.lsp.diagnostic.goto_next()")
-    vim.cmd("command! LspDiagLine lua vim.lsp.diagnostic.show_line_diagnostics()")
+    vim.cmd(
+        "command! LspDiagLine lua vim.lsp.diagnostic.show_line_diagnostics()")
     vim.cmd("command! LspSignatureHelp lua vim.lsp.buf.signature_help()")
 
     buf_map(bufnr, "n", "gd", ":LspDef<CR>", {silent = true})
@@ -54,7 +57,8 @@ local on_attach = function(client, bufnr)
     buf_map(bufnr, "n", "]a", ":LspDiagNext<CR>", {silent = true})
     buf_map(bufnr, "n", "ga", ":LspCodeAction<CR>", {silent = true})
     buf_map(bufnr, "n", "<Leader>a", ":LspDiagLine<CR>", {silent = true})
-    buf_map(bufnr, "i", "<C-x><C-x>", "<cmd> LspSignatureHelp<CR>", {silent = true})
+    buf_map(bufnr, "i", "<C-x><C-x>", "<cmd> LspSignatureHelp<CR>",
+            {silent = true})
 
     if client.resolved_capabilities.document_formatting then
         vim.api.nvim_exec([[
@@ -66,13 +70,12 @@ local on_attach = function(client, bufnr)
     end
 end
 
-
 local filetypes = {
     typescript = "eslint",
     typescriptreact = "eslint",
     javascript = "eslint",
     javascriptreact = "eslint",
-    python = "pylint",
+    python = "pylint"
 }
 
 local linters = {
@@ -99,17 +102,15 @@ local linters = {
         sourceName = "pylint",
         command = "pylint",
         debounce = 500,
-        args = { "--output-format", "text", "--score", "no", "--msg-template", "'{line}:{column}:{category}:{msg} ({msg_id}:{symbol})'", "%file" },
+        args = {
+            "--output-format", "text", "--score", "no", "--msg-template",
+            "'{line}:{column}:{category}:{msg} ({msg_id}:{symbol})'", "%file"
+        },
         formatPattern = {
             "^(\\d+?):(\\d+?):([a-z]+?):(.*)$",
-            {
-                line = 1,
-                column = 2,
-                security = 3,
-                message = 4
-            }
+            {line = 1, column = 2, security = 3, message = 4}
         },
-        rootPatterns = { ".git", "pyproject.toml", "setup.py" },
+        rootPatterns = {".git", "pyproject.toml", "setup.py"},
         securities = {
             informational = "hint",
             refactor = "info",
@@ -120,7 +121,7 @@ local linters = {
         },
         offsetColumn = 1,
         formatLines = 1
-    },
+    }
 }
 
 local formatters = {
@@ -128,68 +129,56 @@ local formatters = {
         command = "prettier",
         args = {"--stdin-filepath", "%filepath"},
         rootPatterns = {
-            ".prettierrc",
-            ".prettierrc.json",
-            ".prettierrc.toml",
-            ".prettierrc.json",
-            ".prettierrc.yml",
-            ".prettierrc.yaml",
-            ".prettierrc.json5",
-            ".prettierrc.js",
-            ".prettierrc.cjs",
-            "prettier.config.js",
-            "prettier.config.cjs"
-        },
+            ".prettierrc", ".prettierrc.json", ".prettierrc.toml",
+            ".prettierrc.json", ".prettierrc.yml", ".prettierrc.yaml",
+            ".prettierrc.json5", ".prettierrc.js", ".prettierrc.cjs",
+            "prettier.config.js", "prettier.config.cjs"
+        }
     },
-    black = {command = "black", args = {"--quiet", "-"}},
+    black = {command = "black", args = {"--quiet", "-"}}
 }
 
 local formatFiletypes = {
     typescript = "prettier",
-    typescriptreact =  "prettier",
+    typescriptreact = "prettier",
     javascript = "prettier",
     javascriptreact = "prettier",
-    python = "black",
+    python = "black"
 }
 
 local lua_settings = {
-       Lua = {
-         runtime = {
-           version = 'LuaJIT',
-           path = {
-             '?.lua',
-             '?/init.lua',
-             vim.fn.expand'~/.luarocks/share/lua/5.3/?.lua',
-             vim.fn.expand'~/.luarocks/share/lua/5.3/?/init.lua',
-             '/usr/share/5.3/?.lua',
-             '/usr/share/lua/5.3/?/init.lua'
-           }
-         },
-         diagnostics = {
-             globals = {'vim'},
-         },
-         workspace = {
-           library = {
-             [vim.fn.expand'~/.luarocks/share/lua/5.3'] = true,
-             ['/usr/share/lua/5.3'] = true
-           },
-           checkThirdParty = false,
-         }
-       }
+    Lua = {
+        runtime = {
+            version = 'LuaJIT',
+            path = {
+                '?.lua', '?/init.lua',
+                vim.fn.expand '~/.luarocks/share/lua/5.3/?.lua',
+                vim.fn.expand '~/.luarocks/share/lua/5.3/?/init.lua',
+                '/usr/share/5.3/?.lua', '/usr/share/lua/5.3/?/init.lua'
+            }
+        },
+        diagnostics = {globals = {'vim'}},
+        workspace = {
+            library = {
+                [vim.fn.expand '~/.luarocks/share/lua/5.3'] = true,
+                ['/usr/share/lua/5.3'] = true
+            },
+            checkThirdParty = false
+        }
+    }
 }
 
 -- config that activates keymaps and enables snippet support
 local function make_config()
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
-  return {
-    -- enable snippet support
-    capabilities = capabilities,
-    -- map buffer local keybindings when the language server attaches
-    on_attach = on_attach,
-  }
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+    return {
+        -- enable snippet support
+        capabilities = capabilities,
+        -- map buffer local keybindings when the language server attaches
+        on_attach = on_attach
+    }
 end
-
 
 -- Provide settings first!
 lsp_installer.settings {
@@ -204,14 +193,9 @@ lsp_installer.settings {
 
 local function setup_servers(server)
     local config = make_config()
-    local opts = {
-        on_attach = on_attach,
-        capabilities = config.capabilities,
-    }
+    local opts = {on_attach = on_attach, capabilities = config.capabilities}
 
-    if server.name == 'sumneko_lua' then
-        opts.settings = lua_settings
-    end
+    if server.name == 'sumneko_lua' then opts.settings = lua_settings end
 
     if server.name == 'tsserver' then
         opts.on_attach = function(client, bufnr)
