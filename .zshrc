@@ -62,18 +62,36 @@ export MYJRE="/usr/lib/jvm/java-16-openjdk-amd64/bin/java"
 export JAVA_DEBUG_JAR="$HOME/.java-debug/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-0.32.0.jar"
 export REACT_EDITOR="none"
 
+if [[ "$(whoami)" -eq "PXH050" ]]; then
+    # >>> conda initialize >>>
+    # !! Contents within this block are managed by 'conda init' !!
+    __conda_setup="$('/Users/PXH050/miniconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
+    else
+        if [ -f "/Users/PXH050/miniconda/etc/profile.d/conda.sh" ]; then
+            . "/Users/PXH050/miniconda/etc/profile.d/conda.sh"
+        else
+            export PATH="/Users/PXH050/miniconda/bin:$PATH"
+        fi
+    fi
+    unset __conda_setup
+    # <<< conda initialize <<<
+elif [[ "$(whoami)" -eq "patroclus" ]]; then
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/PXH050/miniconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/patroclus/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/Users/PXH050/miniconda/etc/profile.d/conda.sh" ]; then
-        . "/Users/PXH050/miniconda/etc/profile.d/conda.sh"
+    if [ -f "/home/patroclus/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/patroclus/miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/Users/PXH050/miniconda/bin:$PATH"
+        export PATH="/home/patroclus/miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+fi
