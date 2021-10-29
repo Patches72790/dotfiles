@@ -1,6 +1,6 @@
 local autocmd = require('config.util').autocmd
 
-M = {}
+local M = {}
 
 local on_attach = function(client, bufnr)
     local buf_map = vim.api.nvim_buf_set_keymap
