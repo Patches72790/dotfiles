@@ -191,6 +191,30 @@ lsp_installer.settings {
     }
 }
 
+-- automatically install servers in this list
+local servers = {
+	"bashls",
+    "pyright",
+    "jdtls",
+    "sumneko_lua",
+    "tsserver",
+    "rust_analyzer",
+    "vimls",
+    "clangd",
+    "eslint",
+}
+
+for _, name in pairs(servers) do
+	local ok, server = lsp_installer.get_server(name)
+	-- Check that the server is supported in nvim-lsp-installer
+	if ok then
+		if not server:is_installed() then
+			print("Installing " .. name)
+			server:install()
+		end
+	end
+end
+
 local function setup_servers(server)
     local config = make_config()
     local opts = {on_attach = on_attach, capabilities = config.capabilities}
