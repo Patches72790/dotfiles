@@ -111,7 +111,7 @@ M.server_opts = {
             on_attach(client, bufnr)
         end
         return default_opts
-    end,
+    end
 }
 
 return M

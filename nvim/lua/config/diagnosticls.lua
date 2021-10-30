@@ -1,10 +1,10 @@
 M = {}
 
 M.filetypes = {
---    typescript = "eslint",
---    typescriptreact = "eslint",
---    javascript = "eslint",
---    javascriptreact = "eslint",
+    --    typescript = "eslint",
+    --    typescriptreact = "eslint",
+    --    javascript = "eslint",
+    --    javascriptreact = "eslint",
     python = "pylint"
 }
 
@@ -69,10 +69,10 @@ M.formatters = {
 }
 
 M.formatFiletypes = {
---    typescript = "prettier",
---    typescriptreact = "prettier",
---    javascript = "prettier",
---    javascriptreact = "prettier",
+    --    typescript = "prettier",
+    --    typescriptreact = "prettier",
+    --    javascript = "prettier",
+    --    javascriptreact = "prettier",
     python = "black"
 }
 

@@ -1,12 +1,12 @@
 local dap = require('dap');
 local map = require('config.util').map;
 
-attach_python_debugger = function()
+local attach_python_debugger = function()
     local dap = require('dap')
     local host = '127.0.0.1'
     local port = 5678;
-    pythonAttachAdapter = {type = 'server', host = host, port = port}
-    pythonAttachConfig = {
+    local pythonAttachAdapter = {type = 'server', host = host, port = port}
+    local pythonAttachConfig = {
         type = "python",
         request = "attach",
         connect = {port = port, host = host},
@@ -78,12 +78,12 @@ dap.configurations.javascript = {
 }
 
 -- TODO create new attach config for vscode-js-debug
-attach_vscode_debugger = function()
+local attach_vscode_debugger = function()
     local dap = require('dap')
     local host = '127.0.0.1'
     local port = 5678
-    adapter = {type = 'server', host = host, port = port}
-    config = {
+    local adapter = {type = 'server', host = host, port = port}
+    local config = {
         type = "pwa-chrome",
         request = 'attach',
         host = host,

@@ -33,35 +33,28 @@ lsp_installer.settings {
 
 -- automatically install servers in this list
 local servers = {
-	"bashls",
-    "pyright",
-    "jdtls",
-    "sumneko_lua",
-    "tsserver",
-    "rust_analyzer",
-    "vimls",
-    "clangd",
-    "eslint",
+    "bashls", "pyright", "jdtls", "sumneko_lua", "tsserver", "rust_analyzer",
+    "vimls", "clangd", "eslint"
 }
 
 for _, name in pairs(servers) do
-	local ok, server = lsp_installer.get_server(name)
-	-- Check that the server is supported in nvim-lsp-installer
-	if ok then
-		if not server:is_installed() then
-			print("Installing " .. name)
-			server:install()
-		end
-	end
+    local ok, server = lsp_installer.get_server(name)
+    -- Check that the server is supported in nvim-lsp-installer
+    if ok then
+        if not server:is_installed() then
+            print("Installing " .. name)
+            server:install()
+        end
+    end
 end
 
---  TODO setup more legit way of customizing options for lang servers
---  see docs : https://github.com/williamboman/nvim-lsp-installer/wiki/Advanced-Configuration#overriding-the-default-lsp-server-options
+--  setup relies on configuration in lang-servers
 local function setup_servers(server)
     local lang_server_cfg = require('config.lang-servers')
     local server_opts = lang_server_cfg.server_opts
     local default_opts = lang_server_cfg.make_config()
-    server:setup(server_opts[server.name] and server_opts[server.name]() or default_opts)
+    server:setup(server_opts[server.name] and server_opts[server.name]() or
+                     default_opts)
     vim.cmd [[ do User LspAttachBuffers ]]
 end
 
@@ -70,4 +63,4 @@ lsp_installer.on_server_ready(setup_servers)
 -- miscellaneous ui customization
 -- show box when cursor is over diagnostic
 vim.o.updatetime = 250
---vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false})]]
+-- vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false})]]
