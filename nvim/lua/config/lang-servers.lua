@@ -111,6 +111,14 @@ M.server_opts = {
             on_attach(client, bufnr)
         end
         return default_opts
+    end,
+    ['pylsp'] = function()
+        local default_opts = M.make_config()
+        default_opts.on_attach = function(client, bufnr)
+            client.resolved_capabilities.document_formatting = false
+            on_attach(client, bufnr)
+        end
+        return default_opts
     end
 }
 

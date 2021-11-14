@@ -33,7 +33,7 @@ lsp_installer.settings {
 
 -- automatically install servers in this list
 local servers = {
-    "bashls", "pyright", "jdtls", "sumneko_lua", "tsserver", "rust_analyzer",
+    "bashls", "pylsp", "jdtls", "sumneko_lua", "tsserver", "rust_analyzer",
     "vimls", "clangd", "eslint"
 }
 
