@@ -41,6 +41,7 @@ opt("undodir", os.getenv("HOME") .. "/dotfiles/nvim/undodir")
 opt("backupdir", os.getenv("HOME") .. "/dotfiles/nvim/backupdir")
 opt("directory", os.getenv("HOME") .. "/dotfiles/nvim/backupdir")
 opt("completeopt", "menuone,noselect,noinsert")
+opt("fileformat", "unix", buffer)
 
 -- color options
 opt("termguicolors", true)
