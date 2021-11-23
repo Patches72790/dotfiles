@@ -86,6 +86,9 @@ M.server_opts = {
             autocmd('EsLintCmd', [[ BufWritePost <buffer> EslintFixAll ]])
             on_attach(client, bufnr)
         end
+        default_opts.filetypes = {
+            'javascriptreact', 'javascript', 'typescript', 'typescriptreact'
+        }
         return default_opts
     end,
     ['tsserver'] = function()
