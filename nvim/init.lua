@@ -42,6 +42,7 @@ opt("backupdir", os.getenv("HOME") .. "/dotfiles/nvim/backupdir")
 opt("directory", os.getenv("HOME") .. "/dotfiles/nvim/backupdir")
 opt("completeopt", "menuone,noselect,noinsert")
 opt("fileformat", "unix", buffer)
+opt("guifont", "FiraMono Nerd Font Mono:h12")
 
 -- color options
 opt("termguicolors", true)
@@ -65,5 +66,5 @@ map("n", "<leader>q", "<cmd>qa<CR>", silent)
 map("n", "<leader>x", "<cmd>x!<CR>", silent)
 
 -- autocmd for triggering linting
-autocmd("LintCmd", [[BufWritePost <buffer> lua require('lint').try_lint()]])
+--autocmd("LintCmd", [[BufWritePost <buffer> lua require('lint').try_lint()]])
 map("n", "<leader>p", "<cmd>Format<CR>")
