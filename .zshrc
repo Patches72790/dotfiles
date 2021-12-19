@@ -72,7 +72,7 @@ if [[ "$(whoami)" == "PXH050" ]]; then
         eval "$__conda_setup"
     else
         if [ -f "/Users/PXH050/miniconda/etc/profile.d/conda.sh" ]; then
-            . "/Users/PXH050/miniconda/etc/profile.d/conda.sh"
+            . "/Users/PXH050/miniconda/etc/profile.d/conda.sh"  # commented out by conda initialize
         else
             export PATH="/Users/PXH050/miniconda/bin:$PATH"
         fi
@@ -87,9 +87,9 @@ elif [[ "$(whoami)" == "patroclus" ]]; then
         eval "$__conda_setup"
     else
         if [ -f "/home/patroclus/miniconda3/etc/profile.d/conda.sh" ]; then
-            . "/home/patroclus/miniconda3/etc/profile.d/conda.sh"
+            . "/home/patroclus/miniconda3/etc/profile.d/conda.sh"  # commented out by conda initialize
         else
-            export PATH="/home/patroclus/miniconda3/bin:$PATH"
+            export PATH="/home/patroclus/miniconda3/bin:$PATH"  # commented out by conda initialize
         fi
     fi
     unset __conda_setup
