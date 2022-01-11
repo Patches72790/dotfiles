@@ -106,6 +106,11 @@ local function plugins_startup()
             require("lualine").setup({options = {theme = "jellybeans"}})
         end
     }
+
+    -- markdown previewer
+    use {
+        "ellisonleao/glow.nvim"
+    }
 end
 
 return packer.startup(plugins_startup)
