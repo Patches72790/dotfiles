@@ -38,7 +38,7 @@ cmp.setup {
     },
     sources = {
         {name = 'nvim_lsp'}, {name = 'buffer'}, {name = 'nvim_lua'},
-        {name = 'path'}, {name = 'luasnip'}, 
-        { name = 'rg', option = { additional_arguments = "--max-depth 4", debounce = 500}},
+        {name = 'path'}, {name = 'luasnip'},
+        {name = 'rg' },
     }
 }
