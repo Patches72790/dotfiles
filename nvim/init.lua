@@ -65,6 +65,9 @@ map("n", "<c-l>", "<c-w>l")
 map("n", "<leader>q", "<cmd>qa<CR>", silent)
 map("n", "<leader>x", "<cmd>x!<CR>", silent)
 
+-- Mapping for Glow MD viewer
+map("n", "<leader>G", ":Glow<CR>", silent)
+
 -- autocmd for triggering linting
 --autocmd("LintCmd", [[BufWritePost <buffer> lua require('lint').try_lint()]])
 map("n", "<leader>p", "<cmd>Format<CR>")
