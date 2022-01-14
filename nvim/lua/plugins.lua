@@ -1,6 +1,7 @@
 local packer = require("packer")
 local use = packer.use
 
+
 local function plugins_startup()
     -- auto-update packer
     use {"wbthomason/packer.nvim"}
@@ -82,9 +83,14 @@ local function plugins_startup()
             "hrsh7th/cmp-nvim-lsp", {"hrsh7th/cmp-path", after = "nvim-cmp"},
             {"hrsh7th/cmp-nvim-lua", after = "nvim-cmp"},
             {"saadparwaiz1/cmp_luasnip", after = "nvim-cmp"},
-            {"hrsh7th/cmp-buffer", after = "nvim-cmp"}
+            {"hrsh7th/cmp-buffer", after = "nvim-cmp"},
+            {"lukas-reineke/cmp-rg", after = "nvim-cmp"},
         },
         config = function() require("config.nvim-cmp") end
+    }
+
+    use {
+        "onsails/lspkind-nvim",
     }
 
     -- colorschemes

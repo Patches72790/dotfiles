@@ -1,5 +1,6 @@
-local cmp = require('cmp');
-local luasnip = require('luasnip');
+local cmp = require('cmp')
+local lspkind = require('lspkind')
+
 cmp.setup {
     snippet = {
         expand = function(args) require('luasnip').lsp_expand(args.body) end
@@ -18,8 +19,26 @@ cmp.setup {
         ['<Tab>'] = cmp.mapping.select_next_item(),
         ['<S-Tab>'] = cmp.mapping.select_prev_item()
     },
+    formatting = {
+        format = lspkind.cmp_format({
+            with_text = false,
+            max_width = 50,
+            before = function(entry, vim_item)
+                vim_item.menu = ({
+                    nvim_lsp = "[LSP]",
+                    buffer = "[Buffer]",
+                    nvim_lua = "[Lua]",
+                    path = "[Path]",
+                    luasnip = "[LuaSnip]",
+                    rg = "[RG]",
+                })[entry.source.name]
+                return vim_item
+            end,
+        }),
+    },
     sources = {
         {name = 'nvim_lsp'}, {name = 'buffer'}, {name = 'nvim_lua'},
-        {name = 'path'}, {name = 'luasnip'}
+        {name = 'path'}, {name = 'luasnip'}, 
+        { name = 'rg', option = { additional_arguments = "--max-depth 4", debounce = 500}},
     }
 }
