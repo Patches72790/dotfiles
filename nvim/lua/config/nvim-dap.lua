@@ -9,20 +9,13 @@ dap.adapters.python = {
 
 dap.configurations.python = {
     {
-        type = 'python',
-        request = 'launch',
-        name = 'Launch file',
+        type = 'server',
+        request = 'attach',
+        name = 'Attach',
         program = "${file}",
         pythonPath = function()
-            local cwd = vim.fn.getcwd();
-            if vim.fn.executable(cwd .. '/env/bin/python3') == 1 then
-                return cwd .. '/env/bin/python3';
-            elseif vim.fn.executable(cwd .. '/venv/bin/python3') == 1 then
-                return cwd .. '/venv/bin/python3';
-            else
-                return os.getenv("PYHTON_CONDA_EXE")
-            end
-        end
+            return os.getenv("PYHTON_CONDA_EXE")
+        end,
     }
 }
 
@@ -49,6 +42,10 @@ dap.configurations.javascript = {
     }
 }
 
+-- sign definitions
+vim.fn.sign_define('DapBreakpoint', {text='🟥', texthl='', linehl='', numhl=''})
+vim.fn.sign_define('DapBreakpointRejected', {text='🟦', texthl='', linehl='', numhl=''})
+vim.fn.sign_define('DapStopped', {text='⭐️', texthl='', linehl='', numhl=''})
 
 -- Key mappings for nvim-dap debugging
 map("n", "<F5>", ":lua require('dap').continue()<CR>");
@@ -63,6 +60,9 @@ map("n", "<leader>lp",
 map("n", "<leader>dr", ":lua require'dap'.repl.open()<CR>");
 map("n", "<leader>dl", ":lua require'dap'.run_last()<CR>");
 map("n", "<leader>dR", ":lua require('config.nvim-dap-config').attach_python_debugger()<CR>");
+
+-- mapping for nvim-dap-ui
+map("n", "<F24>", ":lua require('dapui').toggle()<CR>")
 
 -- telescope-dap commands and mappings
 -- :Telescope dap commands

@@ -4,8 +4,8 @@ M = {}
 
 M.attach_python_debugger = function()
     local host = '127.0.0.1'
-    local port = 5678;
-    local pythonAttachAdapter = {type = 'server', host = host, port = port}
+    local port = 5679;
+    local pythonAttachAdapter = {type = 'server', host = host, port = port, justMyCode = false}
     local pythonAttachConfig = {
         type = "python",
         request = "attach",
@@ -13,6 +13,7 @@ M.attach_python_debugger = function()
         mode = 'remote',
         name = 'Remote Attach Debugger',
         cwd = vim.fn.getcwd(),
+        justMyCode = false,
     }
 
     local session = dap.attach(pythonAttachAdapter, pythonAttachConfig);

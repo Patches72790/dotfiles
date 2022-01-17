@@ -67,7 +67,10 @@ local function plugins_startup()
         config = function() require("config.nvim-dap") end
     }
 
-    use {"rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"}}
+    use {"rcarriga/nvim-dap-ui",
+         requires = {"mfussenegger/nvim-dap"},
+         config = function() require('dapui').setup() end,
+    }
 
     -- linters
     use {

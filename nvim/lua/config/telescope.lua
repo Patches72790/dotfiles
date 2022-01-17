@@ -1,9 +1,13 @@
 local telescope = require('telescope');
 local map = require('config.util').map;
 
+-- dap extension mappings
 telescope.load_extension('dap');
+map("n", "<leader>ds", ":Telescope dap frames<CR>")
+map("n", "<leader>db", ":Telescope dap list_breakpoints<CR>")
 
-local opt = { silent = true }
+-- general telescope mappings
+local silent = { silent = true }
 map('n', '<leader>ff',  '<cmd>Telescope find_files<CR>', silent)
 map('n', '<leader>fg',  '<cmd>Telescope live_grep<CR>', silent)
 map('n', '<leader>fb',  '<cmd>Telescope buffers<CR>', silent)
