@@ -97,7 +97,7 @@ local function plugins_startup()
     }
 
     -- colorschemes
-    use {"morhetz/gruvbox"}
+    use {"ellisonleao/gruvbox.nvim"}
     use {"doums/darcula"}
 
     -- git

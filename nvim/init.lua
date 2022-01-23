@@ -47,7 +47,8 @@ opt("guifont", "FiraMono Nerd Font Mono:h12")
 -- color options
 opt("termguicolors", true)
 opt("background", "dark")
-cmd [[ colorscheme darcula ]]
+--cmd [[ colorscheme darcula ]]
+cmd([[colorscheme gruvbox]])
 
 -- keybindings
 local silent = {silent = true}
