@@ -56,6 +56,10 @@ local silent = {silent = true}
 -- save buffer
 map("n", "<leader>w", "<cmd>w<CR>", silent)
 
+-- copy/paste from clipboard
+map("n", "<leader><c-c>", '"*y', silent)
+map("n", "<leader><c-p>", '"*p', silent)
+
 -- Window movement
 map("n", "<c-h>", "<c-w>h")
 map("n", "<c-j>", "<c-w>j")
