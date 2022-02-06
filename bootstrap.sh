@@ -1,0 +1,95 @@
+#!/bin/bash
+
+function load_dotfiles() {
+    echo "Preparing to load dotfiles repo."
+    echo "Installing prerequisite xclip..."
+    sudo apt-get install -y xclip
+
+    # need to setup ssh-keygen first on machine
+    ssh-keygen -f github
+    xclip -sel c < $HOME/.ssh/github
+    echo "SSH public keygen copied to clipboard"
+
+    # wait until user presses 'y'
+    echo "Waiting until you press 'y' to continue..."
+    while [[ true ]]; do
+        read -n response 
+        echo "Responded with $response"
+        if [[ $response == "y" ]]; then
+            break
+        fi
+    done
+
+    # download dotfiles repo
+    cd $HOME
+    git clone git@github.com:Patches72790/dotfiles.git 
+    echo "Successfully loaded dotfiles repo."
+}
+
+function install_zsh() {
+    echo "Installing zsh if not already present"
+
+    # first install zsh and set shell
+    my_shell=$(echo $SHELL)
+    if [[ $my_shell != *"zsh"* ]]; then
+        sudo apt install zsh
+        sudo chsh -s $(which zsh)
+    fi
+
+    # check for zsh correct installation
+    if [[ $(echo $SHELL) != *"zsh"* ]]; then
+        echo "Error installing zsh. Quitting."
+        exit 1
+    fi
+        
+    # oh my zsh install
+    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+    # setup symlink for zsh
+    ln -s $HOME/dotfiles/.zshrc $HOME/.zshrc
+    source $HOME/.zshrc
+}
+
+function install_nvim() {
+    # nvim install
+    curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+    chmod u+x nvim.appimage
+
+    # move app image to bin folder
+    sudo mkdir /usr/local/nvim/bin
+    sudo mv nvim.appimage /usr/local/nvim/bin/nvim
+}
+
+
+# node and node version manager
+function install_node() {
+    # install nvm
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+
+    # source zsh
+    source $HOME/.zshrc
+}
+
+# miniconda
+function install_miniconda() {
+    
+}
+
+# luaformat
+function install_lua_and_more() {}
+
+# rust
+function install_rust() {
+    # install rustup
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+    # update rust
+    rustup update
+}
+
+# run installers
+load_dotfiles
+install_zsh
+install_nvim
+install_node
+install_rust
