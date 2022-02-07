@@ -1,3 +1,6 @@
+# source any helper files
+source $HOME/dotfiles/sh-utils/index
+
 # If you come from bash you might have to change your $PATH.
 export PATH="/usr/local/go/bin:/usr/local/nvim/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/bin:/usr/local/bin:$PATH"
 
@@ -95,3 +98,6 @@ elif [[ "$(whoami)" == "patroclus" ]]; then
     unset __conda_setup
     # <<< conda initialize <<<
 fi
+
+# set my conda env to matching tab and project folder
+#set_conda_env

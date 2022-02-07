@@ -1,0 +1,18 @@
+function set_conda_env {
+    # environment to project folder map
+    declare -A env_to_project_location
+    env_to_project_location["base"]="$HOME"
+    env_to_project_location["atlas"]="$HOME/Projects/atlas-webapp/app/webapp/app"
+    env_to_project_location["opterrix"]="$HOME/Projects/opterrix/application/webapp/app"
+
+    atlas="conda activate env && nvm use --lts && cd $HOME/Projects/atlas-webapp/app/webapp/app"
+    opterrix="conda activate opterrix-env && nvm use --lts && cd $HOME/Projects/opterrix/application/webapp/app"
+    my_current_env=$(conda env list | awk '{if ($2=="*") print $1}')
+
+    function do_set_env {
+        conda activate $1
+        nvm use --lts >> /dev/null
+    }
+
+    do_set_env $my_current_env
+}
