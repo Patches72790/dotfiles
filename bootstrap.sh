@@ -78,14 +78,6 @@ function install_node {
     source $HOME/.zshrc
 }
 
-# miniconda
-#function install_miniconda {
-#    
-#}
-
-# luaformat
-#function install_lua_and_more {}
-
 # rust
 function install_rust {
     # install rustup
@@ -95,9 +87,15 @@ function install_rust {
     rustup update
 }
 
+function install_fd_and_rg {
+    sudo apt-get install fd-find ripgrep
+    ln -s $(which fd-find) /usr/local/bin/fd
+}
+
 # run installers
 #load_dotfiles
 #install_zsh
 #install_nvim
-install_node
+#install_node
 #install_rust
+install_fd_and_rg

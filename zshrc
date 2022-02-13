@@ -54,18 +54,16 @@ alias antlr4='java -jar /usr/local/lib/antlr-4.9.2-complete.jar'
 alias grun='java org.antlr.v4.gui.TestRig'
 export CLASSPATH=".:/usr/local/lib/antlr-4.9.2-complete.jar:$CLASSPATH"
 
-# node env variable
-export NVM_DIR="$XDG_CONFIG_HOME/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 # neovim variables
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
-export MYJRE="/usr/lib/jvm/java-16-openjdk-amd64/bin/java"
-export JAVA_DEBUG_JAR="$HOME/.java-debug/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-0.32.0.jar"
 export REACT_EDITOR="none"
 alias nv="nvim"
+
+# node env variable
+export NVM_DIR="$XDG_CONFIG_HOME/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
 
 if [[ "$(whoami)" == "PXH050" ]]; then
     # >>> conda initialize >>>
@@ -75,7 +73,7 @@ if [[ "$(whoami)" == "PXH050" ]]; then
         eval "$__conda_setup"
     else
         if [ -f "/Users/PXH050/miniconda/etc/profile.d/conda.sh" ]; then
-            . "/Users/PXH050/miniconda/etc/profile.d/conda.sh"  # commented out by conda initialize
+ . "/Users/PXH050/miniconda/etc/profile.d/conda.sh"  # commented out by conda initialize  # commented out by conda initialize
         else
             export PATH="/Users/PXH050/miniconda/bin:$PATH"
         fi
@@ -90,9 +88,9 @@ elif [[ "$(whoami)" == "patroclus" ]]; then
         eval "$__conda_setup"
     else
         if [ -f "/home/patroclus/miniconda3/etc/profile.d/conda.sh" ]; then
-            . "/home/patroclus/miniconda3/etc/profile.d/conda.sh"  # commented out by conda initialize
+ . "/home/patroclus/miniconda3/etc/profile.d/conda.sh"  # commented out by conda initialize  # commented out by conda initialize
         else
-            export PATH="/home/patroclus/miniconda3/bin:$PATH"  # commented out by conda initialize
+ export PATH="/home/patroclus/miniconda3/bin:$PATH"  # commented out by conda initialize  # commented out by conda initialize
         fi
     fi
     unset __conda_setup

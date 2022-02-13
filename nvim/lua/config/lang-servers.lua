@@ -12,10 +12,10 @@ local on_attach = function(client, bufnr)
     vim.cmd("command! LspRefs lua vim.lsp.buf.references()")
     vim.cmd("command! LspTypeDef lua vim.lsp.buf.type_definition()")
     vim.cmd("command! LspImplementation lua vim.lsp.buf.implementation()")
-    vim.cmd("command! LspDiagPrev lua vim.lsp.diagnostic.goto_prev()")
-    vim.cmd("command! LspDiagNext lua vim.lsp.diagnostic.goto_next()")
+    vim.cmd("command! LspDiagPrev lua vim.diagnostic.goto_prev()")
+    vim.cmd("command! LspDiagNext lua vim.diagnostic.goto_next()")
     vim.cmd(
-        "command! LspDiagLine lua vim.lsp.diagnostic.show_line_diagnostics()")
+        "command! LspDiagLine lua vim.diagnostic.open_float()")
     vim.cmd("command! LspSignatureHelp lua vim.lsp.buf.signature_help()")
 
     buf_map(bufnr, "n", "gd", ":LspDef<CR>", {silent = true})
