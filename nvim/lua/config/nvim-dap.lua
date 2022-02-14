@@ -1,9 +1,33 @@
 local dap = require('dap');
 local map = require('config.util').map;
 
+dap.adapters.lldb = {
+    type = 'executable',
+    command = '/usr/local/bin/lldb-vscode',
+    name = 'lldb',
+}
+
+dap.configurations.rust = {
+    {
+    name = "Launch",
+    type = "lldb",
+    request = "launch",
+    program = function ()
+        return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    stopOnEntry = false,
+    args = function()
+        return vim.fn.input('Args for executable: ')
+    end,
+    runInTerminal = false,
+},
+}
+
+
 dap.adapters.python = {
     type = 'executable',
-    command = os.getenv('PYHTON_CONDA_EXE'), 
+    command = os.getenv('PYHTON_CONDA_EXE'),
     args = {'-m', 'debugpy.adapter'}
 }
 
