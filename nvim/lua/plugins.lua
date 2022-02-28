@@ -104,7 +104,10 @@ local function plugins_startup()
     use {
         "lewis6991/gitsigns.nvim",
         requires = {"nvim-lua/plenary.nvim"},
-        config = function() require("gitsigns").setup() end
+        config = function() require("gitsigns").setup {
+            on_attach = require('config.gitsigns').gitsigns_attach
+        }
+        end
     }
 
     -- status line
