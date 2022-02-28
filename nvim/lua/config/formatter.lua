@@ -8,6 +8,7 @@ formatter.setup {
                 return { exe = 'darker',
                          args = { '--quiet',
                                   '--stdout',
+                                  '--isort',
                                   vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
                                   stdin = true }
                 --return {exe = 'black', args = {'--quiet', '-'}, stdin = true}
