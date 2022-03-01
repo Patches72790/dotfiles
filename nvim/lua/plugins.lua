@@ -123,6 +123,15 @@ local function plugins_startup()
     use {
         "ellisonleao/glow.nvim"
     }
+
+    -- startup screen
+    use {
+        'goolord/alpha-nvim',
+        config = function ()
+            require("alpha").setup(require('alpha.themes.dashboard').config)
+        end
+    }
+
 end
 
 return packer.startup(plugins_startup)
