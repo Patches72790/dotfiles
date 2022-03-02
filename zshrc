@@ -64,7 +64,7 @@ alias nv="nvim"
 # node env variable
 export NVM_DIR="$XDG_CONFIG_HOME/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 if [[ "$(whoami)" == "PXH050" ]]; then
     # >>> conda initialize >>>
@@ -100,3 +100,4 @@ fi
 
 # set my conda env to matching tab and project folder
 #set_conda_env
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

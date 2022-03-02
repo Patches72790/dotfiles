@@ -104,7 +104,10 @@ local function plugins_startup()
     use {
         "lewis6991/gitsigns.nvim",
         requires = {"nvim-lua/plenary.nvim"},
-        config = function() require("gitsigns").setup() end
+        config = function() require("gitsigns").setup {
+            on_attach = require('config.gitsigns').gitsigns_attach
+        }
+        end
     }
 
     -- status line
@@ -127,6 +130,14 @@ local function plugins_startup()
             require("zk").setup()
         end
     }
+    -- startup screen
+    use {
+        'goolord/alpha-nvim',
+        config = function ()
+            require("alpha").setup(require('alpha.themes.dashboard').config)
+        end
+    }
+
 end
 
 return packer.startup(plugins_startup)

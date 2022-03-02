@@ -96,6 +96,6 @@ function install_fd_and_rg {
 #load_dotfiles
 #install_zsh
 #install_nvim
-#install_node
+install_node
 #install_rust
-install_fd_and_rg
+#install_fd_and_rg
