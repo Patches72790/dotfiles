@@ -120,6 +120,13 @@ local function plugins_startup()
     use {
         "ellisonleao/glow.nvim"
     }
+
+    use {
+        "mickael-menu/zk-nvim",
+        config = function()
+            require("zk").setup()
+        end
+    }
 end
 
 return packer.startup(plugins_startup)
