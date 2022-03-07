@@ -124,6 +124,12 @@ local function plugins_startup()
         "ellisonleao/glow.nvim"
     }
 
+    use {
+        "mickael-menu/zk-nvim",
+        config = function()
+            require("zk").setup()
+        end
+    }
     -- startup screen
     use {
         'goolord/alpha-nvim',
