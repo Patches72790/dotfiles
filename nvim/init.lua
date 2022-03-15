@@ -67,6 +67,10 @@ map("n", "<c-j>", "<c-w>j")
 map("n", "<c-k>", "<c-w>k")
 map("n", "<c-l>", "<c-w>l")
 
+-- tab navigation
+map("n", "<S-l>", "gt") -- next tab (right)
+map("n", "<S-h>", "gT") -- previous tab (left)
+
 -- closing buffers
 map("n", "<leader>q", "<cmd>qa<CR>", silent)
 map("n", "<leader>x", "<cmd>x!<CR>", silent)
