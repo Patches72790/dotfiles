@@ -40,7 +40,7 @@ fi
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 alias gdec="git log --decorate=full --oneline --graph"
-alias nvconfig="cd $HOME/dotfiles/nvim && nvim ."
+alias nvconfig="cd $HOME/dotfiles/nvim && nvim"
 export ZK_NOTEBOOK_DIR="$HOME/zk_notebook"
 
 # for Opterrix mac only!
