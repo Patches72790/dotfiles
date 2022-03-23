@@ -42,7 +42,7 @@ opt("backupdir", os.getenv("HOME") .. "/dotfiles/nvim/backupdir")
 opt("directory", os.getenv("HOME") .. "/dotfiles/nvim/backupdir")
 opt("completeopt", "menuone,noselect,noinsert")
 opt("fileformat", "unix", buffer)
-opt("guifont", "FiraMono Nerd Font Mono:h12")
+opt("guifont", "FiraMono Nerd Font Mono:h13")
 opt("relativenumber", true)
 
 -- color options

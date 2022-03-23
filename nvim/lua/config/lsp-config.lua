@@ -34,7 +34,7 @@ lsp_installer.settings {
 -- automatically install servers in this list
 local servers = {
     "bashls", "jdtls", "sumneko_lua", "tsserver", "rust_analyzer",
-    "vimls", "clangd", "eslint", "pyright"
+    "vimls", "clangd", "eslint", "pyright", "gopls",
 }
 
 for _, name in pairs(servers) do
