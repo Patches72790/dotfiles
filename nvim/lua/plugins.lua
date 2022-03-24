@@ -72,12 +72,6 @@ local function plugins_startup()
          config = function() require('dapui').setup() end,
     }
 
-    -- linters
-    use {
-        "mfussenegger/nvim-lint",
-        config = function() require("config.linter") end
-    }
-
     -- autocomplete
     use {
         "hrsh7th/nvim-cmp",
@@ -135,6 +129,21 @@ local function plugins_startup()
         'goolord/alpha-nvim',
         config = function ()
             require("alpha").setup(require('alpha.themes.dashboard').config)
+        end
+    }
+
+    use {
+        'jose-elias-alvarez/null-ls.nvim',
+        config = function()
+            require('config.lsp.null-ls')
+        end,
+        requires = { 'nvim-lua/plenary.nvim' },
+    }
+
+    use {
+        'folke/which-key.nvim',
+        config = function()
+            require('which-key').setup()
         end
     }
 
