@@ -33,7 +33,8 @@ local function plugins_startup()
     -- lsp config
     use {
         "neovim/nvim-lspconfig",
-        event = "BufReadPre",
+        opt = true,
+        event = "VimEnter",
         wants = { 'nvim-lsp-installer', 'cmp-nvim-lsp', 'null-ls.nvim' },
         config = function() require("config.lsp").setup() end,
         requires = {

@@ -5,13 +5,14 @@ local null_ls_utils = require("null-ls.utils")
 local builtins = null_ls.builtins
 
 local sources = {
-	builtins.formatting.black.with({ extra_args = { "--fast" } }),
-	builtins.formatting.prettierd,
-	builtins.formatting.isort,
-	builtins.formatting.stylua,
+	builtins.formatting.black.with({ extra_args = { "--fast" }, filetypes = { "python" } }),
+	builtins.formatting.prettierd.with({ filetypes = { "javascript, javascriptreact, typescript, typescriptreact" } }),
+	builtins.formatting.isort.with({ filetypes = { "python" } }),
+	builtins.formatting.stylua.with({ filetypes = { "lua" } }),
 }
 
 function M.setup(opts)
+	print(opts)
 	null_ls.setup({
 		sources = sources,
 		debounce = 150,

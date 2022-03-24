@@ -26,7 +26,7 @@ function M.setup()
 	}
 
 	-- null-ls setup TODO
-	require("config.lsp.null-ls.init").setup(opts)
+	require("config.lsp.null-ls").setup(opts)
 	-- Lsp-Installer setup TODO
 	require("config.lsp.installer").setup(opts)
 end
