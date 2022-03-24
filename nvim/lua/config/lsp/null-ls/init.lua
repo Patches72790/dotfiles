@@ -12,12 +12,12 @@ local sources = {
 }
 
 function M.setup(opts)
-	print(opts)
+	local on_attach = opts and opts.on_attach
 	null_ls.setup({
 		sources = sources,
 		debounce = 150,
 		save_after_format = false,
-		on_attach = opts.on_attach,
+		on_attach = on_attach,
 		root_dir = null_ls_utils.root_pattern(".git", ".package.json"),
 	})
 end
