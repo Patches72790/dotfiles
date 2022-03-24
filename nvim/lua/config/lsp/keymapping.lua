@@ -13,8 +13,8 @@ local function keymappings(client, bufnr)
     -- lsp diagnostics gotos
     vim.cmd("command! LspDiagPrev lua vim.diagnostic.goto_prev()")
     vim.cmd("command! LspDiagNext lua vim.diagnostic.goto_next()")
-    keymap(bufnr, "n", "[a", ":LspDiagPrev<CR>", opts)
-    keymap(bufnr, "n", "]a", ":LspDiagNext<CR>", opts)
+    keymap("n", "[a", ":LspDiagPrev<CR>", opts)
+    keymap("n", "]a", ":LspDiagNext<CR>", opts)
 
     -- <leader> + l + [key]
     local keymap_l = {
@@ -42,6 +42,7 @@ local function keymappings(client, bufnr)
 
     -- enable document formatting if enabled for client
     if client.resolved_capabilities.document_formatting then
+        vim.cmd("command! LspFormatting lua vim.lsp.buf.formatting_seq_sync(nil, 2000)")
         keymap_l.l.F = { "<cmd>lua vim.lsp.buf.formatting_seq_sync(nil, 2000)<CR>", "Format Document" }
     end
 
