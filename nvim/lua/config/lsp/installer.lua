@@ -91,28 +91,24 @@ function M.setup(options)
     }
 
     for server_name, _ in pairs(servers) do
-        local server_ok, server = lsp_installer_servers.get_server(name)
-        if server_ok then
-            lsp_installer.on_server_ready(function()
-
-                -- extend options with any language specific options
-                local opts = vim.tbl_deep_extend("force", options,
-                    servers[server.name] and server[server.name](options) or {})
-
-                -- setup server
-                server:setup(opts)
-
-            end)
-            -- install if not installed
-           if not server:is_installed() then
-               print("Installing " .. name)
-               server:install()
-           end
+        local server_is_found, server = lsp_installer.get_server(server_name)
+        if server_is_found and not server:is_installed() then
+            print("Installing " .. name)
+            server:install()
         else
-            msg = "Server " .. server .. " not available"
+            local msg = "Server " .. server.name .. " not available"
             vim.notify(msg, vim.log.levels.ERROR, { title = "Server" })
         end
     end
+
+    lsp_installer.on_server_ready(function(server)
+        -- extend options with any language specific options
+        local enhanced_server_opts = servers[server.name] 
+                                     and servers[server.name](options) or {}
+        local opts = vim.tbl_deep_extend("force", options, enhanced_server_opts)
+        -- setup server
+        server:setup(opts)
+    end)
 end
 
 return M
