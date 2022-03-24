@@ -28,13 +28,19 @@ local function plugins_startup()
 
     use {"nvim-telescope/telescope-dap.nvim"}
 
+    use {"williamboman/nvim-lsp-installer"}
+
     -- lsp config
     use {
         "neovim/nvim-lspconfig",
-        config = function() require("config.lsp-config") end
+        event = "BufReadPre",
+        wants = { 'nvim-lsp-installer', 'cmp-nvim-lsp', 'null-ls.nvim' },
+        config = function() require("config.lsp").setup() end,
+        requires = {
+          "williamboman/nvim-lsp-installer",
+          "jose-elias-alvarez/null-ls.nvim",
+        },
     }
-
-    use {"williamboman/nvim-lsp-installer"}
 
     use {
         "mhartington/formatter.nvim",
@@ -135,7 +141,7 @@ local function plugins_startup()
     use {
         'jose-elias-alvarez/null-ls.nvim',
         config = function()
-            require('config.lsp.null-ls')
+            require('config.lsp.null-ls').setup()
         end,
         requires = { 'nvim-lua/plenary.nvim' },
     }
@@ -146,7 +152,6 @@ local function plugins_startup()
             require('which-key').setup()
         end
     }
-
 end
 
 return packer.startup(plugins_startup)
