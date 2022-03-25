@@ -49,17 +49,13 @@ local servers = {
 		local enhanced_opts = {}
 		enhanced_opts.on_attach = function(client, bufnr)
 		    client.resolved_capabilities.document_formatting = false
+            client.resolved_capabilities.document_range_formatting = false
 		    opts.on_attach(client, bufnr)
 		end
 		return enhanced_opts
 	end,
-	["pyright"] = function(opts)
-		local enhanced_opts = {}
-		enhanced_opts.on_attach = function(client, bufnr)
-		    client.resolved_capabilities.document_formatting = false
-		    opts.on_attach(client, bufnr)
-		end
-		return enhanced_opts
+	["pyright"] = function(_)
+		return {}
 	end,
 
 	-- other language servers
@@ -98,7 +94,7 @@ function M.setup(options)
 	for server_name, _ in pairs(servers) do
 		local server_is_found, server = lsp_installer.get_server(server_name)
 		if server_is_found and not server:is_installed() then
-			print("Installing " .. name)
+			print("Installing " .. server_name)
 			server:install()
 		end
 	end

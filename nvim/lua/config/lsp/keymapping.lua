@@ -30,7 +30,15 @@ local function keymappings(client, bufnr)
         }
     }
 
-    -- g + [key]
+    -- utilities <leader> + u + [key]
+    local keymap_u = {
+        u = {
+            name = "Utilities",
+            t = { "<cmd> lua require('config.lsp.null-ls.formatters').toggle()<CR>", "Toggle Auto Format" }
+        }
+    }
+
+    -- Gotos g + [key]
     local keymap_g = {
         name = "Goto",
         d = {"<cmd>Telescope lsp_definitions<CR>", "Definition"},
@@ -42,13 +50,14 @@ local function keymappings(client, bufnr)
 
     -- enable document formatting if enabled for client
     if client.resolved_capabilities.document_formatting then
-        vim.cmd("command! LspFormatting lua vim.lsp.buf.formatting_seq_sync(nil, 2000)")
-        keymap_l.l.F = { "<cmd>lua vim.lsp.buf.formatting_seq_sync(nil, 2000)<CR>", "Format Document" }
+        vim.cmd("command! LspFormatting lua vim.lsp.buf.formatting_sync(nil, 2000)")
+        keymap_l.l.F = { "<cmd>LspFormatting<CR>", "Format Document" }
     end
 
     -- register which key keymaps
     whichkey.register(keymap_l, {buffer = bufnr, prefix = "<leader>"})
     whichkey.register(keymap_g, {buffer = bufnr, prefix = "g"})
+    whichkey.register(keymap_u, {buffer = bufnr, prefix = "<leader>"})
 end
 
 -- Setup the keymappings for client and bufnr
