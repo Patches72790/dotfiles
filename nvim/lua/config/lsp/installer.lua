@@ -1,9 +1,10 @@
 local M = {}
+local autocmd = require('config.util').autocmd
 local lsp_installer = require("nvim-lsp-installer")
 
 -- server options to be used in setup function for lsp_installer
 local servers = {
-	["sumneko_lua"] = function()
+	["sumneko_lua"] = function(_)
 		local default_opts = {}
 		default_opts.settings = {
 			Lua = {
@@ -30,35 +31,35 @@ local servers = {
 		}
 		return default_opts
 	end,
-	["eslint"] = function()
-		local default_opts = {}
-		--default_opts.on_attach = function(client, bufnr)
-		--    autocmd('EsLintCmd', [[ BufWritePost <buffer> EslintFixAll ]])
-		--    on_attach(client, bufnr)
-		--end
-		default_opts.filetypes = {
+	["eslint"] = function(opts)
+		local enhanced_opts = {}
+		enhanced_opts.on_attach = function(client, bufnr)
+		    autocmd('EsLintCmd', [[ BufWritePost <buffer> EslintFixAll ]])
+		    opts.on_attach(client, bufnr)
+		end
+		enhanced_opts.filetypes = {
 			"javascriptreact",
 			"javascript",
 			"typescript",
 			"typescriptreact",
 		}
-		return default_opts
+		return enhanced_opts
 	end,
-	["tsserver"] = function()
-		local default_opts = {}
-		--default_opts.on_attach = function(client, bufnr)
-		--    client.resolved_capabilities.document_formatting = false
-		--    on_attach(client, bufnr)
-		--end
-		return default_opts
+	["tsserver"] = function(opts)
+		local enhanced_opts = {}
+		enhanced_opts.on_attach = function(client, bufnr)
+		    client.resolved_capabilities.document_formatting = false
+		    opts.on_attach(client, bufnr)
+		end
+		return enhanced_opts
 	end,
-	["pyright"] = function()
-		local default_opts = {}
-		--default_opts.on_attach = function(client, bufnr)
-		--    client.resolved_capabilities.document_formatting = false
-		--    on_attach(client, bufnr)
-		--end
-		return default_opts
+	["pyright"] = function(opts)
+		local enhanced_opts = {}
+		enhanced_opts.on_attach = function(client, bufnr)
+		    client.resolved_capabilities.document_formatting = false
+		    opts.on_attach(client, bufnr)
+		end
+		return enhanced_opts
 	end,
 
 	-- other language servers

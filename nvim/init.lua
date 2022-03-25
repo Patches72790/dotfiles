@@ -20,7 +20,6 @@ local utils = require("config.util")
 local opt = utils.opt
 local cmd = vim.cmd
 local map = utils.map
-local autocmd = utils.autocmd
 
 -- general options
 opt("number", true, window)
@@ -77,7 +76,3 @@ map("n", "<leader>x", "<cmd>x!<CR>", silent)
 
 -- Mapping for Glow MD viewer
 map("n", "<leader>G", ":Glow<CR>", silent)
-
--- autocmd for triggering linting
---autocmd("LintCmd", [[BufWritePost <buffer> lua require('lint').try_lint()]])
-map("n", "<leader>p", "<cmd>Format<CR>")

@@ -6,8 +6,8 @@ local builtins = null_ls.builtins
 
 local sources = {
 	builtins.formatting.black.with({ extra_args = { "--fast" }, filetypes = { "python" } }),
-	builtins.formatting.prettierd.with({ filetypes = { "javascript, javascriptreact, typescript, typescriptreact" } }),
 	builtins.formatting.isort.with({ filetypes = { "python" } }),
+	builtins.formatting.prettierd.with({ filetypes = { "javascript, javascriptreact, typescript, typescriptreact" } }),
 	builtins.formatting.stylua.with({ filetypes = { "lua" } }),
 }
 
