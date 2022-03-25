@@ -10,6 +10,7 @@ local sources = {
 	formatting.stylua,
 	formatting.eslint_d,
 	formatting.rustfmt,
+	formatting.shfmt,
 	diagnostics.eslint_d,
 }
 
