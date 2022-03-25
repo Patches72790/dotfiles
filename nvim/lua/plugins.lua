@@ -159,7 +159,8 @@ local function plugins_startup()
 	use({
 		"goolord/alpha-nvim",
 		config = function()
-			require("alpha").setup(require("alpha.themes.dashboard").config)
+			--require("alpha").setup(require("alpha.themes.dashboard").config)
+			require("config.alpha")
 		end,
 	})
 
