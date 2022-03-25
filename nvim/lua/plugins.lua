@@ -29,8 +29,6 @@ local function plugins_startup()
 
 	use({ "nvim-telescope/telescope-dap.nvim" })
 
-	--use({ "williamboman/nvim-lsp-installer" })
-
 	-- lsp config
 	use({
 		"neovim/nvim-lspconfig",
@@ -45,6 +43,18 @@ local function plugins_startup()
 			"jose-elias-alvarez/null-ls.nvim",
 		},
 	})
+
+	use({
+		"folke/trouble.nvim",
+		requires = "kyazdani42/nvim-web-devicons",
+		cmd = { "TroubleToggle", "Trouble" },
+		config = function()
+			require("trouble").setup({
+				use_diagnostic_signs = true,
+			})
+		end,
+	})
+
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
