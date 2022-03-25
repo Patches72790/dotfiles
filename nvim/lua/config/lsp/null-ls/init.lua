@@ -8,15 +8,13 @@ local diagnostics = null_ls.builtins.diagnostics
 local sources = {
 	formatting.black.with({ extra_args = { "--fast" } }),
 	formatting.isort.with({ filetypes = { "python" } }),
-	formatting.prettier.with({
-		prefer_local = "node_modules/.bin",
-		extra_args = { "--single-quote", "--no-semi", "--jsx-single-quote" },
-	}),
+	--formatting.prettier.with({
+	--	prefer_local = "node_modules/.bin",
+	--	extra_args = { "--single-quote", "--no-semi", "--jsx-single-quote" },
+	--}),
 	formatting.stylua,
-	formatting.eslint.with({
-		prefer_local = "node_modules/.bin/",
-		extra_args = { "--config", vim.fn.expand("~/Projects/atlas-webapp/app/webapp/app/.eslintrc.js") },
-	}),
+	formatting.eslint_d,
+	diagnostics.eslint_d,
 }
 
 function M.setup(opts)

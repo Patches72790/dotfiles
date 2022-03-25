@@ -1,5 +1,5 @@
 local M = {}
-local autocmd = require('config.util').autocmd
+local autocmd = require("config.util").autocmd
 local lsp_installer = require("nvim-lsp-installer")
 
 -- server options to be used in setup function for lsp_installer
@@ -34,23 +34,17 @@ local servers = {
 	["eslint"] = function(opts)
 		local enhanced_opts = {}
 		enhanced_opts.on_attach = function(client, bufnr)
-		    autocmd('EsLintCmd', [[ BufWritePost <buffer> EslintFixAll ]])
-		    opts.on_attach(client, bufnr)
+			client.resolved_capabilities.document_formatting = false
+			client.resolved_capabilities.document_range_formatting = false
 		end
-		enhanced_opts.filetypes = {
-			"javascriptreact",
-			"javascript",
-			"typescript",
-			"typescriptreact",
-		}
-       	return enhanced_opts
+		return enhanced_opts
 	end,
 	["tsserver"] = function(opts)
 		local enhanced_opts = {}
 		enhanced_opts.on_attach = function(client, bufnr)
-		    client.resolved_capabilities.document_formatting = false
-            client.resolved_capabilities.document_range_formatting = false
-		    opts.on_attach(client, bufnr)
+			client.resolved_capabilities.document_formatting = false
+			client.resolved_capabilities.document_range_formatting = false
+			opts.on_attach(client, bufnr)
 		end
 		return enhanced_opts
 	end,
