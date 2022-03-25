@@ -6,12 +6,10 @@ local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics
 
 local sources = {
-	--formatting.black.with({ extra_args = { "--fast" } }),
-	formatting.isort.with({ filetypes = { "python" } }),
+	require("config.lsp.null-ls.sources.darker"), -- darker formatter for python = black + isort
 	formatting.stylua,
 	formatting.eslint_d,
 	formatting.rustfmt,
-	require("config.lsp.null-ls.sources.darker"),
 	diagnostics.eslint_d,
 }
 
@@ -21,7 +19,6 @@ function M.setup(opts)
 		debug = true,
 		sources = sources,
 		debounce = 150,
-		save_after_format = false,
 		on_attach = on_attach,
 		root_dir = null_ls_utils.root_pattern(".git"),
 	})
