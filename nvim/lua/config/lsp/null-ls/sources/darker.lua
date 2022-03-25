@@ -14,7 +14,6 @@ return h.make_builtin({
 		args = {
 			"--quiet",
 			"--stdout",
-			"--isort",
 			"$FILENAME",
 		},
 		to_stdin = true,
