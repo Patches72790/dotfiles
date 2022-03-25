@@ -1,10 +1,10 @@
-local lualine = require'lualine'
+local lualine = require("lualine")
 
 lualine.setup({
-    options = {
-        theme = "gruvbox"
-    },
-    tabline = {
-        lualine_a = {'tabs'}
-    }
+	options = {
+		theme = "gruvbox",
+	},
+	tabline = {
+		lualine_a = { "tabs" },
+	},
 })
