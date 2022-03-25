@@ -30,6 +30,14 @@ local function plugins_startup()
 
     use {"williamboman/nvim-lsp-installer"}
 
+--    use {
+--        'jose-elias-alvarez/null-ls.nvim',
+--        config = function()
+--            require('config.lsp.null-ls').setup()
+--        end,
+--        requires = { 'nvim-lua/plenary.nvim' },
+--    }
+
     -- lsp config
     use {
         "neovim/nvim-lspconfig",
@@ -42,12 +50,6 @@ local function plugins_startup()
           "jose-elias-alvarez/null-ls.nvim",
         },
     }
-
-    use {
-        "mhartington/formatter.nvim",
-        config = function() require("config.formatter") end
-    }
-
     use {
         "nvim-treesitter/nvim-treesitter",
         run = ":TSUpdate",
@@ -137,14 +139,6 @@ local function plugins_startup()
         config = function ()
             require("alpha").setup(require('alpha.themes.dashboard').config)
         end
-    }
-
-    use {
-        'jose-elias-alvarez/null-ls.nvim',
-        config = function()
-            require('config.lsp.null-ls').setup()
-        end,
-        requires = { 'nvim-lua/plenary.nvim' },
     }
 
     use {

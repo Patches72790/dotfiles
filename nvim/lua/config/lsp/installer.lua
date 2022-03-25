@@ -43,7 +43,7 @@ local servers = {
 			"typescript",
 			"typescriptreact",
 		}
-		return enhanced_opts
+       	return enhanced_opts
 	end,
 	["tsserver"] = function(opts)
 		local enhanced_opts = {}
