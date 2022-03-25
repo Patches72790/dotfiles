@@ -44,16 +44,16 @@ local function plugins_startup()
 		},
 	})
 
-	use({
-		"folke/trouble.nvim",
-		requires = "kyazdani42/nvim-web-devicons",
-		cmd = { "TroubleToggle", "Trouble" },
-		config = function()
-			require("trouble").setup({
-				use_diagnostic_signs = true,
-			})
-		end,
-	})
+	--use({
+	--	"folke/trouble.nvim",
+	--	requires = "kyazdani42/nvim-web-devicons",
+	--	cmd = { "TroubleToggle", "Trouble" },
+	--	config = function()
+	--		require("trouble").setup({
+	--			use_diagnostic_signs = true,
+	--		})
+	--	end,
+	--})
 
 	use({
 		"nvim-treesitter/nvim-treesitter",
