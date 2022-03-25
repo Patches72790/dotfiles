@@ -6,14 +6,12 @@ local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics
 
 local sources = {
-	formatting.black.with({ extra_args = { "--fast" } }),
+	--formatting.black.with({ extra_args = { "--fast" } }),
 	formatting.isort.with({ filetypes = { "python" } }),
-	--formatting.prettier.with({
-	--	prefer_local = "node_modules/.bin",
-	--	extra_args = { "--single-quote", "--no-semi", "--jsx-single-quote" },
-	--}),
 	formatting.stylua,
 	formatting.eslint_d,
+	formatting.rustfmt,
+	require("config.lsp.null-ls.sources.darker"),
 	diagnostics.eslint_d,
 }
 
