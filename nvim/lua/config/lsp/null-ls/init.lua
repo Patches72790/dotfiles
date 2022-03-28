@@ -24,6 +24,7 @@ function M.setup(opts)
 		debounce = 150,
 		on_attach = on_attach,
 		root_dir = null_ls_utils.root_pattern(".git"),
+		update_in_insert = true,
 	})
 end
 
