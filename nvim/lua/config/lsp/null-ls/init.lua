@@ -13,6 +13,7 @@ local sources = {
 	formatting.eslint_d,
 	formatting.rustfmt,
 	formatting.shfmt,
+	formatting.gofmt,
 	diagnostics.eslint_d,
 }
 
