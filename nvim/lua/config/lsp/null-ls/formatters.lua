@@ -17,7 +17,7 @@ end
 
 function M.format()
 	if M.autoformat then
-		util.warn("Formatting buffer in null-ls", "Formatting")
+		--util.warn("Formatting buffer in null-ls", "Formatting")
 		vim.lsp.buf.formatting_sync(nil, 2000)
 	end
 end
@@ -53,7 +53,7 @@ function M.setup(client, bufnr)
 		vim.cmd([[
          augroup LspFormat
              autocmd! * <buffer>
-             autocmd BufWritePre <buffer> lua require('config.lsp.null-ls.formatters').format()
+             autocmd BufWritePost <buffer> lua require('config.lsp.null-ls.formatters').format()
          augroup END
          ]])
 	end
