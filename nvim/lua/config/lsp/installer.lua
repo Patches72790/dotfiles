@@ -68,7 +68,10 @@ local servers = {
 	vimls = function()
 		return {}
 	end,
-	gopls = function()
+	gopls = function() -- Go
+		return {}
+	end,
+	hls = function() -- haskell
 		return {}
 	end,
 }

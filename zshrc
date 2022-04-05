@@ -45,7 +45,7 @@ export ZK_NOTEBOOK_DIR="$HOME/zk_notebook"
 
 # for Opterrix mac only!
 if [[ "$(whoami)" == "PXH050" ]]; then
-    alias atlas="conda activate env && nvm use --lts && cd $HOME/Projects/atlas-webapp/app/webapp/app"
+    alias atlas="conda activate atlas-env && nvm use --lts && cd $HOME/Projects/atlas-webapp/app/webapp/app"
     alias opterrix="conda activate opterrix-env && nvm use --lts && cd $HOME/Projects/opterrix/application/webapp/app"
     alias opt-direct="conda activate opt-direct && nvm use --lts && cd $HOME/Projects/opterrix-direct/application/webapp/app"
 fi
