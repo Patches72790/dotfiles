@@ -13,6 +13,11 @@ function M.setup()
 	map("n", "<leader>dr", ":lua require'dap'.repl.open()<CR>")
 	map("n", "<leader>dl", ":lua require'dap'.run_last()<CR>")
 
+	-- dap-python keys
+	map("n", "<leader>dn", ":lua require'dap-python'.test_method()<CR>")
+	map("n", "<leader>df", ":lua require'dap-python'.test_class()<CR>")
+	map("n", "<leader>ds", "<ESC>:lua require'dap-python'.debug_selection()<CR>")
+
 	-- mapping for nvim-dap-ui
 	map("n", "<F24>", ":lua require('dapui').toggle()<CR>")
 end

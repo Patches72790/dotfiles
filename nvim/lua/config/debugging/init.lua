@@ -1,5 +1,6 @@
 local M = {}
 
+---Configures general utilities for the debugging tool
 local function configure()
 	-- sign definitions
 	vim.fn.sign_define("DapBreakpoint", { text = "🟥", texthl = "", linehl = "", numhl = "" })
@@ -17,9 +18,9 @@ local function configure_debuggers()
 end
 
 function M.setup()
-	configure()
 	configure_exts()
-    configure_debuggers()
+	configure_debuggers()
+	configure()
 	require("config.debugging.keymap").setup()
 end
 
