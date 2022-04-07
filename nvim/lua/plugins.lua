@@ -86,8 +86,9 @@ local function plugins_startup()
 	use({
 		"mfussenegger/nvim-dap",
 		config = function()
-			require("config.nvim-dap")
+			require("config.debugging").setup()
 		end,
+        requires = { 'mfussenegger/nvim-dap-python' }
 	})
 
 	use({
