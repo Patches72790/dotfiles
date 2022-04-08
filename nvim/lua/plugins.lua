@@ -90,15 +90,12 @@ local function plugins_startup()
 			{ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
 			{ "hrsh7th/cmp-buffer", after = "nvim-cmp" },
 			{ "lukas-reineke/cmp-rg", after = "nvim-cmp" },
+			{ "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
+			"onsails/lspkind-nvim", -- VScode pictograms
 		},
 		config = function()
-			require("config.nvim-cmp")
+			require("config.nvim-cmp").setup()
 		end,
-	})
-
-	-- vscode-like pictograms
-	use({
-		"onsails/lspkind-nvim",
 	})
 
 	-- colorschemes

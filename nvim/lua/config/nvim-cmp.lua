@@ -1,7 +1,8 @@
+local M = {}
 local cmp = require("cmp")
 local lspkind = require("lspkind")
 
-cmp.setup({
+local cmp_configuration = {
 	snippet = {
 		expand = function(args)
 			require("luasnip").lsp_expand(args.body)
@@ -44,6 +45,26 @@ cmp.setup({
 		{ name = "nvim_lua" },
 		{ name = "path" },
 		{ name = "luasnip" },
+		{ name = "cmdline" },
 		--{name = 'rg' },
 	},
-})
+}
+
+local cmp_cmdline_config = {
+	sources = {
+		{ name = "cmdline" },
+	},
+}
+local cmp_cmdline_search_config = {
+	sources = {
+		{ name = "buffer" },
+	},
+}
+
+function M.setup()
+	cmp.setup(cmp_configuration)
+	cmp.setup.cmdline(":", cmp_cmdline_config)
+    cmp.setup.cmdline('/', cmp_cmdline_search_config)
+end
+
+return M
