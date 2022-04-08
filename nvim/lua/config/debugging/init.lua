@@ -22,6 +22,7 @@ function M.setup()
 	configure_debuggers()
 	configure()
 	require("config.debugging.keymap").setup()
+	require("dapui").setup() -- initialize nvim-dap-ui
 end
 
 return M

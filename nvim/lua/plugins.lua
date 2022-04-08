@@ -27,8 +27,6 @@ local function plugins_startup()
 		end,
 	})
 
-	use({ "nvim-telescope/telescope-dap.nvim" })
-
 	-- lsp config
 	use({
 		"neovim/nvim-lspconfig",
@@ -43,17 +41,6 @@ local function plugins_startup()
 			"jose-elias-alvarez/null-ls.nvim",
 		},
 	})
-
-	--use({
-	--	"folke/trouble.nvim",
-	--	requires = "kyazdani42/nvim-web-devicons",
-	--	cmd = { "TroubleToggle", "Trouble" },
-	--	config = function()
-	--		require("trouble").setup({
-	--			use_diagnostic_signs = true,
-	--		})
-	--	end,
-	--})
 
 	use({
 		"nvim-treesitter/nvim-treesitter",
@@ -73,12 +60,8 @@ local function plugins_startup()
 		end,
 	})
 
-	-- general language packages
+	-- java specialized language server
 	use({
-		"leafgarland/typescript-vim",
-		"peitalin/vim-jsx-typescript",
-		"rust-lang/rust.vim",
-		{ "prettier/vim-prettier", run = "npm install" },
 		"mfussenegger/nvim-jdtls",
 	})
 
@@ -88,15 +71,11 @@ local function plugins_startup()
 		config = function()
 			require("config.debugging").setup()
 		end,
-        requires = { 'mfussenegger/nvim-dap-python' }
-	})
-
-	use({
-		"rcarriga/nvim-dap-ui",
-		requires = { "mfussenegger/nvim-dap" },
-		config = function()
-			require("dapui").setup()
-		end,
+		requires = {
+			"mfussenegger/nvim-dap-python",
+			"nvim-telescope/telescope-dap.nvim",
+			"rcarriga/nvim-dap-ui",
+		},
 	})
 
 	-- autocomplete
@@ -117,13 +96,13 @@ local function plugins_startup()
 		end,
 	})
 
+	-- vscode-like pictograms
 	use({
 		"onsails/lspkind-nvim",
 	})
 
 	-- colorschemes
-	use({ "ellisonleao/gruvbox.nvim" })
-	use({ "doums/darcula" })
+	use({ "ellisonleao/gruvbox.nvim", "doums/darcula" })
 
 	-- git
 	use({
