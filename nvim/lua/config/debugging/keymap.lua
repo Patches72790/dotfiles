@@ -21,5 +21,10 @@ function M.setup()
 	-- mapping for nvim-dap-ui
 	map("n", "<F24>", ":lua require('dapui').toggle()<CR>")
 end
-
+-- telescope-dap commands and mappings
+-- :Telescope dap commands
+-- :Telescope dap variables
+-- :Telescope dap frames
+-- :Telescope dap list_breakpoints
+-- :Telescope dap configurations
 return M

@@ -59,9 +59,9 @@ local servers = {
 	jdtls = function()
 		return {}
 	end,
-	rust_analyzer = function()
-		return {}
-	end,
+	--rust_analyzer = function()
+	--	return {}
+	--end,
 	clangd = function()
 		return {}
 	end,
@@ -103,6 +103,17 @@ function M.setup(options)
 		-- setup server
 		server:setup(opts)
 	end)
+
+	-- rust uses rust-tools.nvim
+	require("rust-tools").setup({
+		dap = {
+			adapter = {
+				type = "executable",
+				command = "lldb-vscode-13",
+				name = "rt_lldb",
+			},
+		},
+	})
 end
 
 return M

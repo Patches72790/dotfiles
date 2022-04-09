@@ -30,7 +30,6 @@ local function plugins_startup()
 	-- lsp config
 	use({
 		"neovim/nvim-lspconfig",
-		opt = true,
 		event = "VimEnter",
 		wants = { "nvim-lsp-installer", "cmp-nvim-lsp", "null-ls.nvim" },
 		config = function()
@@ -39,6 +38,7 @@ local function plugins_startup()
 		requires = {
 			"williamboman/nvim-lsp-installer",
 			"jose-elias-alvarez/null-ls.nvim",
+			"simrat39/rust-tools.nvim",
 		},
 	})
 
