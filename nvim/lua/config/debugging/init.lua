@@ -15,7 +15,7 @@ end
 
 local function configure_debuggers()
 	require("config.debugging.python").setup()
-	require("config.debugging.rust").setup()
+	--require("config.debugging.rust").setup()
 end
 
 function M.setup()

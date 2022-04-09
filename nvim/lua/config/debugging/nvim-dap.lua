@@ -63,5 +63,3 @@ dap.configurations.javascript = {
 		restart = true,
 	},
 }
-
-
