@@ -59,9 +59,41 @@ local servers = {
 	jdtls = function()
 		return {}
 	end,
-	--rust_analyzer = function()
-	--	return {}
-	--end,
+	rust_analyzer = function(options, server)
+		local rust_opts = {
+			tools = {
+				autoSetHints = true,
+				hover_with_actions = false,
+				inlay_hints = {
+					show_parameter_hints = true,
+					parameter_hints_prefix = "",
+					other_hints_prefix = "",
+				},
+			},
+			server = vim.tbl_deep_extend("force", options, server:get_default_options(), {
+				settings = {
+					["rust-analyzer"] = {
+						completion = {
+							postfix = {
+								enable = false,
+							},
+						},
+						checkOnSave = {
+							command = "clippy",
+						},
+					},
+				},
+			}),
+			dap = {
+				adapter = {
+					type = "executable",
+					command = "lldb-vscode-13",
+					name = "rt_lldb",
+				},
+			},
+		}
+		return rust_opts
+	end,
 	clangd = function()
 		return {}
 	end,
@@ -98,22 +130,16 @@ function M.setup(options)
 
 	lsp_installer.on_server_ready(function(server)
 		-- extend options with any language specific options
-		local enhanced_server_opts = servers[server.name] and servers[server.name](options) or {}
-		local opts = vim.tbl_deep_extend("force", options, enhanced_server_opts)
-		-- setup server
-		server:setup(opts)
+		local enhanced_server_opts = servers[server.name] and servers[server.name](options, server) or {}
+		if server.name == "rust_analyzer" then
+			require("rust-tools").setup(enhanced_server_opts)
+			server:attach_buffers()
+		else
+			local opts = vim.tbl_deep_extend("force", options, enhanced_server_opts)
+			-- setup server
+			server:setup(opts)
+		end
 	end)
-
-	-- rust uses rust-tools.nvim
-	require("rust-tools").setup({
-		dap = {
-			adapter = {
-				type = "executable",
-				command = "lldb-vscode-13",
-				name = "rt_lldb",
-			},
-		},
-	})
 end
 
 return M
