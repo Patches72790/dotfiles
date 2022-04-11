@@ -48,3 +48,13 @@ abbr gstp 'git stash pop'
 abbr gstl 'git stash list'
 abbr gstc 'git stash clear'
 abbr gsts 'git stash show --text'
+
+function set_atlas_env
+    if test $USER = "PXH050"
+        abbr atlas "conda activate atlas-env && nvm use --lts && cd $HOME/Projects/atlas-webapp/app/webapp/app"
+        abbr opterrix "conda activate opterrix-env && nvm use --lts && cd $HOME/Projects/opterrix/application/webapp/app"
+        abbr opt-direct "conda activate opt-direct && nvm use --lts && cd $HOME/Projects/opterrix-direct/application/webapp/app"
+    end
+end
+
+set_atlas_env
