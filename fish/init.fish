@@ -13,7 +13,6 @@ set -xg NVM_DIR $XDG_CONFIG_HOME/nvm
 # TODO! SETUP conda and NVM somehow
 
 if status is-interactive
-    fish_config theme choose lava
     fish_config prompt choose informative_vcs
 end
 

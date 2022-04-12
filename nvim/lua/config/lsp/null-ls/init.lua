@@ -11,7 +11,6 @@ local sources = {
 	}), -- darker formatter for python = black + isort
 	formatting.stylua,
 	formatting.eslint_d,
-	formatting.rustfmt,
 	formatting.shfmt,
 	formatting.gofmt,
 	diagnostics.eslint_d,

@@ -21,9 +21,9 @@ local function plugins_startup()
 	-- telescope search tool
 	use({
 		"nvim-telescope/telescope.nvim",
-		requires = { "nvim-lua/plenary.nvim" },
+		requires = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-ui-select.nvim" },
 		config = function()
-			require("config.telescope")
+			require("config.telescope").setup()
 		end,
 	})
 
