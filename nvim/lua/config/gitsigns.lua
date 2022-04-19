@@ -65,4 +65,10 @@ M.gitsigns_attach = function(bufnr)
 	map("x", "ih", ":<C-U>Gitsigns select_hunk<CR>")
 end
 
+function M.setup()
+	local gitsigns = require("gitsigns")
+	gitsigns.setup({
+		on_attach = gitsigns_attach_nvim_0_7_only,
+	})
+end
 return M
