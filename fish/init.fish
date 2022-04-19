@@ -18,6 +18,7 @@ end
 
 # general abbreviations for editing
 abbr nv 'nvim'
+abbr nvconfig 'cd $HOME/dotfiles/nvim && nvim'
 
 # abbreviations (aliases) for git
 abbr g 'git'
