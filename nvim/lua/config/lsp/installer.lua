@@ -31,14 +31,14 @@ local servers = {
 		}
 		return default_opts
 	end,
-	["eslint"] = function(opts)
-		local enhanced_opts = {}
-		enhanced_opts.on_attach = function(client, bufnr)
-			client.resolved_capabilities.document_formatting = false
-			client.resolved_capabilities.document_range_formatting = false
-		end
-		return enhanced_opts
-	end,
+	--["eslint"] = function(opts)
+	--	local enhanced_opts = {}
+	--	enhanced_opts.on_attach = function(client, bufnr)
+	--		client.resolved_capabilities.document_formatting = false
+	--		client.resolved_capabilities.document_range_formatting = false
+	--	end
+	--	return enhanced_opts
+	--end,
 	["tsserver"] = function(opts)
 		local enhanced_opts = {}
 		enhanced_opts.on_attach = function(client, bufnr)

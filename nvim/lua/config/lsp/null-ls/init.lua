@@ -10,10 +10,12 @@ local sources = {
 		extra_args = { "--isort" },
 	}), -- darker formatter for python = black + isort
 	formatting.stylua,
+	formatting.prettierd,
 	formatting.eslint_d,
 	formatting.shfmt,
 	formatting.gofmt,
 	diagnostics.eslint_d,
+	diagnostics.tsc,
 }
 
 function M.setup(opts)

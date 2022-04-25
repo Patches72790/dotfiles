@@ -3,6 +3,7 @@ local M = {}
 -- Only use after update to neovim 0.7
 local function gitsigns_attach_nvim_0_7_only(bufnr)
 	local gs = package.loaded.gitsigns
+    local whichkey = require('which-key')
 
 	local function map(mode, l, r, opts)
 		opts = opts or {}
@@ -34,7 +35,6 @@ local function gitsigns_attach_nvim_0_7_only(bufnr)
 	-- Text object
 	map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
 end
-
 
 function M.setup()
 	local gitsigns = require("gitsigns")
