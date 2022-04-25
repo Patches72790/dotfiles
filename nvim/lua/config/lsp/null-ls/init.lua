@@ -10,7 +10,9 @@ local sources = {
 		extra_args = { "--isort" },
 	}), -- darker formatter for python = black + isort
 	formatting.stylua,
-	formatting.prettierd,
+	formatting.prettierd.with({
+		filetypes = { "html", "json", "css" },
+	}),
 	formatting.eslint_d,
 	formatting.shfmt,
 	formatting.gofmt,
