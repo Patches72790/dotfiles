@@ -70,6 +70,12 @@ map("n", "<c-j>", "<c-w>j")
 map("n", "<c-k>", "<c-w>k")
 map("n", "<c-l>", "<c-w>l")
 
+-- moving from terminal window
+map({ "t", "n" }, "<c-w>h", "<c-\\><c-n><c-w>h")
+map({ "t", "n" }, "<c-w>j", "<c-\\><c-n><c-w>j")
+map({ "t", "n" }, "<c-w>k", "<c-\\><c-n><c-w>k")
+map({ "t", "n" }, "<c-w>l", "<c-\\><c-n><c-w>l")
+
 -- tab navigation
 map("n", "<S-l>", "gt") -- next tab (right)
 map("n", "<S-h>", "gT") -- previous tab (left)
