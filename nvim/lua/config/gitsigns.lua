@@ -3,7 +3,7 @@ local M = {}
 -- Only use after update to neovim 0.7
 local function gitsigns_attach_nvim_0_7_only(bufnr)
 	local gs = package.loaded.gitsigns
-    local whichkey = require('which-key')
+	local whichkey = require("which-key")
 
 	local function map(mode, l, r, opts)
 		opts = opts or {}
@@ -18,6 +18,8 @@ local function gitsigns_attach_nvim_0_7_only(bufnr)
 	-- Actions
 	map({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>")
 	map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
+	map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+
 	map("n", "<leader>hS", gs.stage_buffer)
 	map("n", "<leader>hu", gs.undo_stage_hunk)
 	map("n", "<leader>hR", gs.reset_buffer)
@@ -31,9 +33,6 @@ local function gitsigns_attach_nvim_0_7_only(bufnr)
 		gs.diffthis("~")
 	end)
 	map("n", "<leader>td", gs.toggle_deleted)
-
-	-- Text object
-	map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
 end
 
 function M.setup()

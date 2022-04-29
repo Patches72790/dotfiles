@@ -142,7 +142,7 @@ local function plugins_startup()
 	use({
 		"folke/which-key.nvim",
 		config = function()
-			require("which-key").setup()
+			require("config.whichkey").setup()
 		end,
 	})
 end
