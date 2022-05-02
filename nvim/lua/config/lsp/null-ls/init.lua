@@ -17,7 +17,6 @@ local sources = {
 	formatting.shfmt,
 	formatting.gofmt,
 	diagnostics.eslint_d,
-	diagnostics.tsc,
 }
 
 function M.setup(opts)
