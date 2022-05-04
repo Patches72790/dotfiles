@@ -4,7 +4,7 @@ local whichkey = require("which-key")
 local keymap = vim.api.nvim_set_keymap
 local buf_keymap = vim.api.nvim_buf_set_keymap
 
-local function keymappings(client, bufnr)
+local function keymappings(_, bufnr)
 	local opts = { noremap = true, silent = true }
 
 	-- lsp hover
@@ -47,12 +47,6 @@ local function keymappings(client, bufnr)
 		I = { "<cmd>Telescope lsp_implementations<CR>", "Goto Implementation" },
 		t = { "<cmd>Telescope lsp_type_definitions<CR>", "Goto Type Definition" },
 	}
-
-	-- enable document formatting if enabled for client
-	if client.resolved_capabilities.document_formatting then
-		vim.cmd("command! LspFormatting lua vim.lsp.buf.formatting_sync(nil, 2000)")
-		keymap_l.l.F = { "<cmd>LspFormatting<CR>", "Format Document" }
-	end
 
 	-- register which key keymaps
 	whichkey.register(keymap_l, { buffer = bufnr, prefix = "<leader>" })

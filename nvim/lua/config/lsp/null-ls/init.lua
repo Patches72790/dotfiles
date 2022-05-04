@@ -19,13 +19,25 @@ local sources = {
 	diagnostics.eslint_d,
 }
 
-function M.setup(opts)
-	local on_attach = opts and opts.on_attach
+function M.setup(_)
+	local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 	null_ls.setup({
 		debug = true,
 		sources = sources,
 		debounce = 150,
-		on_attach = on_attach,
+		on_attach = function(client, bufnr)
+			if client.supports_method("textDocument/formatting") then
+				vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+				vim.api.nvim_create_autocmd("BufWritePost", {
+					group = augroup,
+					buffer = bufnr,
+					callback = function()
+						-- 0.8 Note -- use vim.lsp.buf.format({ bufnr = bufnr })
+						vim.lsp.buf.formatting_sync(nil, 2000)
+					end,
+				})
+			end
+		end,
 		root_dir = null_ls_utils.root_pattern(".git"),
 		update_in_insert = true,
 	})

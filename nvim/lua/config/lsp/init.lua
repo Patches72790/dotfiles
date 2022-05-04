@@ -4,8 +4,7 @@ local function on_attach(client, bufnr)
 	-- configure the keymappings
 	require("config.lsp.keymapping").setup(client, bufnr)
 
-	-- configure highlighting TODO
-	-- Configure Formatting TODO
+	-- Configure Formatting
 	require("config.lsp.null-ls.formatters").setup(client, bufnr)
 end
 

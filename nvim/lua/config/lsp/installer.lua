@@ -1,5 +1,4 @@
 local M = {}
-local autocmd = require("config.util").autocmd
 local lsp_installer = require("nvim-lsp-installer")
 
 -- server options to be used in setup function for lsp_installer

@@ -17,7 +17,7 @@ end
 
 function M.format()
 	if M.autoformat then
-		--util.warn("Formatting buffer in null-ls", "Formatting")
+		util.warn("Formatting buffer in null-ls", "Formatting")
 		vim.lsp.buf.formatting_sync(nil, 2000)
 	end
 end
@@ -35,6 +35,7 @@ function M.list_supported(filetype)
 	return supported
 end
 
+
 function M.setup(client, bufnr)
 	local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
 
@@ -45,18 +46,9 @@ function M.setup(client, bufnr)
 		enable = not (client.name == "null-ls")
 	end
 
-	--enable = true
 	client.resolved_capabilities.document_formatting = enable
 	client.resolved_capabilities.document_range_formatting = enable
 
-	if client.resolved_capabilities.document_formatting then
-		vim.cmd([[
-         augroup LspFormat
-             autocmd! * <buffer>
-             autocmd BufWritePost <buffer> lua require('config.lsp.null-ls.formatters').format()
-         augroup END
-         ]])
-	end
 end
 
 return M

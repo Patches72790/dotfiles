@@ -145,6 +145,13 @@ local function plugins_startup()
 			require("config.whichkey").setup()
 		end,
 	})
+
+	use({
+		"karb94/neoscroll.nvim",
+		config = function() 
+            require('neoscroll').setup()
+        end,
+	})
 end
 
 return packer.startup(plugins_startup)
