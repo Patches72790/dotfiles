@@ -35,7 +35,9 @@ function M.list_supported(filetype)
 	return supported
 end
 
-
+-- Enables formatting for buffer according to whether
+-- Null-Ls is enabled for given filetype or the native LSP
+-- has its own formatting method
 function M.setup(client, bufnr)
 	local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
 
@@ -48,7 +50,6 @@ function M.setup(client, bufnr)
 
 	client.resolved_capabilities.document_formatting = enable
 	client.resolved_capabilities.document_range_formatting = enable
-
 end
 
 return M

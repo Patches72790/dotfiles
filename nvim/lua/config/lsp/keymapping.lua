@@ -24,7 +24,7 @@ local function keymappings(_, bufnr)
 			a = { "<cmd>Telescope lsp_code_actions<CR>", "Code Action" },
 			n = { "<cmd>lua vim.lsp.buf.rename()", "Rename" },
 			i = { "<cmd>LspInfo <CR>", "Lsp Info" },
-			d = { "<cmd>Telescope diagnostics<CR>", "Diagnostics" },
+			d = { "<cmd>Telescope diagnostics bufnr=0<CR>", "Diagnostics" },
 			s = { "<cmd>Telescope lsp_document_symbols<CR>", "Document Symbols" },
 			t = { "<cmd>TroubleToggle<CR>", "Trouble" },
 		},
