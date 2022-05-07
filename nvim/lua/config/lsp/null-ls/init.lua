@@ -13,10 +13,12 @@ local sources = {
 	formatting.prettierd.with({
 		filetypes = { "html", "json", "css" },
 	}),
-	formatting.eslint_d,
+	formatting.eslint,
 	formatting.shfmt,
 	formatting.gofmt,
-	diagnostics.eslint_d,
+	formatting.rustfmt,
+    formatting.taplo,
+	diagnostics.eslint,
 }
 
 -- Used from null-ls.nvim wiki for async_formatting
