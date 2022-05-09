@@ -6,6 +6,8 @@ export PATH="/usr/local/go/bin:/usr/local/nvim/bin:$HOME/.local/bin:$HOME/.cargo
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+# Path to custom plugins folder
+export ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -14,7 +16,13 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="half-life"
 
 # plugins folder
-plugins=(git)
+plugins=(
+    git
+    aliases
+    rust
+    docker
+    zsh-autosuggestions
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -101,3 +109,5 @@ fi
 # set my conda env to matching tab and project folder
 #set_conda_env
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+[ "$(whoami)" = "PXH050" ] && [ -f "/Users/PXH050/.ghcup/env" ] && source "/Users/PXH050/.ghcup/env" # ghcup-env
