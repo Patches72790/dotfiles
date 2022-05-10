@@ -1,5 +1,4 @@
 local M = {}
-local lsp_installer = require("nvim-lsp-installer")
 
 -- server options to be used in setup function for lsp_installer
 local servers = {
@@ -30,14 +29,6 @@ local servers = {
 		}
 		return default_opts
 	end,
-	--["eslint"] = function(opts)
-	--	local enhanced_opts = {}
-	--	enhanced_opts.on_attach = function(client, bufnr)
-	--		client.resolved_capabilities.document_formatting = false
-	--		client.resolved_capabilities.document_range_formatting = false
-	--	end
-	--	return enhanced_opts
-	--end,
 	["tsserver"] = function(opts)
 		local enhanced_opts = {}
 		enhanced_opts.on_attach = function(client, bufnr)
@@ -58,7 +49,7 @@ local servers = {
 	jdtls = function()
 		return {}
 	end,
-	rust_analyzer = function(options, server)
+	rust_analyzer = function(options)
 		local extension_path = vim.env.HOME .. "/.vscode/extensions/vadimcn.vscode-lldb-1.7.0/"
 		local codelldb_path = extension_path .. "adapter/codelldb"
 		local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
@@ -73,7 +64,8 @@ local servers = {
 					other_hints_prefix = "",
 				},
 			},
-			server = vim.tbl_deep_extend("force", options, server:get_default_options(), {
+			-- add the custom on_attach and resolved_capabilities from lsp/init.lua
+			server = vim.tbl_deep_extend("force", options, {
 				settings = {
 					["rust-analyzer"] = {
 						completion = {
@@ -98,10 +90,10 @@ local servers = {
 		}
 		return rust_opts
 	end,
-	clangd = function()
+	clangd = function() -- C, C++, etc.
 		return {}
 	end,
-	vimls = function()
+	vimls = function() -- vimscript
 		return {}
 	end,
 	gopls = function() -- Go
@@ -113,6 +105,8 @@ local servers = {
 }
 
 function M.setup(options)
+	local lsp_installer = require("nvim-lsp-installer")
+	local lsp_config = require("lspconfig")
 	-- Provide settings first!
 	lsp_installer.settings({
 		ui = {
@@ -124,26 +118,21 @@ function M.setup(options)
 		},
 	})
 
-	for server_name, _ in pairs(servers) do
-		local server_is_found, server = lsp_installer.get_server(server_name)
-		if server_is_found and not server:is_installed() then
-			print("Installing " .. server_name)
-			server:install()
+	-- per https://github.com/williamboman/nvim-lsp-installer/discussions/636 -- server:setup no longer used
+	lsp_installer.setup({
+		ensure_installed = vim.tbl_keys(servers),
+	})
+
+	-- use lspconfig for server setup
+	for server_name, enhanced_setup_opts_func in pairs(servers) do
+		local enhanced_server_opts = enhanced_setup_opts_func(options)
+		if server_name == "rust_analyzer" then
+			require("rust-tools").setup(enhanced_server_opts)
+		else
+			local server_opts = vim.tbl_deep_extend("force", options, enhanced_server_opts)
+			lsp_config[server_name].setup(server_opts)
 		end
 	end
-
-	lsp_installer.on_server_ready(function(server)
-		-- extend options with any language specific options
-		local enhanced_server_opts = servers[server.name] and servers[server.name](options, server) or {}
-		if server.name == "rust_analyzer" then
-			require("rust-tools").setup(enhanced_server_opts)
-			server:attach_buffers()
-		else
-			local opts = vim.tbl_deep_extend("force", options, enhanced_server_opts)
-			-- setup server
-			server:setup(opts)
-		end
-	end)
 end
 
 return M
