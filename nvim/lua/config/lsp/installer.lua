@@ -99,8 +99,14 @@ local servers = {
 	gopls = function() -- Go
 		return {}
 	end,
-	hls = function() -- haskell
-		return {}
+	hls = function(opts) -- haskell
+		local enhanced_opts = {}
+		enhanced_opts.on_attach = function(client, bufnr)
+			client.resolved_capabilities.document_formatting = true
+			client.resolved_capabilities.document_range_formatting = true
+			opts.on_attach(client, bufnr)
+		end
+		return enhanced_opts
 	end,
 }
 

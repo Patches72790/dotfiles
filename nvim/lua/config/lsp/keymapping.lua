@@ -13,6 +13,7 @@ local function keymappings(_, bufnr)
 	-- lsp diagnostics gotos
 	vim.cmd("command! LspDiagPrev lua vim.diagnostic.goto_prev()")
 	vim.cmd("command! LspDiagNext lua vim.diagnostic.goto_next()")
+	vim.cmd("command! LspFormat lua vim.lsp.buf.formatting_sync(null, 2000)")
 	keymap("n", "[a", ":LspDiagPrev<CR>", opts)
 	keymap("n", "]a", ":LspDiagNext<CR>", opts)
 
@@ -27,6 +28,7 @@ local function keymappings(_, bufnr)
 			d = { "<cmd>Telescope diagnostics bufnr=0<CR>", "Diagnostics" },
 			s = { "<cmd>Telescope lsp_document_symbols<CR>", "Document Symbols" },
 			t = { "<cmd>TroubleToggle<CR>", "Trouble" },
+			F = { "<cmd>:LspFormat<CR>", "LspFormat" },
 		},
 	}
 

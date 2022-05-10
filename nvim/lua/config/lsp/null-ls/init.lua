@@ -17,7 +17,7 @@ local sources = {
 	formatting.shfmt,
 	formatting.gofmt,
 	formatting.rustfmt,
-    formatting.taplo,
+	formatting.taplo,
 	diagnostics.eslint_d,
 }
 
