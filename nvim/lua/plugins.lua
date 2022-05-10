@@ -46,18 +46,11 @@ local function plugins_startup()
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
 		config = function()
-			require("nvim-treesitter.configs").setup({
-				ensure_installed = {
-					"rust",
-					"python",
-					"javascript",
-					"typescript",
-					"c",
-					"cpp",
-				},
-				highlight = { enable = true },
-			})
+			require("config.treesitter").setup()
 		end,
+		requires = {
+			"nvim-orgmode/orgmode",
+		},
 	})
 
 	-- java specialized language server
@@ -148,9 +141,9 @@ local function plugins_startup()
 
 	use({
 		"karb94/neoscroll.nvim",
-		config = function() 
-            require('neoscroll').setup()
-        end,
+		config = function()
+			require("neoscroll").setup()
+		end,
 	})
 end
 

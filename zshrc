@@ -50,6 +50,7 @@ fi
 alias gdec="git log --decorate=full --oneline --graph"
 alias nvconfig="cd $HOME/dotfiles/nvim && nvim"
 export ZK_NOTEBOOK_DIR="$HOME/zk_notebook"
+export ORG_PATH="$HOME/org"
 
 # for Opterrix mac only!
 if [[ "$(whoami)" == "PXH050" ]]; then
