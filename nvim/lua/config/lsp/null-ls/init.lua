@@ -60,7 +60,9 @@ function M.setup(_)
 		sources = sources,
 		debounce = 150,
 		on_attach = function(client, bufnr)
-			if client.supports_method("textDocument/formatting") then
+			if
+				client.supports_method("textDocument/formatting") and client.resolved_capabilities.document_formatting
+			then
 				vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
 				vim.api.nvim_create_autocmd("BufWritePost", {
 					group = augroup,

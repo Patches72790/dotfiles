@@ -104,6 +104,14 @@ local servers = {
 		enhanced_opts.on_attach = function(client, bufnr)
 			client.resolved_capabilities.document_formatting = true
 			client.resolved_capabilities.document_range_formatting = true
+			vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+				group = "LspFormatting",
+				desc = "Format on save for haskell language server",
+				pattern = { "*.hs" },
+				callback = function()
+					vim.lsp.buf.formatting_sync(nil, 2000)
+				end,
+			})
 			opts.on_attach(client, bufnr)
 		end
 		return enhanced_opts
@@ -113,8 +121,12 @@ local servers = {
 function M.setup(options)
 	local lsp_installer = require("nvim-lsp-installer")
 	local lsp_config = require("lspconfig")
-	-- Provide settings first!
-	lsp_installer.settings({
+
+	-- per https://github.com/williamboman/nvim-lsp-installer/discussions/636
+	-- server:setup no longer used
+	lsp_installer.setup({
+		ensure_installed = vim.tbl_keys(servers),
+		automatic_installation = true,
 		ui = {
 			icons = {
 				server_installed = "✓",
@@ -122,11 +134,6 @@ function M.setup(options)
 				server_uninstalled = "✗",
 			},
 		},
-	})
-
-	-- per https://github.com/williamboman/nvim-lsp-installer/discussions/636 -- server:setup no longer used
-	lsp_installer.setup({
-		ensure_installed = vim.tbl_keys(servers),
 	})
 
 	-- use lspconfig for server setup

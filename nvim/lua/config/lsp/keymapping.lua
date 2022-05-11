@@ -3,6 +3,7 @@ local M = {}
 local whichkey = require("which-key")
 local keymap = vim.api.nvim_set_keymap
 local buf_keymap = vim.api.nvim_buf_set_keymap
+local create_user_command = vim.api.nvim_create_user_command
 
 local function keymappings(client, bufnr)
 	local opts = { noremap = true, silent = true }
@@ -11,8 +12,14 @@ local function keymappings(client, bufnr)
 	buf_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
 
 	-- lsp diagnostics gotos
-	vim.cmd("command! LspDiagPrev lua vim.diagnostic.goto_prev()")
-	vim.cmd("command! LspDiagNext lua vim.diagnostic.goto_next()")
+	create_user_command(
+		"LspDiagPrev",
+		"lua vim.diagnostic.goto_prev()",
+		{ desc = "Go to the previous lsp diagnostic from cursor" }
+	)
+	create_user_command("LspDiagNext", "lua vim.diagnostic.goto_next()", {
+		desc = "Go to the next lsp diagnostic from cursor",
+	})
 	keymap("n", "[a", ":LspDiagPrev<CR>", opts)
 	keymap("n", "]a", ":LspDiagNext<CR>", opts)
 
@@ -31,7 +38,7 @@ local function keymappings(client, bufnr)
 	}
 
 	if client.resolved_capabilities.document_formatting then
-		vim.cmd("command! LspFormat lua vim.lsp.buf.formatting_sync(nil, 2000)")
+		create_user_command("LspFormat", "lua vim.lsp.buf.formatting_sync(nil, 2000)", {})
 		keymap_l.l.F = { "<cmd>:LspFormat<CR>", "LspFormat" }
 	end
 
