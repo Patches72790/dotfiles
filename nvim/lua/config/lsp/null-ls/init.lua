@@ -18,6 +18,7 @@ local sources = {
 	formatting.gofmt,
 	formatting.rustfmt,
 	formatting.taplo,
+	formatting.remark,
 	diagnostics.eslint_d,
 }
 

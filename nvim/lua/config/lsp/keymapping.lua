@@ -4,7 +4,7 @@ local whichkey = require("which-key")
 local keymap = vim.api.nvim_set_keymap
 local buf_keymap = vim.api.nvim_buf_set_keymap
 
-local function keymappings(_, bufnr)
+local function keymappings(client, bufnr)
 	local opts = { noremap = true, silent = true }
 
 	-- lsp hover
@@ -13,7 +13,6 @@ local function keymappings(_, bufnr)
 	-- lsp diagnostics gotos
 	vim.cmd("command! LspDiagPrev lua vim.diagnostic.goto_prev()")
 	vim.cmd("command! LspDiagNext lua vim.diagnostic.goto_next()")
-	vim.cmd("command! LspFormat lua vim.lsp.buf.formatting_sync(null, 2000)")
 	keymap("n", "[a", ":LspDiagPrev<CR>", opts)
 	keymap("n", "]a", ":LspDiagNext<CR>", opts)
 
@@ -28,9 +27,13 @@ local function keymappings(_, bufnr)
 			d = { "<cmd>Telescope diagnostics bufnr=0<CR>", "Diagnostics" },
 			s = { "<cmd>Telescope lsp_document_symbols<CR>", "Document Symbols" },
 			t = { "<cmd>TroubleToggle<CR>", "Trouble" },
-			F = { "<cmd>:LspFormat<CR>", "LspFormat" },
 		},
 	}
+
+	if client.resolved_capabilities.document_formatting then
+		vim.cmd("command! LspFormat lua vim.lsp.buf.formatting_sync(nil, 2000)")
+		keymap_l.l.F = { "<cmd>:LspFormat<CR>", "LspFormat" }
+	end
 
 	-- utilities <leader> + u + [key]
 	local keymap_u = {
