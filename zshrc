@@ -113,3 +113,5 @@ fi
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [ "$(whoami)" = "PXH050" ] && [ -f "/Users/PXH050/.ghcup/env" ] && source "/Users/PXH050/.ghcup/env" # ghcup-env
+
+[ "$(whoami)" = "patroclus" ] && [ -f "/home/patroclus/.ghcup/env" ] && source "/home/patroclus/.ghcup/env" # ghcup-env
