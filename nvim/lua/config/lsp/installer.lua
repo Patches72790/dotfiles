@@ -116,6 +116,9 @@ local servers = {
 		end
 		return enhanced_opts
 	end,
+    dockerls = function()
+        return {}
+    end
 }
 
 function M.setup(options)
