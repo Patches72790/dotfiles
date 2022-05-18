@@ -108,7 +108,7 @@ local function plugins_startup()
 		"nvim-lualine/lualine.nvim",
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
 		config = function()
-			require("config.lualine")
+			require("config.lualine").setup()
 		end,
 	})
 

@@ -51,4 +51,5 @@ function M.info(msg, name)
 	vim.notify(msg, vim.log.levels.INFO, { title = name })
 end
 
+
 return M

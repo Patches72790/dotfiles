@@ -6,6 +6,8 @@ local function on_attach(client, bufnr)
 
 	-- Configure Formatting
 	require("config.lsp.null-ls.formatters").setup(client, bufnr)
+
+    require('config.lsp.diagnostics').setup()
 end
 
 -- update nvim cmp capabilities
@@ -24,9 +26,7 @@ function M.setup()
 		},
 	}
 
-	-- Lsp-Installer setup TODO
 	require("config.lsp.installer").setup(opts)
-	-- null-ls setup TODO
 	require("config.lsp.null-ls").setup(opts)
 end
 
