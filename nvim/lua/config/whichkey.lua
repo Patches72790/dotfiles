@@ -1,17 +1,17 @@
 local M = {}
 local whichkey = require("which-key")
 
-local terminal_window_mapping = {
-	name = "Terminal",
-	["<C-w>h"] = { "<C-\\><C-n><C-w>h" },
-	["<C-w>j"] = { "<C-\\><C-n><C-w>j" },
-	["<C-w>k"] = { "<C-\\><C-n><C-w>k" },
-	["<C-w>l"] = { "<C-\\><C-n><C-w>l" },
+local misc_mapping = {
+	name = "Miscellaneous",
+	u = {
+		s = { ":e $MYVIMRC<CR>", "Neovim Settings" },
+		n = { ":e $NV_NOTES_PATH<CR>", "Neovim Note" },
+	},
 }
 
 function M.setup()
 	whichkey.setup()
-	--whichkey.register(terminal_window_mapping, { mode = "t", prefix = "<leader>" })
+	whichkey.register(misc_mapping, { prefix = "<leader>" })
 end
 
 return M

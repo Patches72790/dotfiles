@@ -7,14 +7,15 @@ local function plugins_startup()
 
 	-- file explorer tree
 	use({
-		"kyazdani42/nvim-tree.lua",
-		requires = { "kyazdani42/nvim-web-devicons" },
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v2.x",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"kyazdani42/nvim-web-devicons",
+			"MunifTanjim/nui.nvim",
+		},
 		config = function()
-			require("config.nvim-tree")
-			require("nvim-tree").setup({
-				open_on_setup = true,
-				view = { side = "right", width = "25%" },
-			})
+			require("config.neo-tree").setup()
 		end,
 	})
 

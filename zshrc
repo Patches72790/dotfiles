@@ -50,6 +50,7 @@ fi
 alias gdec="git log --decorate=full --oneline --graph"
 alias nvconfig="cd $HOME/dotfiles/nvim && nvim"
 alias nv-notes="cd $HOME/Notes && nvim"
+export NV_NOTES_PATH="$HOME/Notes"
 export ZK_NOTEBOOK_DIR="$HOME/zk_notebook"
 export ORG_PATH="$HOME/org"
 
