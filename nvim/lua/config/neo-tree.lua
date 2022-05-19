@@ -376,7 +376,7 @@ function M.setup()
 	-- in the form "LspDiagnosticsSignWarning"
 
 	require("neo-tree").setup(config)
-	vim.api.nvim_set_keymap("n", "<C-n>", ":Neotree<CR>", { noremap = true, silent = true})
+	vim.api.nvim_set_keymap("n", "<C-n>", ":Neotree toggle<CR>", { noremap = true, silent = true })
 end
 
 return M

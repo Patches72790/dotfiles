@@ -49,9 +49,6 @@ local function plugins_startup()
 		config = function()
 			require("config.treesitter").setup()
 		end,
-		requires = {
-			"nvim-orgmode/orgmode",
-		},
 	})
 
 	-- java specialized language server
