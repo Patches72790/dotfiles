@@ -51,5 +51,16 @@ function M.info(msg, name)
 	vim.notify(msg, vim.log.levels.INFO, { title = name })
 end
 
+function M.set_current_window_option(option, value)
+	vim.api.nvim_win_set_option(0, option, value)
+end
+
+function M.set_current_buffer_option(option, value)
+	vim.api.nvim_buf_set_option(0, option, value)
+end
+
+function M.set_global_option(option, value)
+	vim.api.nvim_set_option(option, value)
+end
 
 return M
