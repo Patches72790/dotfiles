@@ -2,7 +2,11 @@
 source $HOME/dotfiles/sh-utils/index
 
 # If you come from bash you might have to change your $PATH.
-export PATH="/usr/local/go/bin:/usr/local/nvim/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/bin:/usr/local/bin:$PATH"
+GO_PATH="/usr/local/go/bin"
+NVIM_PATH="/usr/local/nvim/bin"
+LOCAL_BIN_PATH="$HOME/.local/bin"
+CARGO_PATH="$HOME/.cargo/bin"
+export PATH="$GO_PATH:$NVIM_PATH:$LOCAL_BIN_PATH:$CARGO_PATH:$HOME/bin:/usr/local/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -31,7 +35,7 @@ source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -51,8 +55,6 @@ alias gdec="git log --decorate=full --oneline --graph"
 alias nvconfig="cd $HOME/dotfiles/nvim && nvim"
 alias nv-notes="cd $HOME/Notes && nvim"
 export NV_NOTES_PATH="$HOME/Notes"
-export ZK_NOTEBOOK_DIR="$HOME/zk_notebook"
-export ORG_PATH="$HOME/org"
 
 # for Opterrix mac only!
 if [[ "$(whoami)" == "PXH050" ]]; then
@@ -110,7 +112,6 @@ elif [[ "$(whoami)" == "patroclus" ]]; then
 fi
 
 # set my conda env to matching tab and project folder
-#set_conda_env
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [ "$(whoami)" = "PXH050" ] && [ -f "/Users/PXH050/.ghcup/env" ] && source "/Users/PXH050/.ghcup/env" # ghcup-env
