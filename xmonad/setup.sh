@@ -23,3 +23,6 @@ stack install
 stack build
 
 # TODO -- replace last few lines of xinitrc with `exec xmonad` when xorg is setup
+
+# TODO extra packages
+# -- xmobar works well with xmonad

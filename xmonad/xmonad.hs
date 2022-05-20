@@ -1,7 +1,9 @@
 import XMonad
 import XMonad.Config.Desktop
 
-myTerminal = "xterm"
+myTerminal = "xterm" -- alacritty
+
+myTextEditor = "nvim"
 
 -- uses super key
 myModMask = mod4Mask
