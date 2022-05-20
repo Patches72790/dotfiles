@@ -1,8 +1,8 @@
 font:
   normal:
-    family: FiraCode Nerd Font Mono
+    family: FiraMono Nerd Font Mono # FiraCode Nerd Font Mono
     style: Regular
-  size: 11
+  size: 14
 
 # Colors (Gruvbox dark)
 colors:
