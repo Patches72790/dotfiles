@@ -116,9 +116,12 @@ local servers = {
 		end
 		return enhanced_opts
 	end,
-    dockerls = function()
-        return {}
-    end
+	dockerls = function()
+		return {}
+	end,
+	awk_ls = function()
+		return {}
+	end,
 }
 
 function M.setup(options)
