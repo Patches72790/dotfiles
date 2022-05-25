@@ -3,7 +3,7 @@ local M = {}
 local lualine = require("lualine")
 
 function M.get_abbreviated_filename()
-    -- TODO - Need to abbreviate string with first letters of filepath
+	-- TODO - Need to abbreviate string with first letters of filepath
 	return vim.fn.getreg("%")
 end
 
@@ -11,6 +11,9 @@ function M.setup()
 	lualine.setup({
 		options = {
 			theme = "gruvbox",
+		},
+		sections = {
+			lualine_c = {},
 		},
 		tabline = {
 			lualine_a = { "tabs" },

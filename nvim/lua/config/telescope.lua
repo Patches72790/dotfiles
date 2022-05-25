@@ -18,6 +18,7 @@ local function configure_keymap()
 	map("n", "<leader>fc", "<cmd> lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", silent)
 	map("n", "<leader>rr", "<cmd> lua require('telescope.builtin').registers()<CR>", silent)
 	map("n", "<leader>km", "<cmd> lua require('telescope.builtin').keymaps()<CR>", silent)
+    map("n", "<leader>hh", "<cmd> lua require('telescope.builtin').help_tags()<CR>", silent)
 end
 
 local function configure()
@@ -34,7 +35,7 @@ function M.setup()
 	})
 
 	configure_keymap()
-    configure()
+	configure()
 end
 
 return M

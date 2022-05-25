@@ -9,6 +9,7 @@ function M.setup()
 			"typescript",
 			"c",
 			"cpp",
+            "go",
 		},
 		highlight = { enable = true },
 	})

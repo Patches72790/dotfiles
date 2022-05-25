@@ -84,10 +84,19 @@ local function init_movement_keymaps()
 	end
 end
 
+local function init_user_commands()
+	vim.api.nvim_create_user_command("DoIt", function()
+		print("Do The Thing")
+	end, { desc = "Test user command" })
+end
+
 function M.setup()
 	init_nvim_options()
 	init_movement_keymaps()
+	init_user_commands()
 	vim.api.nvim_command("colorscheme gruvbox")
+    -- initialize global helpers
+	require("config.globals")
 end
 
 return M
