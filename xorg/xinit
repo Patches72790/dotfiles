@@ -1,3 +1,0 @@
-#!/bin/bash
-
-ln -s /etc/X11/xinit/xinitrc $HOME/.xinitrc
