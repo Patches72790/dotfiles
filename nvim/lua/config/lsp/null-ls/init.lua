@@ -16,7 +16,7 @@ local sources = {
 	formatting.eslint_d,
 	formatting.shfmt,
 	formatting.gofmt,
-	formatting.rustfmt,
+	formatting.rustfmt.with({ extra_args = { "--edition=2021" } }),
 	formatting.taplo,
 	formatting.remark,
 	diagnostics.eslint_d,
