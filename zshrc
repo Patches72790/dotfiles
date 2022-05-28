@@ -71,6 +71,7 @@ export CLASSPATH=".:/usr/local/lib/antlr-4.9.2-complete.jar:$CLASSPATH"
 # neovim variables
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
+export LOCAL_PLUGINS_HOME="$HOME/Projects/nvim-plugins/"
 export REACT_EDITOR="none"
 alias nv="nvim"
 

@@ -5,6 +5,17 @@ local function plugins_startup()
 	-- auto-update packer
 	use({ "wbthomason/packer.nvim" })
 
+	use({
+		os.getenv("LOCAL_PLUGINS_HOME") .. "neo-notes.nvim/",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim",
+		},
+		config = function()
+			require("notes").setup()
+		end,
+	})
+
 	-- file explorer tree
 	use({
 		"nvim-neo-tree/neo-tree.nvim",
