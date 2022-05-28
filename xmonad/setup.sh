@@ -20,7 +20,6 @@ curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 # start stack project
 stack init
 stack install
-stack build
 
 # TODO -- replace last few lines of xinitrc with `exec xmonad` when xorg is setup
 
