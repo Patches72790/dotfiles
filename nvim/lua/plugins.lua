@@ -6,7 +6,7 @@ local function plugins_startup()
 	use({ "wbthomason/packer.nvim" })
 
 	use({
-		os.getenv("LOCAL_PLUGINS_HOME") .. "neo-notes.nvim/",
+		"Patches72790/neo-notes.nvim",
 		requires = {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope.nvim",
