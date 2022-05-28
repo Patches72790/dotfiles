@@ -1,7 +1,7 @@
 import XMonad
 import XMonad.Config.Desktop
 
-myTerminal = "xterm" -- alacritty
+myTerminal = "alacritty"
 
 myTextEditor = "nvim"
 
