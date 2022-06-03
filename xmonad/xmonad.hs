@@ -17,7 +17,9 @@ main =
         withEasySB (statusBarProp "xmobar" (pure myXmobarPP)) defToggleStrutsKey $
           desktopConfig
             { terminal = myTerminal,
-              modMask = myModMask
+              modMask = myModMask,
+              workspaces = myWorkspaces,
+              layoutHook = myLayout
             }
 
 myTerminal :: String
@@ -33,7 +35,7 @@ myBorderWidth = 2
 
 myFocusFollowsMouse = True
 
-myWorkspaces = [1 .. 9]
+myWorkspaces = ["web", "code", "term"] ++ ["4", "5", "6"]
 
 myLayout = tiled ||| Mirror tiled ||| Full
   where
