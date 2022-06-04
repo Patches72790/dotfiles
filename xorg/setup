@@ -2,4 +2,4 @@
 
 ln -s $HOME/dotfiles/xorg/xinitrc $HOME/.xinitrc
 
-sudo pacman -S xorg nitrogen picom trayer xfce4-power-manager
+sudo pacman -S xorg xorg-xinit nitrogen picom trayer xfce4-power-manager
