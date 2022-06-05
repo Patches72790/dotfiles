@@ -1,31 +1,40 @@
 Config { overrideRedirect = False
-       , font     = "xft:FiraMono Nerd Font Mono-10"
+       , font     = "xft:FiraMono Nerd Font Mono-12"
        , bgColor  = "#282828"
        , fgColor  = "#ebdbb2"
-       , position = Static { xpos = 1920, ypos = 0, width = 1920, height = 24 }
+       , position = Static { xpos = 1920, ypos = 0, width = 1920, height = 30 }
        , allDesktops = True
        , hideOnStart = False
        , alpha = 175
        , commands = [                     
                     Run Network "enp6s0" ["-t", "\x2b06 <tx>kb \x2b07 <rx>kb"] 20
+        		    , Run CoreTemp
+        			[
+        			  "--template", "\xf2c7<total>C",
+        			  "--Low", "70",
+        			  "--High", "80",
+        			  "--low", "darkgreen",
+        			  "--high", "darkred",
+        			  "--normal", "darkorange"
+        			] 50
                     , Run Cpu
-                        [ "-L", "3"
-                        , "-H", "50"
-                        , "--high"  , "red"
-                        , "--normal", "green"
-                        ] 10
+                      [ "-t", "\xf6c4 <total>%" 
+              		, "-L", "3"
+                      , "-H", "50"
+                      , "--high"  , "red"
+                      , "--normal", "green"
+                      ] 10
                     , Run Alsa "default" "Master"
                         [ "--template", "<volumestatus>"
                         , "--suffix"  , "True"
                         , "--"
                         , "--on", ""
                         ]
-                    , Run Memory ["--template", "Mem: <usedratio>%"] 10
-                    , Run Swap [] 10
-                    , Run Date "%a %Y-%m-%d <fc=#8be9fd>%H:%M</fc>" "date" 10
+                    , Run Memory ["--template", "\xe28c <usedratio>%"] 10
+                    , Run Date "\xf43a %a %Y-%m-%d <fc=#8be9fd>%H:%M</fc>" "date" 10
                     , Run XMonadLog
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
-       , template = "%XMonadLog% }{ %enp6s0% | %cpu% | %memory% * %swap% | %date% "
+       , template = "%XMonadLog% }{ %enp6s0% | %cpu% | %coretemp% | %memory% | %date% "
        }

@@ -61,7 +61,7 @@ myFocusedBorderColor = "#00A8A8"
 
 myFocusFollowsMouse = True
 
-myWorkspaces = ["web", "code"] ++ ["3", "4", "5", "6"]
+myWorkspaces = ["\xe777", "\xfa9e", "\xf489"] ++ ["4", "5", "6"]
 
 mySpacing :: Integer -> l a -> ModifiedLayout Spacing l a
 mySpacing i = spacingRaw True (Border i i i i) True (Border i i i i) True
