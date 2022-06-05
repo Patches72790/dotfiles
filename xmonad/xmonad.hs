@@ -1,3 +1,4 @@
+import GHC.IO.Handle (Handle)
 import XMonad
 import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog
@@ -6,31 +7,42 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
+import XMonad.Layout (Tall)
 import XMonad.Layout.IndependentScreens as LIS
+import XMonad.Layout.LayoutModifier
+import XMonad.Layout.Renamed (Rename (Replace), renamed)
+import XMonad.Layout.ResizableTile (ResizableTall (ResizableTall))
+import XMonad.Layout.Spacing (Border (Border), Spacing (Spacing), spacingRaw)
 import XMonad.Util.Loggers
 import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
 
 main :: IO ()
 main =
-  xmonad $
-    ewmhFullscreen $
-      ewmh $
-        withEasySB (statusBarProp "xmobar" (pure myXmobarPP)) defToggleStrutsKey $
-          desktopConfig
-            { terminal = myTerminal,
-              modMask = myModMask,
-              workspaces = myWorkspaces,
-              layoutHook = myLayout,
-              borderWidth = myBorderWidth,
-              normalBorderColor = myNormalBorderColor,
-              focusedBorderColor = myFocusedBorderColor
-              --startupHook = myStartupHook
-            }
+  do
+    xmobar0 <- spawnPipe "xmobar -x 0 $HOME/dotfiles/xmobar/desktop.xmobarrc.main"
+    xmobar1 <- spawnPipe "xmobar -x 1 $HOME/dotfiles/xmobar/desktop.xmobarrc.second"
+    xmonad $
+      ewmhFullscreen $
+        ewmh $
+          withEasySB (statusBarProp "xmobar" (pure (myXmobarPP xmobar0 xmobar1))) defToggleStrutsKey $
+            desktopConfig
+              { terminal = myTerminal,
+                modMask = myModMask,
+                workspaces = myWorkspaces,
+                layoutHook = myLayout,
+                borderWidth = myBorderWidth,
+                normalBorderColor = myNormalBorderColor,
+                focusedBorderColor = myFocusedBorderColor,
+                startupHook = myStartupHook
+              }
 
 myStartupHook = do
-  spawnOnce "xmobar -x 0"
-  spawnOnce "xmobar -x 1"
+  spawnOnce "nitrogen --restore &"
+  spawnOnce "picom &"
+
+myFont :: String
+myFont = "xft:FireMono Nerd Font Mono:regular:size=10"
 
 myTerminal :: String
 myTerminal = "alacritty"
@@ -51,17 +63,21 @@ myFocusFollowsMouse = True
 
 myWorkspaces = ["web", "code"] ++ ["3", "4", "5", "6"]
 
-myLayout = tiled ||| Mirror tiled ||| Full
-  where
-    tiled = Tall nmaster delta ratio
-    nmaster = 1
-    delta = 3 / 100
-    ratio = 1 / 2
+mySpacing :: Integer -> l a -> ModifiedLayout Spacing l a
+mySpacing i = spacingRaw True (Border i i i i) True (Border i i i i) True
 
-myXmobarPP :: PP
-myXmobarPP =
+tiled =
+  renamed [Replace "tiled"] $
+    mySpacing 5 $
+      Tall 1 (3 / 100) (1 / 2)
+
+myLayout = tiled ||| Mirror tiled ||| Full
+
+myXmobarPP :: Handle -> Handle -> PP
+myXmobarPP xmproc0 xmproc1 =
   def
-    { ppSep = magenta " | ",
+    { ppOutput = \x -> hPutStrLn xmproc0 x >> hPutStrLn xmproc1 x,
+      ppSep = magenta " | ",
       ppTitleSanitize = xmobarStrip,
       ppCurrent = wrap " " "" . xmobarBorder "Top" "#8be9fd" 2,
       ppVisible = green . wrap " " "",
@@ -85,27 +101,3 @@ myXmobarPP =
     red = xmobarColor "#ff5555" ""
     lowWhite = xmobarColor "#bbbbbb" ""
     green = xmobarColor "#98be65" ""
-
--- example config block for desktop
---{
---  terminal           = myTerminal,
---  focusFollowsMouse  = myFocusFollowsMouse,
---  borderWidth        = myBorderWidth,
---  modMask            = myModMask,
---  -- numlockMask deprecated in 0.9.1
---  -- numlockMask        = myNumlockMask,
---  workspaces         = myWorkspaces,
---  normalBorderColor  = myNormalBorderColor,
---  focusedBorderColor = myFocusedBorderColor,
---
---  -- key bindings
---  keys               = myKeys,
---  mouseBindings      = myMouseBindings,
---
---  -- hooks, layouts
---  layoutHook         = myLayout,
---  manageHook         = myManageHook,
---  handleEventHook    = myEventHook,
---  logHook            = myLogHook,
---  startupHook        = myStartupHook
---}
