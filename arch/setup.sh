@@ -3,7 +3,7 @@
 linux_packages=base linux linux-firmware
 grub_packages=grub efibootmgr dosfstools os-prober mtools
 packages=git neovim vim zsh \
-         alsa-utils pulseaudio NetworkManager \
+         alsa-utils pulseaudio NetworkManager redshift\
          xorg xorg-server \
          xclip xdotool
 
