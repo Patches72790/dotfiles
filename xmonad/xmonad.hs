@@ -1,5 +1,8 @@
+import Control.Monad (void)
 import GHC.IO.Handle (Handle)
+import Graphics.X11.ExtraTypes
 import XMonad
+import XMonad.Actions.Volume
 import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
@@ -13,6 +16,7 @@ import XMonad.Layout.LayoutModifier
 import XMonad.Layout.Renamed (Rename (Replace), renamed)
 import XMonad.Layout.ResizableTile (ResizableTall (ResizableTall))
 import XMonad.Layout.Spacing (Border (Border), Spacing (Spacing), spacingRaw)
+import XMonad.Util.EZConfig (additionalKeys)
 import XMonad.Util.Loggers
 import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
@@ -25,21 +29,32 @@ main =
     xmonad $
       ewmhFullscreen $
         ewmh $
-          withEasySB (statusBarProp "xmobar" (pure (myXmobarPP xmobar0 xmobar1))) defToggleStrutsKey $
-            desktopConfig
-              { terminal = myTerminal,
-                modMask = myModMask,
-                workspaces = myWorkspaces,
-                layoutHook = myLayout,
-                borderWidth = myBorderWidth,
-                normalBorderColor = myNormalBorderColor,
-                focusedBorderColor = myFocusedBorderColor,
-                startupHook = myStartupHook
-              }
+          myConfig xmobar0 xmobar1
+            `additionalKeys` myKeys
 
+myConfig xmobar0 xmobar1 =
+  withEasySB (statusBarProp "xmobar" (pure (myXmobarPP xmobar0 xmobar1))) defToggleStrutsKey $
+    desktopConfig
+      { terminal = myTerminal,
+        modMask = myModMask,
+        workspaces = myWorkspaces,
+        layoutHook = myLayout,
+        borderWidth = myBorderWidth,
+        normalBorderColor = myNormalBorderColor,
+        focusedBorderColor = myFocusedBorderColor,
+        startupHook = myStartupHook
+      }
+
+myStartupHook :: X ()
 myStartupHook = do
   spawnOnce "nitrogen --restore &"
   spawnOnce "picom &"
+
+myKeys :: [((KeyMask, KeySym), X ())]
+myKeys =
+  [ ((mod4Mask, xF86XK_AudioRaiseVolume), spawn "amixer set Master 2-"), --void (raiseVolume 4)),
+    ((mod4Mask, xF86XK_AudioLowerVolume), spawn "amixer set Master 2+") --void (lowerVolume 4))
+  ]
 
 myFont :: String
 myFont = "xft:FireMono Nerd Font Mono:regular:size=10"
@@ -51,16 +66,21 @@ myTextEditor :: String
 myTextEditor = "nvim"
 
 -- uses super key
+myModMask :: KeyMask
 myModMask = mod4Mask
 
+myBorderWidth :: Dimension
 myBorderWidth = 2
 
 myNormalBorderColor = ""
 
+myFocusedBorderColor :: String
 myFocusedBorderColor = "#00A8A8"
 
+myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
 
+myWorkspaces :: [String]
 myWorkspaces = ["\xe777", "\xfa9e", "\xf489"] ++ ["4", "5", "6"]
 
 mySpacing :: Integer -> l a -> ModifiedLayout Spacing l a
