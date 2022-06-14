@@ -8,27 +8,17 @@ Config { overrideRedirect = False
        , alpha = 175
        , commands = [                     
                     Run Network "wlp58s0" ["-t", "\x2b06 <tx>kb \x2b07 <rx>kb"] 20
-        		    , Run CoreTemp
-        			[
-        			  "--template", "\xf2c7<total>C",
-        			  "--Low", "70",
-        			  "--High", "80",
-        			  "--low", "darkgreen",
-        			  "--high", "darkred",
-        			  "--normal", "darkorange"
-        			] 50
-                    , Run Cpu
+        		    , Run Cpu
                       [ "-t", "\xf6c4 <total>%" 
-              		, "-L", "3"
+              		  , "-L", "3"
                       , "-H", "50"
                       , "--high"  , "red"
                       , "--normal", "green"
                       ] 10
-                    , Run Alsa "default" "Master"
+                    , Run Volume "default" "Master"
                         [ "--template", "<volumestatus>"
                         , "--suffix"  , "True"
-                        , "--"
-                        , "--on", ""
+                        , "--on"
                         ]
                     , Run Memory ["--template", "\xe28c <usedratio>%"] 10
                     , Run Date "\xf43a %a %Y-%m-%d <fc=#8be9fd>%H:%M</fc>" "date" 10
@@ -36,5 +26,5 @@ Config { overrideRedirect = False
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
-       , template = "%XMonadLog% }{ %wlp58s0% | %cpu% | %coretemp% | %memory% | %date% "
+       , template = "%XMonadLog% }{ %default:Master% | %wlp58s0% | %cpu% | %memory% | %date% "
        }

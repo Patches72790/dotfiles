@@ -45,6 +45,7 @@ myConfig xmobar0 =
 
 myStartupHook :: X ()
 myStartupHook = do
+  spawnOnce "xfce4-power-manager &"
   spawnOnce "nitrogen --restore &"
   spawnOnce "picom &"
 
