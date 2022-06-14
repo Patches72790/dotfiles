@@ -23,7 +23,7 @@ import XMonad.Util.SpawnOnce
 main :: IO ()
 main =
   do
-    xmobar0 <- spawnPipe "xmobar -x 0 $HOME/dotfiles/xmobar/laptop.xmobarrc"
+    xmobar0 <- spawnPipe "xmobar $HOME/dotfiles/xmobar/laptop.xmobarrc"
     xmonad $
       ewmhFullscreen $
         ewmh $

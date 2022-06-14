@@ -8,6 +8,7 @@ Config { overrideRedirect = False
        , alpha = 175
        , commands = [                     
                     Run Network "wlp58s0" ["-t", "\x2b06 <tx>kb \x2b07 <rx>kb"] 20
+                    , Run Volume "default" "Master" [] 5
         		    , Run Cpu
                       [ "-t", "\xf6c4 <total>%" 
               		  , "-L", "3"
@@ -15,11 +16,6 @@ Config { overrideRedirect = False
                       , "--high"  , "red"
                       , "--normal", "green"
                       ] 10
-                    , Run Volume "default" "Master"
-                        [ "--template", "<volumestatus>"
-                        , "--suffix"  , "True"
-                        , "--on"
-                        ]
                     , Run Memory ["--template", "\xe28c <usedratio>%"] 10
                     , Run Date "\xf43a %a %Y-%m-%d <fc=#8be9fd>%H:%M</fc>" "date" 10
                     , Run XMonadLog
