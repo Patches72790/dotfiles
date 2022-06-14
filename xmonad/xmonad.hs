@@ -47,13 +47,15 @@ myConfig xmobar0 xmobar1 =
 
 myStartupHook :: X ()
 myStartupHook = do
+  spawnOnce "xfce4-power-manager &"
   spawnOnce "nitrogen --restore &"
   spawnOnce "picom &"
 
 myKeys :: [((KeyMask, KeySym), X ())]
 myKeys =
-  [ ((mod4Mask, xF86XK_AudioRaiseVolume), spawn "amixer set Master 2-"), --void (raiseVolume 4)),
-    ((mod4Mask, xF86XK_AudioLowerVolume), spawn "amixer set Master 2+") --void (lowerVolume 4))
+  [ ((0, xF86XK_AudioRaiseVolume), spawn "amixer -q sset Master 2%+"),
+    ((0, xF86XK_AudioLowerVolume), spawn "amixer -q sset Master 2%-"),
+    ((0, xF86XK_AudioMute), spawn "amixer set Master toggle")
   ]
 
 myFont :: String
