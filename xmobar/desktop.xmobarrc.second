@@ -24,12 +24,7 @@ Config { overrideRedirect = False
                       , "--high"  , "red"
                       , "--normal", "green"
                       ] 10
-                    , Run Alsa "default" "Master"
-                        [ "--template", "<volumestatus>"
-                        , "--suffix"  , "True"
-                        , "--"
-                        , "--on", ""
-                        ]
+                    , Run Volume "default" "Master" [ "--template", "<volumestatus>"] 10
                     , Run Memory ["--template", "\xe28c <usedratio>%"] 10
                     , Run Date "\xf43a %a %Y-%m-%d <fc=#8be9fd>%H:%M</fc>" "date" 10
                     , Run XMonadLog

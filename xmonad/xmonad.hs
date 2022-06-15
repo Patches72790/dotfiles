@@ -53,9 +53,9 @@ myStartupHook = do
 
 myKeys :: [((KeyMask, KeySym), X ())]
 myKeys =
-  [ ((0, xF86XK_AudioRaiseVolume), spawn "amixer -q sset Master 2%+"),
-    ((0, xF86XK_AudioLowerVolume), spawn "amixer -q sset Master 2%-"),
-    ((0, xF86XK_AudioMute), spawn "amixer set Master toggle")
+  [ ((0, xF86XK_AudioRaiseVolume), spawn "pamixer -i 2"),
+    ((0, xF86XK_AudioLowerVolume), spawn "pamixer -d 2"),
+    ((0, xF86XK_AudioMute), spawn "pamixer --default-source -t")
   ]
 
 myFont :: String

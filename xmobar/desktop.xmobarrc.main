@@ -18,23 +18,21 @@ Config { overrideRedirect = False
         			  "--normal", "darkorange"
         			] 50
                     , Run Cpu
-                      [ "-t", "\xf6c4 <total>%" 
-              		, "-L", "3"
-                      , "-H", "50"
-                      , "--high"  , "red"
-                      , "--normal", "green"
+                      [ 
+                      "-t", "\xf6c4 <total>%",
+              		  "-L", "3",
+                      "-H", "50",
+                      "--high", "red",
+                      "--normal", "green"
                       ] 10
-                    , Run Alsa "default" "Master"
-                        [ "--template", "<volumestatus>"
-                        , "--suffix"  , "True"
-                        , "--"
-                        , "--on", ""
-                        ]
+                    , Run Volume "default" "Master" [] 10
+                    , Run Com "pamixer" ["--get-volume-human"] "myvolume" 5
+                    , Run Com "if [[ $(pamixer --get-mute) ]]; then echo ﳌ; else echo ; fi" [] "volstatus" 10
                     , Run Memory ["--template", "\xe28c <usedratio>%"] 10
                     , Run Date "\xf43a %a %Y-%m-%d <fc=#8be9fd>%H:%M</fc>" "date" 10
                     , Run XMonadLog
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
-       , template = "%XMonadLog% }{ %enp6s0% | %cpu% | %coretemp% | %memory% | %date% "
+       , template = "%XMonadLog% }{ %volstatus% %myvolume% | %enp6s0% | %cpu% | %coretemp% | %memory% | %date% "
        }
