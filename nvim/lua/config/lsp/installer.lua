@@ -50,6 +50,23 @@ local servers = {
 		return {}
 	end,
 	rust_analyzer = function(options)
+		local custom_opts = vim.tbl_deep_extend("force", options, {
+			settings = {
+				["rust-analyzer"] = {
+					completion = {
+						postfix = {
+							enable = false,
+						},
+					},
+					checkOnSave = {
+						command = "clippy",
+					},
+				},
+			},
+		})
+		return custom_opts
+	end,
+	rust_analyzer_rust_tools = function(options)
 		local extension_path = vim.env.HOME .. "/.vscode/extensions/vadimcn.vscode-lldb-1.7.0/"
 		local codelldb_path = extension_path .. "adapter/codelldb"
 		local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
@@ -88,7 +105,8 @@ local servers = {
 				},
 			},
 		}
-		return rust_opts
+		--return rust_opts
+		return {}
 	end,
 	clangd = function() -- C, C++, etc.
 		return {}
@@ -145,8 +163,9 @@ function M.setup(options)
 	-- use lspconfig for server setup
 	for server_name, enhanced_setup_opts_func in pairs(servers) do
 		local enhanced_server_opts = enhanced_setup_opts_func(options)
-		if server_name == "rust_analyzer" then
-			require("rust-tools").setup(enhanced_server_opts)
+		if server_name == "rust_analyzer_rust_tools" then
+			print("Skipping rust-tools")
+			--require("rust-tools").setup(enhanced_server_opts)
 		else
 			local server_opts = vim.tbl_deep_extend("force", options, enhanced_server_opts)
 			lsp_config[server_name].setup(server_opts)
