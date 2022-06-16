@@ -85,9 +85,24 @@ local function init_movement_keymaps()
 end
 
 local function init_user_commands()
-	vim.api.nvim_create_user_command("DoIt", function()
-		print("Do The Thing")
-	end, { desc = "Test user command" })
+	local Job = require("plenary.job")
+	local error = require("config.util").error
+	vim.api.nvim_create_user_command("DevSearch", function()
+		-- TODO! How to deal with error when executable not found?
+
+		Job
+			:new({
+				command = "dev-search",
+				args = { vim.fn.input("Search query: ") },
+				on_stderr = function(err, data)
+					error("Error executing dev-search with message: " .. err)
+				end,
+				on_stdout = function(err, data)
+					error("Error executing dev-search with message: " .. err)
+				end,
+			})
+			:start()
+	end, { desc = "Send a call to developer search to local default browser" })
 end
 
 function M.setup()
@@ -95,7 +110,7 @@ function M.setup()
 	init_movement_keymaps()
 	init_user_commands()
 	vim.api.nvim_command("colorscheme gruvbox")
-    -- initialize global helpers
+	-- initialize global helpers
 	require("config.globals")
 end
 
