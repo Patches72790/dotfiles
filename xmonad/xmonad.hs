@@ -13,6 +13,7 @@ import XMonad.Hooks.StatusBar.PP
 import XMonad.Layout (Tall)
 import XMonad.Layout.IndependentScreens as LIS
 import XMonad.Layout.LayoutModifier
+import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Layout.Renamed (Rename (Replace), renamed)
 import XMonad.Layout.ResizableTile (ResizableTall (ResizableTall))
 import XMonad.Layout.Spacing (Border (Border), Spacing (Spacing), spacingRaw)
@@ -23,27 +24,25 @@ import XMonad.Util.SpawnOnce
 
 main :: IO ()
 main =
-  do
-    xmobar0 <- spawnPipe "xmobar -x 0 $HOME/dotfiles/xmobar/desktop.xmobarrc.main"
-    xmobar1 <- spawnPipe "xmobar -x 1 $HOME/dotfiles/xmobar/desktop.xmobarrc.second"
-    xmonad $
-      ewmhFullscreen $
-        ewmh $
-          myConfig xmobar0 xmobar1
-            `additionalKeys` myKeys
+  xmonad
+    . withSB
+      (mySBMain <> mySBSecondary)
+    . ewmhFullscreen
+    . ewmh
+    $ myConfig `additionalKeys` myKeys
 
-myConfig xmobar0 xmobar1 =
-  withEasySB (statusBarProp "xmobar" (pure (myXmobarPP xmobar0 xmobar1))) defToggleStrutsKey $
-    desktopConfig
-      { terminal = myTerminal,
-        modMask = myModMask,
-        workspaces = myWorkspaces,
-        layoutHook = myLayout,
-        borderWidth = myBorderWidth,
-        normalBorderColor = myNormalBorderColor,
-        focusedBorderColor = myFocusedBorderColor,
-        startupHook = myStartupHook
-      }
+myConfig =
+  def
+    { terminal = myTerminal,
+      modMask = myModMask,
+      workspaces = myWorkspaces,
+      layoutHook = myLayout,
+      borderWidth = myBorderWidth,
+      normalBorderColor = myNormalBorderColor,
+      focusedBorderColor = myFocusedBorderColor,
+      startupHook = myStartupHook,
+      manageHook = manageDocks
+    }
 
 myStartupHook :: X ()
 myStartupHook = do
@@ -93,13 +92,18 @@ tiled =
     mySpacing 5 $
       Tall 1 (3 / 100) (1 / 2)
 
-myLayout = tiled ||| Mirror tiled ||| Full
+myLayout = avoidStruts (smartBorders (tiled ||| Mirror tiled ||| Full))
 
-myXmobarPP :: Handle -> Handle -> PP
-myXmobarPP xmproc0 xmproc1 =
+mySBMain :: StatusBarConfig
+mySBMain = statusBarPropTo "_XMONAD_LOG_1" "xmobar -x 0 $HOME/dotfiles/xmobar/desktop.xmobarrc.main" (pure myXmobarPP)
+
+mySBSecondary :: StatusBarConfig
+mySBSecondary = statusBarPropTo "_XMONAD_LOG_2" "xmobar -x 0 $HOME/dotfiles/xmobar/desktop.xmobarrc.second" (pure myXmobarPP)
+
+myXmobarPP :: PP
+myXmobarPP =
   def
-    { ppOutput = \x -> hPutStrLn xmproc0 x >> hPutStrLn xmproc1 x,
-      ppSep = magenta " | ",
+    { ppSep = magenta " | ",
       ppTitleSanitize = xmobarStrip,
       ppCurrent = wrap " " "" . xmobarBorder "Top" "#8be9fd" 2,
       ppVisible = green . wrap " " "",
