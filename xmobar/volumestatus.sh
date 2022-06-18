@@ -2,8 +2,4 @@
 
 status="$(pamixer --get-mute)"
 
-if [[ !$status ]]; then
-    echo ""
-else
-    echo "ﳌ"
-fi
+[ $status != "true" ] && echo "" || echo "ﳌ"

@@ -27,13 +27,11 @@ Config { overrideRedirect = False
                       ] 10
                     , Run Volume "default" "Master" [] 10
                     , Run Com "pamixer" ["--get-volume-human"] "myvolume" 5
-                    , Run Com "[ $(pamixer --get-mute) ] && echo ﳌ || echo " [] "volstatus" 10
-                    , Run Com "/home/patroclus/dotfiles/xmobar/volumestatus.sh" [] "volstatus2" 10
                     , Run Memory ["--template", "\xe28c <usedratio>%"] 10
                     , Run Date "\xf43a %a %Y-%m-%d <fc=#8be9fd>%H:%M</fc>" "date" 10
                     , Run XPropertyLog "_XMONAD_LOG_1"
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
-       , template = "%_XMONAD_LOG_1% }{ %volstatus% %myvolume% | %enp6s0% | %cpu% | %coretemp% | %memory% | %date% "
+       , template = "%_XMONAD_LOG_1% }{  %myvolume% | %enp6s0% | %cpu% | %coretemp% | %memory% | %date% "
        }
