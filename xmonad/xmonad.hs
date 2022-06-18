@@ -17,7 +17,8 @@ import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Layout.Renamed (Rename (Replace), renamed)
 import XMonad.Layout.ResizableTile (ResizableTall (ResizableTall))
 import XMonad.Layout.Spacing (Border (Border), Spacing (Spacing), spacingRaw)
-import XMonad.Util.EZConfig (additionalKeys)
+import XMonad.Util.Cursor (setDefaultCursor)
+import XMonad.Util.EZConfig (additionalKeys, additionalKeysP)
 import XMonad.Util.Loggers
 import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
@@ -29,7 +30,7 @@ main =
       (mySBMain <> mySBSecondary)
     . ewmhFullscreen
     . ewmh
-    $ myConfig `additionalKeys` myKeys
+    $ myConfig `additionalKeys` myMediaKeys `additionalKeysP` myQuickKeys
 
 myConfig =
   def
@@ -49,9 +50,15 @@ myStartupHook = do
   spawnOnce "xfce4-power-manager &"
   spawnOnce "nitrogen --restore &"
   spawnOnce "picom &"
+  setDefaultCursor xC_coffee_mug
 
-myKeys :: [((KeyMask, KeySym), X ())]
-myKeys =
+myQuickKeys :: [(String, X ())]
+myQuickKeys =
+  [ ("M-f", spawn "firefox")
+  ]
+
+myMediaKeys :: [((KeyMask, KeySym), X ())]
+myMediaKeys =
   [ ((0, xF86XK_AudioRaiseVolume), spawn "pamixer -i 2"),
     ((0, xF86XK_AudioLowerVolume), spawn "pamixer -d 2"),
     ((0, xF86XK_AudioMute), spawn "pamixer --default-source -t")
