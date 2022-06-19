@@ -16,6 +16,16 @@ local function plugins_startup()
 		end,
 	})
 
+	use({
+		"Patches72790/dev-search.nvim",
+		requires = {
+			"nvim-lua/plenary.nvim",
+		},
+		config = function()
+			require("search").setup()
+		end,
+	})
+
 	-- file explorer tree
 	use({
 		"nvim-neo-tree/neo-tree.nvim",
