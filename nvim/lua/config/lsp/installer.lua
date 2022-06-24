@@ -41,7 +41,9 @@ local servers = {
 	["pyright"] = function(_)
 		return {}
 	end,
-
+    elmls = function()
+        return {}
+    end,
 	-- other language servers
 	bashls = function()
 		return {}
