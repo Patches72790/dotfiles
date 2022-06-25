@@ -18,11 +18,18 @@ local function plugins_startup()
 
 	use({
 		"Patches72790/dev-search.nvim",
+		--"/Users/PXH050/Projects/neovim_plugins/dev-search.nvim",
 		requires = {
 			"nvim-lua/plenary.nvim",
 		},
+		opt = false,
 		config = function()
-			require("search").setup()
+			require("dev-search").setup({
+				settings = {
+					base_url = "https://cse.google.com",
+					context_id = "c897a4eacb3fd1332",
+				},
+			})
 		end,
 	})
 
