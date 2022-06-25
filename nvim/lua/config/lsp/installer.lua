@@ -17,7 +17,7 @@ local servers = {
 						"/usr/share/lua/5.3/?/init.lua",
 					},
 				},
-				diagnostics = { globals = { "vim" } },
+				diagnostics = { globals = { "vim", "require" } },
 				workspace = {
 					library = {
 						[vim.fn.expand("~/.luarocks/share/lua/5.3")] = true,
@@ -41,9 +41,21 @@ local servers = {
 	["pyright"] = function(_)
 		return {}
 	end,
-    elmls = function()
-        return {}
-    end,
+	elmls = function(opts)
+		local util = require("lspconfig.util")
+		return {
+			on_attach = function(client, bufnr)
+				client.resolved_capabilities.document_formatting = true
+				client.resolved_capabilities.document_range_formatting = true
+				opts.on_attach(client, bufnr)
+			end,
+
+			root_dir = function(fname)
+				local path = util.root_pattern("elm.json", ".git", "elm-stuff")
+				return fname
+			end,
+		}
+	end,
 	-- other language servers
 	bashls = function()
 		return {}
