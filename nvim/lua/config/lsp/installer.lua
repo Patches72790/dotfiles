@@ -38,6 +38,10 @@ local servers = {
 		end
 		return enhanced_opts
 	end,
+
+	cssls = function()
+		return {}
+	end,
 	["pyright"] = function(_)
 		return {}
 	end,
@@ -58,9 +62,6 @@ local servers = {
 	end,
 	-- other language servers
 	bashls = function()
-		return {}
-	end,
-	jdtls = function()
 		return {}
 	end,
 	rust_analyzer = function(options)
