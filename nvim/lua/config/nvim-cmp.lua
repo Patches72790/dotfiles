@@ -1,7 +1,6 @@
 local M = {}
 local cmp = require("cmp")
 local lspkind = require("lspkind")
-local luasnip_setup = require("config.luasnip").setup
 
 local cmp_configuration = {
 	snippet = {
@@ -23,7 +22,7 @@ local cmp_configuration = {
 	}),
 	formatting = {
 		format = lspkind.cmp_format({
-			with_text = false,
+			with_text = true,
 			max_width = 50,
 			before = function(entry, vim_item)
 				vim_item.menu = ({
@@ -40,13 +39,15 @@ local cmp_configuration = {
 	},
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
-		{ name = "buffer" },
+		{ name = "buffer", keyword_length = 5 },
 		{ name = "nvim_lua" },
 		{ name = "path" },
 		{ name = "luasnip" },
 		{ name = "cmdline" },
-		{ name = "orgmode" },
 	}),
+	view = {
+		entries = "custom",
+	},
 }
 
 -- used with ':' on cmdline
