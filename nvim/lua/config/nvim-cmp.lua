@@ -1,6 +1,7 @@
 local M = {}
 local cmp = require("cmp")
 local lspkind = require("lspkind")
+local luasnip_setup = require("config.luasnip").setup
 
 local cmp_configuration = {
 	snippet = {

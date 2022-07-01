@@ -117,6 +117,13 @@ local function plugins_startup()
 		end,
 	})
 
+	use({
+		"L3MON4D3/LuaSnip",
+		config = function()
+			require("config.luasnip").setup()
+		end,
+	})
+
 	-- colorschemes
 	use({ "ellisonleao/gruvbox.nvim", "doums/darcula" })
 
