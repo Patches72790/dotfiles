@@ -31,10 +31,14 @@ local function configure_snippets(ls)
 	local s = ls.snippet
 	local t = ls.text_node
 	local i = ls.insert_node
+	local c = ls.choice_node
 
 	ls.add_snippets("all", {
-		s("fn", {
-			t("fun function"),
+		s("todo", {
+			c(1, {
+				fmt("TODO[AT-{}] =>", { i(1) }),
+				fmt("TODO[BROAD-{}] =>", { i(1) }),
+			}),
 		}),
 	})
 
@@ -42,7 +46,7 @@ local function configure_snippets(ls)
 		s("req", fmt("local {} = require('{}')", { i(1, "default"), rep(1) })),
 	})
 
-	ls.add_snippets("html", {
+	ls.add_snippets("javascriptreact",  {
 		s("div", {
 			t("<div>"),
 			i(1),
