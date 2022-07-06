@@ -1,5 +1,21 @@
 local M = {}
 
+local make_formatting_on_attach = function(file_pattern_tbl, desc, opts)
+	return function(client, bufnr)
+		client.resolved_capabilities.document_formatting = true
+		client.resolved_capabilities.document_range_formatting = true
+		vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+			group = "LspFormatting",
+			desc = desc,
+			pattern = file_pattern_tbl,
+			callback = function()
+				vim.lsp.buf.formatting_sync(nil, 2000)
+			end,
+		})
+		opts.on_attach(client, bufnr)
+	end
+end
+
 -- server options to be used in setup function for lsp_installer
 local servers = {
 	["sumneko_lua"] = function(_)
@@ -38,7 +54,11 @@ local servers = {
 		end
 		return enhanced_opts
 	end,
-
+	yamlls = function(opts)
+		local enhanced_opts = {}
+		enhanced_opts.on_attach = make_formatting_on_attach({"*.yaml, *.yml"}, "Formatting command for yaml files", opts)
+		return enhanced_opts
+	end,
 	cssls = function()
 		return {}
 	end,
@@ -134,19 +154,11 @@ local servers = {
 	end,
 	hls = function(opts) -- haskell
 		local enhanced_opts = {}
-		enhanced_opts.on_attach = function(client, bufnr)
-			client.resolved_capabilities.document_formatting = true
-			client.resolved_capabilities.document_range_formatting = true
-			vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-				group = "LspFormatting",
-				desc = "Format on save for haskell language server",
-				pattern = { "*.hs" },
-				callback = function()
-					vim.lsp.buf.formatting_sync(nil, 2000)
-				end,
-			})
-			opts.on_attach(client, bufnr)
-		end
+		enhanced_opts.on_attach = make_formatting_on_attach(
+			{ "*.hs" },
+			"Format on save for haskell language server",
+			opts
+		)
 		return enhanced_opts
 	end,
 	dockerls = function()
