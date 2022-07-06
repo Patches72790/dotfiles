@@ -1,5 +1,6 @@
 # source any helper files
 source $HOME/dotfiles/sh-utils/index
+source $HOME/dotfiles/nnn/nnn.conf
 
 # If you come from bash you might have to change your $PATH.
 GO_PATH="/usr/local/go/bin"
@@ -111,9 +112,6 @@ elif [[ "$(whoami)" == "patroclus" ]]; then
     unset __conda_setup
     # <<< conda initialize <<<
 fi
-
-# set my conda env to matching tab and project folder
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [ "$(whoami)" = "PXH050" ] && [ -f "/Users/PXH050/.ghcup/env" ] && source "/Users/PXH050/.ghcup/env" # ghcup-env
 
