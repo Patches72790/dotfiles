@@ -16,6 +16,7 @@ import XMonad.Layout.LayoutModifier
 import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Layout.Renamed (Rename (Replace), renamed)
 import XMonad.Layout.ResizableTile (ResizableTall (ResizableTall))
+import XMonad.Layout.SimpleFloat
 import XMonad.Layout.Spacing (Border (Border), Spacing (Spacing), spacingRaw)
 import XMonad.Util.Cursor (setDefaultCursor)
 import XMonad.Util.EZConfig (additionalKeys, additionalKeysP)
@@ -47,6 +48,7 @@ myConfig =
 
 myStartupHook :: X ()
 myStartupHook = do
+  spawnOnce "redshift-gtk &"
   spawnOnce "xfce4-power-manager &"
   spawnOnce "nitrogen --restore &"
   spawnOnce "picom &"
