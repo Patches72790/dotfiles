@@ -23,5 +23,5 @@ Config { overrideRedirect = False
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
-       , template = "%XMonadLog% }{ %default:Master% | %wlp58s0% | %cpu% | %memory% | %date% | %battery% "
+       , template = "%_XMONAD_LOG_1% }{ %default:Master% | %wlp58s0% | %cpu% | %memory% | %date% | %battery% "
        }

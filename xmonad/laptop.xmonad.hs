@@ -2,6 +2,7 @@ import Control.Monad (void)
 import GHC.IO.Handle (Handle)
 import Graphics.X11.ExtraTypes
 import XMonad
+import XMonad.Actions.Volume
 import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
@@ -12,52 +13,61 @@ import XMonad.Hooks.StatusBar.PP
 import XMonad.Layout (Tall)
 import XMonad.Layout.IndependentScreens as LIS
 import XMonad.Layout.LayoutModifier
+import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Layout.Renamed (Rename (Replace), renamed)
 import XMonad.Layout.ResizableTile (ResizableTall (ResizableTall))
+import XMonad.Layout.SimpleFloat
 import XMonad.Layout.Spacing (Border (Border), Spacing (Spacing), spacingRaw)
-import XMonad.Util.EZConfig (additionalKeys)
+import XMonad.Util.Cursor (setDefaultCursor)
+import XMonad.Util.EZConfig (additionalKeys, additionalKeysP)
 import XMonad.Util.Loggers
 import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
 
 main :: IO ()
 main =
-  do
-    xmobar0 <- spawnPipe "xmobar $HOME/dotfiles/xmobar/laptop.xmobarrc"
-    xmonad $
-      ewmhFullscreen $
-        ewmh $
-          myConfig xmobar0
-            `additionalKeys` myKeys
+  xmonad
+    . withSB
+      mySBMain
+    . ewmhFullscreen
+    . ewmh
+    $ myConfig `additionalKeys` myMediaKeys `additionalKeysP` myQuickKeys
 
-myConfig xmobar0 =
-  withEasySB (statusBarProp "xmobar" (pure (myXmobarPP xmobar0))) defToggleStrutsKey $
-    desktopConfig
-      { terminal = myTerminal,
-        modMask = myModMask,
-        workspaces = myWorkspaces,
-        layoutHook = myLayout,
-        borderWidth = myBorderWidth,
-        normalBorderColor = myNormalBorderColor,
-        focusedBorderColor = myFocusedBorderColor,
-        startupHook = myStartupHook
-      }
+myConfig =
+  def
+    { terminal = myTerminal,
+      modMask = myModMask,
+      workspaces = myWorkspaces,
+      layoutHook = myLayout,
+      borderWidth = myBorderWidth,
+      normalBorderColor = myNormalBorderColor,
+      focusedBorderColor = myFocusedBorderColor,
+      startupHook = myStartupHook,
+      manageHook = manageDocks
+    }
 
 myStartupHook :: X ()
 myStartupHook = do
+  spawnOnce "redshift-gtk &"
   spawnOnce "xfce4-power-manager &"
   spawnOnce "nitrogen --restore &"
   spawnOnce "picom &"
+  setDefaultCursor xC_coffee_mug
 
-myKeys :: [((KeyMask, KeySym), X ())]
-myKeys =
-  [ ((0, xF86XK_AudioRaiseVolume), spawn "amixer -q sset Master 2%+"),
-    ((0, xF86XK_AudioLowerVolume), spawn "amixer -q sset Master 2%-"),
-    ((0, xF86XK_AudioMute), spawn "amixer set Master toggle")
+myQuickKeys :: [(String, X ())]
+myQuickKeys =
+  [ ("M-f", spawn "firefox")
+  ]
+
+myMediaKeys :: [((KeyMask, KeySym), X ())]
+myMediaKeys =
+  [ ((0, xF86XK_AudioRaiseVolume), spawn "pamixer -i 2"),
+    ((0, xF86XK_AudioLowerVolume), spawn "pamixer -d 2"),
+    ((0, xF86XK_AudioMute), spawn "pamixer --default-source -t")
   ]
 
 myFont :: String
-myFont = "xft:FiraMono Nerd Font Mono:regular:size=10"
+myFont = "xft:FireMono Nerd Font Mono:regular:size=10"
 
 myTerminal :: String
 myTerminal = "alacritty"
@@ -91,13 +101,15 @@ tiled =
     mySpacing 5 $
       Tall 1 (3 / 100) (1 / 2)
 
-myLayout = tiled ||| Mirror tiled ||| Full
+myLayout = avoidStruts (smartBorders (tiled ||| Mirror tiled ||| Full))
 
-myXmobarPP :: Handle -> PP
-myXmobarPP xmproc0 =
+mySBMain :: StatusBarConfig
+mySBMain = statusBarPropTo "_XMONAD_LOG_1" "xmobar $HOME/dotfiles/xmobar/laptop.xmobarrc" (pure myXmobarPP)
+
+myXmobarPP :: PP
+myXmobarPP =
   def
-    { ppOutput = hPutStrLn xmproc0,
-      ppSep = magenta " | ",
+    { ppSep = magenta " | ",
       ppTitleSanitize = xmobarStrip,
       ppCurrent = wrap " " "" . xmobarBorder "Top" "#8be9fd" 2,
       ppVisible = green . wrap " " "",
