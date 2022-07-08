@@ -82,6 +82,7 @@ myModMask = mod4Mask
 myBorderWidth :: Dimension
 myBorderWidth = 2
 
+myNormalBorderColor :: String
 myNormalBorderColor = ""
 
 myFocusedBorderColor :: String
