@@ -56,7 +56,8 @@ myStartupHook = do
 
 myQuickKeys :: [(String, X ())]
 myQuickKeys =
-  [ ("M-f", spawn "firefox")
+  [ ("M-f", spawn "firefox"),
+    ("M-\\", spawn "rofi -show run")
   ]
 
 myMediaKeys :: [((KeyMask, KeySym), X ())]
