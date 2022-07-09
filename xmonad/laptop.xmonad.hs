@@ -92,7 +92,7 @@ myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
 
 myWorkspaces :: [String]
-myWorkspaces = ["\xe777", "\xfa9e", "\xf489"] ++ ["4", "5", "6"]
+myWorkspaces = ["\xf269", "\xf489", "\xe777", "\xe7a8", "\xe73c", "\xf126"]
 
 mySpacing :: Integer -> l a -> ModifiedLayout Spacing l a
 mySpacing i = spacingRaw True (Border i i i i) True (Border i i i i) True

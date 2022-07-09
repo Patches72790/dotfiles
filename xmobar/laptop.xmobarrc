@@ -23,5 +23,5 @@ Config { overrideRedirect = False
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
-       , template = "%_XMONAD_LOG_1% }{  %myvolume% | %wlp58s0% | %cpu% | %memory% | %date% | %battery% "
+       , template = " <fc=#1793d1></fc> %_XMONAD_LOG_1% }{  %myvolume% | %wlp58s0% | %cpu% | %memory% | %date% | %battery% "
        }
