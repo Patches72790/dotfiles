@@ -56,7 +56,11 @@ local servers = {
 	end,
 	yamlls = function(opts)
 		local enhanced_opts = {}
-		enhanced_opts.on_attach = make_formatting_on_attach({"*.yaml, *.yml"}, "Formatting command for yaml files", opts)
+		enhanced_opts.on_attach = make_formatting_on_attach(
+			{ "*.yaml, *.yml" },
+			"Formatting command for yaml files",
+			opts
+		)
 		return enhanced_opts
 	end,
 	cssls = function()
@@ -74,10 +78,10 @@ local servers = {
 				opts.on_attach(client, bufnr)
 			end,
 
-			root_dir = function(fname)
-				local path = util.root_pattern("elm.json", ".git", "elm-stuff")
-				return fname
-			end,
+			--			root_dir = function(fname)
+			--				local path = util.root_pattern("elm.json", ".git", "elm-stuff")
+			--				return fname
+			--			end,
 		}
 	end,
 	-- other language servers
