@@ -111,7 +111,7 @@ local function plugins_startup()
 			{ "lukas-reineke/cmp-rg", after = "nvim-cmp" },
 			{ "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
 			"onsails/lspkind-nvim", -- VScode pictograms
-            "dmitmel/cmp-digraphs",
+			"dmitmel/cmp-digraphs",
 		},
 		config = function()
 			require("config.nvim-cmp").setup()

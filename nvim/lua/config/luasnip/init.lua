@@ -26,17 +26,19 @@ local function configure_keymaps(ls)
 end
 
 local function configure_snippets(ls)
+	local FILETYPE_COMMENTS = require("config.luasnip.util").FILETYPE_TO_COMMENTS
 	local fmt = require("luasnip.extras.fmt").fmt
 	local rep = require("luasnip.extras").rep
 	local s = ls.snippet
 	local t = ls.text_node
 	local i = ls.insert_node
 	local c = ls.choice_node
+	local d = ls.dynamic_node
 
 	ls.add_snippets("all", {
 		s("todo", {
 			c(1, {
-				fmt("TODO[AT-{}] =>", { i(1) }),
+				fmt("{} TODO[AT-{}] =>", { i(1, FILETYPE_COMMENTS[vim.bo.filetype]), i(2) }),
 				fmt("TODO[BROAD-{}] =>", { i(1) }),
 			}),
 		}),
@@ -46,13 +48,7 @@ local function configure_snippets(ls)
 		s("req", fmt("local {} = require('{}')", { i(1, "default"), rep(1) })),
 	})
 
-	ls.add_snippets("javascriptreact",  {
-		s("div", {
-			t("<div>"),
-			i(1),
-			t("</div>"),
-		}),
-	})
+	require("config.luasnip.js").configure_web_snippets(ls)
 end
 
 local function configure_luasnip()
@@ -63,10 +59,10 @@ local function configure_luasnip()
 		history = true,
 		update_events = "TextChanged,TextChangedI",
 		enable_autosnippets = true,
-		exit_opts = {
+		ext_opts = {
 			[types.choiceNode] = {
 				active = {
-					virt_text = { { "←", "Error" } },
+					virt_text = { { "← Current Choice", "Info" } },
 				},
 			},
 		},
