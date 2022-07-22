@@ -1,6 +1,9 @@
 local M = {}
 
 local function configure_keymaps(ls)
+	-- vim.ui.select for choice nodes
+	vim.keymap.set({ "i", "s" }, "<c-u>", "<cmd>lua require('luasnip.extras.select_choice')()<CR>", { silent = true })
+
 	-- expansion key
 	-- expand current item or jump to next in snippet
 	vim.keymap.set({ "i", "s" }, "<c-k>", function()
@@ -34,14 +37,24 @@ local function configure_snippets(ls)
 	local i = ls.insert_node
 	local c = ls.choice_node
 	local d = ls.dynamic_node
+	local f = ls.function_node
 
 	ls.add_snippets("all", {
-		s("todo", {
-			c(1, {
-				fmt("{} TODO[AT-{}] =>", { i(1, FILETYPE_COMMENTS[vim.bo.filetype]), i(2) }),
-				fmt("TODO[BROAD-{}] =>", { i(1) }),
-			}),
-		}),
+		s(
+			"todo",
+			fmt("{comment} TODO[{project}-{jira}] => {note}", {
+				comment = f(function()
+					return FILETYPE_COMMENTS[vim.bo.filetype]
+				end),
+				project = c(1, {
+					t("BROAD"),
+					t("AT"),
+					t("TRX"),
+				}),
+				jira = i(2),
+				note = i(3),
+			})
+		),
 	})
 
 	ls.add_snippets("lua", {

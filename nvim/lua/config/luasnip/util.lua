@@ -12,7 +12,7 @@ local M = {
 }
 
 M.add_snippets_for_filetypes = function(luasnip, filetypes, snippets)
-	for filetype in pairs(filetypes) do
+	for _, filetype in pairs(filetypes) do
 		luasnip.add_snippets(filetype, snippets)
 	end
 end

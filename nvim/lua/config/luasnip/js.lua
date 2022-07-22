@@ -6,13 +6,16 @@ M.configure_web_snippets = function(ls)
 	local s = ls.snippet
 	local t = ls.text_node
 	local i = ls.insert_node
+	local fmt = require("luasnip.extras.fmt").fmt
 
 	add_snippets_for_filetypes(ls, { "javascriptreact", "javascript", "typescript", "typescriptreact" }, {
-		s("div", {
-			t("<div>"),
-			i(1),
-			t("</div>"),
-		}),
+		s(
+			"select",
+			fmt("const {} = useSelector(select{})", {
+				i(1),
+				i(2),
+			})
+		),
 	})
 end
 
