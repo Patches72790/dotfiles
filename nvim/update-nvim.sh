@@ -1,9 +1,5 @@
 #!/bin/bash
                 
-install-dependency() {
-
-}
-
 # Get machine type
 unameOutput="$(uname -s)"
 case "${unameOutput}" in

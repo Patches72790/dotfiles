@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sudo ln -s $HOME/dotfiles/nvim $XDG_CONFIG_HOME/nvim
