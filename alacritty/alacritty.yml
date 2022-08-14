@@ -1,6 +1,18 @@
+env:
+  TERM: alacritty
+
+window:
+  padding:
+    x: 10
+    y: 10
+
+    dynamic_padding: true
+    decoration: none
+
+
 font:
   normal:
-    family: FiraCode Nerd Font Mono
+    family: Source Code Pro
     style: Regular
   size: 12
 
