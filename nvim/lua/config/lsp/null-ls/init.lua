@@ -65,7 +65,7 @@ function M.setup(_)
 				client.supports_method("textDocument/formatting") and client.resolved_capabilities.document_formatting
 			then
 				vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-				vim.api.nvim_create_autocmd("BufWritePost", {
+				vim.api.nvim_create_autocmd("BufWritePre", {
 					group = augroup,
 					buffer = bufnr,
 					callback = function()
