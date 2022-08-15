@@ -19,8 +19,12 @@ local sources = {
 	formatting.rustfmt.with({ extra_args = { "--edition=2021" } }),
 	formatting.taplo,
 	formatting.remark,
-    --require('config.lsp.null-ls.sources.yamlls'),
+	--require('config.lsp.null-ls.sources.yamlls'),
 	diagnostics.eslint_d,
+}
+
+local filetype_to_buffer_event = {
+	python = "BufWritePost",
 }
 
 -- Used from null-ls.nvim wiki for async_formatting
@@ -64,8 +68,9 @@ function M.setup(_)
 			if
 				client.supports_method("textDocument/formatting") and client.resolved_capabilities.document_formatting
 			then
+				local event_fn = filetype_to_buffer_event[vim.bo.filetype] or "BufWritePre"
 				vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-				vim.api.nvim_create_autocmd("BufWritePre", {
+				vim.api.nvim_create_autocmd(event_fn, {
 					group = augroup,
 					buffer = bufnr,
 					callback = function()
