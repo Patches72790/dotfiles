@@ -6,6 +6,14 @@ local function plugins_startup()
 	use({ "wbthomason/packer.nvim" })
 
 	use({
+		"s1n7ax/nvim-terminal",
+		config = function()
+			vim.o.hidden = true
+			require("nvim-terminal").setup()
+		end,
+	})
+
+	use({
 		"Patches72790/neo-notes.nvim",
 		requires = {
 			"nvim-lua/plenary.nvim",
@@ -74,6 +82,9 @@ local function plugins_startup()
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
+		requires = {
+			"nvim-treesitter/playground",
+		},
 		config = function()
 			require("config.treesitter").setup()
 		end,

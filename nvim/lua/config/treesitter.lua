@@ -9,9 +9,14 @@ function M.setup()
 			"typescript",
 			"c",
 			"cpp",
-            "go",
+			"go",
+			"lua",
+			"query",
 		},
 		highlight = { enable = true },
+		playground = {
+			enable = true,
+		},
 	})
 end
 

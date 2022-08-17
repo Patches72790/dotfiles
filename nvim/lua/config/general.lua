@@ -74,6 +74,7 @@ local function init_movement_keymaps()
 		["<c-w>j"] = "<c-\\><c-n><c-w>j",
 		["<c-w>k"] = "<c-\\><c-n><c-w>k",
 		["<c-w>l"] = "<c-\\><c-n><c-w>l",
+		["<leader><leader>"] = "<c-\\><c-n>",
 	}
 	local map = require("config.util").map
 	for lhs, rhs in pairs(movement_mapping) do
@@ -84,8 +85,7 @@ local function init_movement_keymaps()
 	end
 end
 
-local function init_user_commands()
-end
+local function init_user_commands() end
 
 function M.setup()
 	init_nvim_options()
