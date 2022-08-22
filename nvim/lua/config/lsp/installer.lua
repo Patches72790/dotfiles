@@ -171,6 +171,9 @@ local servers = {
 	awk_ls = function()
 		return {}
 	end,
+	jdtls = function()
+		return {}
+	end,
 }
 
 function M.setup(options)
