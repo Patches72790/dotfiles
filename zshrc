@@ -7,7 +7,8 @@ GO_PATH="/usr/local/go/bin"
 NVIM_PATH="/usr/local/nvim/bin"
 LOCAL_BIN_PATH="$HOME/.local/bin"
 CARGO_PATH="$HOME/.cargo/bin"
-export PATH="$GO_PATH:$NVIM_PATH:$LOCAL_BIN_PATH:$CARGO_PATH:$HOME/bin:/usr/local/bin:$PATH"
+JAVA_PATH="/usr/local/opt/openjdk@17/bin"
+export PATH="$JAVA_PATH:$GO_PATH:$NVIM_PATH:$LOCAL_BIN_PATH:$CARGO_PATH:$HOME/bin:/usr/local/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
