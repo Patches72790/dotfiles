@@ -16,6 +16,18 @@ M.configure_web_snippets = function(ls)
 				i(2),
 			})
 		),
+		s(
+			"describe",
+			fmt('describe("{}", () => {{}})', {
+				i(1),
+			})
+		),
+		s(
+			"it",
+			fmt('it("{}", () => {{}})', {
+				i(1),
+			})
+		),
 	})
 end
 
