@@ -22,8 +22,8 @@ function M.query()
     ]]
 	)
 
-	i(vim.treesitter.query.list_directives())
-	i(vim.treesitter.query.list_predicates())
+	--i(vim.treesitter.query.list_directives())
+	--i(vim.treesitter.query.list_predicates())
 
 	for _, matches, _ in query:iter_matches(root, buffer) do
 		for id, node in pairs(matches) do
