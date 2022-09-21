@@ -18,6 +18,8 @@ function M.setup()
 			enable = true,
 		},
 	})
+
+	require("config.treesitter.helpers")
 end
 
 return M
