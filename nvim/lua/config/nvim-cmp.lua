@@ -43,7 +43,6 @@ local cmp_configuration = {
 		{ name = "nvim_lua" },
 		{ name = "path" },
 		{ name = "luasnip" },
-		{ name = "cmdline" },
 	}),
 	view = {
 		entries = "custom",
