@@ -13,13 +13,15 @@ set smartcase
 set noswapfile
 set undofile
 set incsearch
-set undodir=~/.config/nvim/undodir
-set backupdir=~/.config/nvim/backupdir
-set directory=~/.config/nvim/backupdir
+set undodir=~/.config/vim/undodir
+set backupdir=~/.config/vim/backupdir
+set directory=~/.config/vim/backupdir
 set completeopt=menuone,noselect,noinsert
+set writebackup
+set backup
 
 " color settings
 " colorscheme gruvbox
-colorscheme darcula
+" colorscheme darcula
 set background=dark
 set termguicolors
