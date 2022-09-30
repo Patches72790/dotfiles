@@ -28,15 +28,12 @@ plugins=(
     rust
     docker
     zsh-autosuggestions
+    zsh-vim-mode
 )
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
@@ -117,3 +114,7 @@ fi
 [ "$(whoami)" = "PXH050" ] && [ -f "/Users/PXH050/.ghcup/env" ] && source "/Users/PXH050/.ghcup/env" # ghcup-env
 
 [ "$(whoami)" = "patroclus" ] && [ -f "/home/patroclus/.ghcup/env" ] && source "/home/patroclus/.ghcup/env" # ghcup-env
+
+# set vim keybindings
+#bindkey -v
+export KEYTIMEOUT=1

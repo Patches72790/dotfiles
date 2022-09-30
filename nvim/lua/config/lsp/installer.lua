@@ -45,15 +45,15 @@ local servers = {
 		}
 		return default_opts
 	end,
-	["tsserver"] = function(opts)
-		local enhanced_opts = {}
-		enhanced_opts.on_attach = function(client, bufnr)
-			client.resolved_capabilities.document_formatting = false
-			client.resolved_capabilities.document_range_formatting = false
-			opts.on_attach(client, bufnr)
-		end
-		return enhanced_opts
-	end,
+	--	["tsserver"] = function(opts)
+	--		local enhanced_opts = {}
+	--		enhanced_opts.on_attach = function(client, bufnr)
+	--			client.resolved_capabilities.document_formatting = false
+	--			client.resolved_capabilities.document_range_formatting = false
+	--			opts.on_attach(client, bufnr)
+	--		end
+	--		return enhanced_opts
+	--	end,
 	yamlls = function(opts)
 		local enhanced_opts = {}
 		enhanced_opts.on_attach = make_formatting_on_attach(
@@ -77,11 +77,6 @@ local servers = {
 				client.resolved_capabilities.document_range_formatting = true
 				opts.on_attach(client, bufnr)
 			end,
-
-			--			root_dir = function(fname)
-			--				local path = util.root_pattern("elm.json", ".git", "elm-stuff")
-			--				return fname
-			--			end,
 		}
 	end,
 	-- other language servers

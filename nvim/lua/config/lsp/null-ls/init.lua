@@ -13,14 +13,13 @@ local sources = {
 	formatting.prettierd.with({
 		filetypes = { "html", "json", "css" },
 	}),
-	formatting.eslint_d,
+	formatting.eslint,
+	diagnostics.eslint,
 	formatting.shfmt,
 	formatting.gofmt,
 	formatting.rustfmt.with({ extra_args = { "--edition=2021" } }),
 	formatting.taplo,
 	formatting.remark,
-	--require('config.lsp.null-ls.sources.yamlls'),
-	diagnostics.eslint_d,
 }
 
 local filetype_to_buffer_event = {
