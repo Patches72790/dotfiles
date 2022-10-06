@@ -17,6 +17,9 @@ function M.setup()
 		playground = {
 			enable = true,
 		},
+		indent = {
+			enable = true,
+		},
 	})
 
 	require("config.treesitter.helpers")
