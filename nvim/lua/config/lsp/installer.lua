@@ -2,8 +2,8 @@ local M = {}
 
 local make_formatting_on_attach = function(file_pattern_tbl, desc, opts)
 	return function(client, bufnr)
-		client.resolved_capabilities.document_formatting = true
-		client.resolved_capabilities.document_range_formatting = true
+		client.server_capabilities.documentFormattingProvider = true
+		client.server_capabilities.documentRangeFormattingProvider = true
 		vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 			group = "LspFormatting",
 			desc = desc,
@@ -18,7 +18,7 @@ end
 
 -- server options to be used in setup function for lsp_installer
 local servers = {
-	["sumneko_lua"] = function(_)
+	["sumneko_lua"] = function(opts)
 		local default_opts = {}
 		default_opts.settings = {
 			Lua = {
@@ -43,13 +43,18 @@ local servers = {
 				},
 			},
 		}
+		default_opts.on_attach = function(client, bufnr)
+			client.server_capabilities.documentFormattingProvider = false
+			client.server_capabilities.documentRangeFormattingProvider = false
+			opts.on_attach(client, bufnr)
+		end
 		return default_opts
 	end,
 	["tsserver"] = function(opts)
 		local enhanced_opts = {}
 		enhanced_opts.on_attach = function(client, bufnr)
-			client.resolved_capabilities.document_formatting = false
-			client.resolved_capabilities.document_range_formatting = false
+			client.server_capabilities.documentFormattingProvider = false
+			client.server_capabilities.documentRangeFormattingProvider = false
 			opts.on_attach(client, bufnr)
 		end
 		return enhanced_opts
@@ -68,16 +73,6 @@ local servers = {
 	end,
 	["pyright"] = function(_)
 		return {}
-	end,
-	elmls = function(opts)
-		local util = require("lspconfig.util")
-		return {
-			on_attach = function(client, bufnr)
-				client.resolved_capabilities.document_formatting = true
-				client.resolved_capabilities.document_range_formatting = true
-				opts.on_attach(client, bufnr)
-			end,
-		}
 	end,
 	-- other language servers
 	bashls = function()

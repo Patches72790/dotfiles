@@ -74,7 +74,8 @@ function M.setup(_)
 					buffer = bufnr,
 					callback = function()
 						-- 0.8 Note -- use vim.lsp.buf.format({ bufnr = bufnr })
-						vim.lsp.buf.formatting_sync(nil, 2000)
+						--vim.lsp.buf.formatting_sync(nil, 2000)
+                        vim.lsp.buf.format({ bufnr = bufnr })
 					end,
 				})
 			end
