@@ -65,7 +65,8 @@ function M.setup(_)
 		debounce = 150,
 		on_attach = function(client, bufnr)
 			if
-				client.supports_method("textDocument/formatting") and client.resolved_capabilities.document_formatting
+				client.supports_method("textDocument/formatting")
+				and client.server_capabilities.documentFormattingProvider
 			then
 				local event_fn = filetype_to_buffer_event[vim.bo.filetype] or "BufWritePre"
 				vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
@@ -73,9 +74,7 @@ function M.setup(_)
 					group = augroup,
 					buffer = bufnr,
 					callback = function()
-						-- 0.8 Note -- use vim.lsp.buf.format({ bufnr = bufnr })
-						--vim.lsp.buf.formatting_sync(nil, 2000)
-                        vim.lsp.buf.format({ bufnr = bufnr })
+						vim.lsp.buf.format({ bufnr = bufnr })
 					end,
 				})
 			end

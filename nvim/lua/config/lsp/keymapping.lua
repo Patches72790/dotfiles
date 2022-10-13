@@ -37,8 +37,8 @@ local function keymappings(client, bufnr)
 		},
 	}
 
-	if client.resolved_capabilities.document_formatting then
-		create_user_command("LspFormat", "lua vim.lsp.buf.formatting_sync(nil, 2000)", {})
+	if client.server_capabilities.documentFormattingProvider then
+		create_user_command("LspFormat", "lua vim.lsp.buf.format()", {})
 		keymap_l.l.F = { "<cmd>:LspFormat<CR>", "LspFormat" }
 	end
 

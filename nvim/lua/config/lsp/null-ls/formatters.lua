@@ -18,21 +18,13 @@ end
 function M.format()
 	if M.autoformat then
 		util.warn("Formatting buffer in null-ls", "Formatting")
-		vim.lsp.buf.formatting_sync(nil, 2000)
+		vim.lsp.buf.format()
 	end
 end
 
 function M.has_formatter(filetype)
 	local available = null_ls_sources.get_available(filetype, formatting_method)
 	return #available > 0
-end
-
-function M.list_registered() end
-
-function M.list_supported(filetype)
-	local supported = null_ls_sources.get_supported(filetype, "formatting")
-	table.sort(supported)
-	return supported
 end
 
 -- Enables formatting for buffer according to whether
@@ -48,8 +40,8 @@ function M.setup(client, bufnr)
 		enable = not (client.name == "null-ls")
 	end
 
-	client.resolved_capabilities.document_formatting = enable
-	client.resolved_capabilities.document_range_formatting = enable
+	client.server_capabilities.documentFormattingProvider = enable
+	client.server_capabilities.documentRangeFormattingProvider = enable
 end
 
 return M
