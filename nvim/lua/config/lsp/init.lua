@@ -11,8 +11,7 @@ local function on_attach(client, bufnr)
 end
 
 -- update nvim cmp capabilities
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").default_capabilities
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- setup LSP handlers
 require("config.lsp.handlers").setup()
