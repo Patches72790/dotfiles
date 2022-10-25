@@ -7,12 +7,12 @@ local function on_attach(client, bufnr)
 	-- Configure Formatting
 	require("config.lsp.null-ls.formatters").setup(client, bufnr)
 
-    require('config.lsp.diagnostics').setup()
+	require("config.lsp.diagnostics").setup()
 end
 
 -- update nvim cmp capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+capabilities = require("cmp_nvim_lsp").default_capabilities
 
 -- setup LSP handlers
 require("config.lsp.handlers").setup()
