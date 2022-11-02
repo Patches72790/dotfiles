@@ -25,10 +25,11 @@ local function plugins_startup()
 	})
 
 	use({
-		"Patches72790/dev-search.nvim",
-		--"/Users/PXH050/Projects/neovim_plugins/dev-search.nvim",
+		--"Patches72790/dev-search.nvim",
+		"/Users/PXH050/Projects/neovim_plugins/dev-search.nvim",
 		requires = {
 			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim",
 		},
 		opt = false,
 		config = function()
@@ -36,6 +37,8 @@ local function plugins_startup()
 				settings = {
 					base_url = "https://cse.google.com",
 					context_id = "c897a4eacb3fd1332",
+					rest_api_url = "https://www.googleapis.com/customsearch/v1?",
+					api_key = "AIzaSyBIlieV20utBzXYcXCkBJ97VSk7qivkXas",
 				},
 			})
 		end,
