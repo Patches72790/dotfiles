@@ -33,6 +33,7 @@ local function keymappings(client, bufnr)
 			i = { "<cmd>LspInfo <CR>", "Lsp Info" },
 			d = { "<cmd>Telescope diagnostics bufnr=0<CR>", "Diagnostics" },
 			s = { "<cmd>Telescope lsp_document_symbols<CR>", "Document Symbols" },
+			S = { "<cmd>Telescope lsp_dynamic_workspace_symbols<CR>", "Dynamic Document Symbols" },
 			t = { "<cmd>TroubleToggle<CR>", "Trouble" },
 		},
 	}
