@@ -25,8 +25,8 @@ local function plugins_startup()
 	})
 
 	use({
-		--"Patches72790/dev-search.nvim",
-		"/Users/PXH050/Projects/neovim_plugins/dev-search.nvim",
+		"Patches72790/dev-search.nvim",
+		--"/Users/PXH050/Projects/neovim_plugins/dev-search.nvim",
 		requires = {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope.nvim",
