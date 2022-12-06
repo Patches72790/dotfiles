@@ -61,11 +61,8 @@ local servers = {
 	end,
 	yamlls = function(opts)
 		local enhanced_opts = {}
-		enhanced_opts.on_attach = make_formatting_on_attach(
-			{ "*.yaml, *.yml" },
-			"Formatting command for yaml files",
-			opts
-		)
+		enhanced_opts.on_attach =
+			make_formatting_on_attach({ "*.yaml, *.yml" }, "Formatting command for yaml files", opts)
 		return enhanced_opts
 	end,
 	cssls = function()
@@ -148,11 +145,8 @@ local servers = {
 	end,
 	hls = function(opts) -- haskell
 		local enhanced_opts = {}
-		enhanced_opts.on_attach = make_formatting_on_attach(
-			{ "*.hs" },
-			"Format on save for haskell language server",
-			opts
-		)
+		enhanced_opts.on_attach =
+			make_formatting_on_attach({ "*.hs" }, "Format on save for haskell language server", opts)
 		return enhanced_opts
 	end,
 	dockerls = function()
@@ -162,6 +156,9 @@ local servers = {
 		return {}
 	end,
 	jdtls = function()
+		return {}
+	end,
+	rnix = function()
 		return {}
 	end,
 }

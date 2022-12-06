@@ -1,5 +1,6 @@
 " general default settings
 set number
+set relativenumber
 syntax on
 set expandtab
 set tabstop=4 shiftwidth=4
@@ -25,3 +26,5 @@ set backup
 " colorscheme darcula
 set background=dark
 set termguicolors
+
+inoremap "<cmd>w" "<leader>w"

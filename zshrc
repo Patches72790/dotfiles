@@ -3,7 +3,7 @@ source $HOME/dotfiles/sh-utils/index
 source $HOME/dotfiles/nnn/nnn.conf
 
 # If you come from bash you might have to change your $PATH.
-GO_PATH="/usr/local/go/bin"
+GO_PATH="/usr/local/go/bin:$HOME/go/bin"
 NVIM_PATH="/usr/local/nvim/bin"
 LOCAL_BIN_PATH="$HOME/.local/bin"
 CARGO_PATH="$HOME/.cargo/bin"
@@ -55,13 +55,6 @@ alias nvconfig="cd $HOME/dotfiles/nvim && nvim"
 alias nv-notes="cd $HOME/Notes && nvim"
 export NV_NOTES_PATH="$HOME/Notes"
 
-# for Opterrix mac only!
-if [[ "$(whoami)" == "PXH050" ]]; then
-    alias atlas="conda activate atlas-env && nvm use --lts && cd $HOME/Projects/atlas-webapp/app/webapp/app"
-    alias opterrix="conda activate opterrix-env && nvm use --lts && cd $HOME/Projects/opterrix/webapp/app"
-    alias opt-direct="conda activate opt-direct && nvm use --lts && cd $HOME/Projects/opterrix-direct/application/webapp/app"
-fi
-
 # Antlr 4 Aliases
 alias antlr4='java -jar /usr/local/lib/antlr-4.9.2-complete.jar'
 alias grun='java org.antlr.v4.gui.TestRig'
@@ -77,44 +70,16 @@ alias nv="nvim"
 # node env variable
 export NVM_DIR="$XDG_CONFIG_HOME/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-if [[ "$(whoami)" == "PXH050" ]]; then
-    # >>> conda initialize >>>
-    # !! Contents within this block are managed by 'conda init' !!
-    __conda_setup="$('/Users/PXH050/miniconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-    if [ $? -eq 0 ]; then
-        eval "$__conda_setup"
-    else
-        if [ -f "/Users/PXH050/miniconda/etc/profile.d/conda.sh" ]; then
- . "/Users/PXH050/miniconda/etc/profile.d/conda.sh"  # commented out by conda initialize  # commented out by conda initialize
-        else
-            export PATH="/Users/PXH050/miniconda/bin:$PATH"
-        fi
-    fi
-    unset __conda_setup
-    # <<< conda initialize <<<
-elif [[ "$(whoami)" == "patroclus" ]]; then
-    # >>> conda initialize >>>
-    # !! Contents within this block are managed by 'conda init' !!
-    __conda_setup="$('/home/patroclus/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-    if [ $? -eq 0 ]; then
-        eval "$__conda_setup"
-    else
-        if [ -f "/home/patroclus/miniconda3/etc/profile.d/conda.sh" ]; then
- . "/home/patroclus/miniconda3/etc/profile.d/conda.sh"  # commented out by conda initialize  # commented out by conda initialize
-        else
- export PATH="/home/patroclus/miniconda3/bin:$PATH"  # commented out by conda initialize  # commented out by conda initialize
-        fi
-    fi
-    unset __conda_setup
-    # <<< conda initialize <<<
-fi
-
-[ "$(whoami)" = "PXH050" ] && [ -f "/Users/PXH050/.ghcup/env" ] && source "/Users/PXH050/.ghcup/env" # ghcup-env
-
-[ "$(whoami)" = "patroclus" ] && [ -f "/home/patroclus/.ghcup/env" ] && source "/home/patroclus/.ghcup/env" # ghcup-env
+# ghcup haskell stuff
+#[ "$(whoami)" = "patroclus" ] && [ -f "/home/patroclus/.ghcup/env" ] && source "/home/patroclus/.ghcup/env" # ghcup-env
 
 # set vim keybindings
-#bindkey -v
+bindkey -v
 export KEYTIMEOUT=1
+
+[ -f "/Users/plharvey/.ghcup/env" ] && source "/Users/plharvey/.ghcup/env" # ghcup-env
+
+# hook into direnv for nix
+eval "$(direnv hook zsh)"
