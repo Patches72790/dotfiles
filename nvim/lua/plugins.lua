@@ -26,7 +26,6 @@ local function plugins_startup()
 
 	use({
 		"Patches72790/dev-search.nvim",
-		--"/Users/PXH050/Projects/neovim_plugins/dev-search.nvim",
 		requires = {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope.nvim",
@@ -165,12 +164,6 @@ local function plugins_startup()
 		"ellisonleao/glow.nvim",
 	})
 
-	use({
-		"mickael-menu/zk-nvim",
-		config = function()
-			require("zk").setup()
-		end,
-	})
 	-- startup screen
 	use({
 		"goolord/alpha-nvim",
