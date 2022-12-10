@@ -134,8 +134,7 @@ local servers = {
 				--},
 			},
 		}
-		--return rust_opts
-		return {}
+		return rust_opts
 	end,
 	clangd = function() -- C, C++, etc.
 		return {}
