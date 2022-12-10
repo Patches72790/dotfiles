@@ -61,8 +61,11 @@ local servers = {
 	end,
 	yamlls = function(opts)
 		local enhanced_opts = {}
-		enhanced_opts.on_attach =
-			make_formatting_on_attach({ "*.yaml, *.yml" }, "Formatting command for yaml files", opts)
+		enhanced_opts.on_attach = make_formatting_on_attach(
+			{ "*.yaml, *.yml" },
+			"Formatting command for yaml files",
+			opts
+		)
 		return enhanced_opts
 	end,
 	cssls = function()
@@ -75,23 +78,23 @@ local servers = {
 	bashls = function()
 		return {}
 	end,
-	rust_analyzer = function(options)
-		local custom_opts = vim.tbl_deep_extend("force", options, {
-			settings = {
-				["rust-analyzer"] = {
-					completion = {
-						postfix = {
-							enable = false,
-						},
-					},
-					checkOnSave = {
-						command = "clippy",
-					},
-				},
-			},
-		})
-		return custom_opts
-	end,
+	--	rust_analyzer = function(options)
+	--		local custom_opts = vim.tbl_deep_extend("force", options, {
+	--			settings = {
+	--				["rust-analyzer"] = {
+	--					completion = {
+	--						postfix = {
+	--							enable = false,
+	--						},
+	--					},
+	--					checkOnSave = {
+	--						command = "clippy",
+	--					},
+	--				},
+	--			},
+	--		})
+	--		return custom_opts
+	--	end,
 	rust_analyzer_rust_tools = function(options)
 		local extension_path = vim.env.HOME .. "/.vscode/extensions/vadimcn.vscode-lldb-1.7.0/"
 		local codelldb_path = extension_path .. "adapter/codelldb"
@@ -123,12 +126,12 @@ local servers = {
 				},
 			}),
 			dap = {
-				--adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
-				adapter = {
-					type = "executable",
-					command = "lldb-vscode-13",
-					name = "rt_lldb",
-				},
+				adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
+				--adapter = {
+				--	type = "executable",
+				--	command = "lldb-vscode-13",
+				--	name = "rt_lldb",
+				--},
 			},
 		}
 		--return rust_opts
@@ -145,8 +148,11 @@ local servers = {
 	end,
 	hls = function(opts) -- haskell
 		local enhanced_opts = {}
-		enhanced_opts.on_attach =
-			make_formatting_on_attach({ "*.hs" }, "Format on save for haskell language server", opts)
+		enhanced_opts.on_attach = make_formatting_on_attach(
+			{ "*.hs" },
+			"Format on save for haskell language server",
+			opts
+		)
 		return enhanced_opts
 	end,
 	dockerls = function()
@@ -185,8 +191,7 @@ function M.setup(options)
 	for server_name, enhanced_setup_opts_func in pairs(servers) do
 		local enhanced_server_opts = enhanced_setup_opts_func(options)
 		if server_name == "rust_analyzer_rust_tools" then
-			print("Skipping rust-tools")
-			--require("rust-tools").setup(enhanced_server_opts)
+			require("rust-tools").setup(enhanced_server_opts)
 		else
 			local server_opts = vim.tbl_deep_extend("force", options, enhanced_server_opts)
 			lsp_config[server_name].setup(server_opts)
