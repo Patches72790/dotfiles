@@ -9,7 +9,7 @@ local make_formatting_on_attach = function(file_pattern_tbl, desc, opts)
 			desc = desc,
 			pattern = file_pattern_tbl,
 			callback = function()
-				vim.lsp.buf.formatting_sync(nil, 2000)
+				vim.lsp.buf.format({ bufnr = bufnr })
 			end,
 		})
 		opts.on_attach(client, bufnr)
