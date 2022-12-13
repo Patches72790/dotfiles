@@ -30,6 +30,12 @@ function M.setup()
 		defaults = {
 			layout_strategy = "vertical",
 			layout_config = { height = 0.95 },
+			file_ignore_patterns = {
+				"node_modules",
+				"public",
+				"assets",
+				"package-lock",
+			},
 		},
 		extensions = {
 			["ui-select"] = {
