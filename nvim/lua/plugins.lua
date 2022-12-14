@@ -14,6 +14,10 @@ local function plugins_startup()
 	})
 
 	use({
+		"lervag/vimtex",
+	})
+
+	use({
 		"Patches72790/neo-notes.nvim",
 		requires = {
 			"nvim-lua/plenary.nvim",
