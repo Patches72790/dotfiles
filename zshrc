@@ -73,14 +73,13 @@ export NVM_DIR="$XDG_CONFIG_HOME/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-# ghcup haskell stuff
-#[ "$(whoami)" = "patroclus" ] && [ -f "/home/patroclus/.ghcup/env" ] && source "/home/patroclus/.ghcup/env" # ghcup-env
-
 # set vim keybindings
 bindkey -v
 export KEYTIMEOUT=1
 
-[ -f "/Users/plharvey/.ghcup/env" ] && source "/Users/plharvey/.ghcup/env" # ghcup-env
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
 
 # hook into direnv for nix
 eval "$(direnv hook zsh)"
+
+if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
