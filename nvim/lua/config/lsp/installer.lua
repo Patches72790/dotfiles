@@ -169,7 +169,8 @@ local servers = {
 }
 
 function M.setup(options)
-	local lsp_installer = require("nvim-lsp-installer")
+	local lsp_installer = require("mason-lspconfig")
+	local mason = require("mason")
 	local lsp_config = require("lspconfig")
 
 	-- per https://github.com/williamboman/nvim-lsp-installer/discussions/636
@@ -177,6 +178,9 @@ function M.setup(options)
 	lsp_installer.setup({
 		ensure_installed = vim.tbl_keys(servers),
 		automatic_installation = true,
+	})
+
+	mason.setup({
 		ui = {
 			icons = {
 				server_installed = "✓",

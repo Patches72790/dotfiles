@@ -74,12 +74,13 @@ local function plugins_startup()
 	use({
 		"neovim/nvim-lspconfig",
 		event = "VimEnter",
-		wants = { "nvim-lsp-installer", "cmp-nvim-lsp", "null-ls.nvim" },
+		wants = { "mason.nvim", "cmp-nvim-lsp", "null-ls.nvim" },
 		config = function()
 			require("config.lsp").setup()
 		end,
 		requires = {
-			"williamboman/nvim-lsp-installer",
+			"williamboman/mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
 			"jose-elias-alvarez/null-ls.nvim",
 			"simrat39/rust-tools.nvim",
 		},
