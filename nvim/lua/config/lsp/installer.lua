@@ -1,13 +1,13 @@
 local M = {}
 
-local make_formatting_on_attach = function(file_pattern_tbl, desc, opts)
+local make_formatting_on_attach = function(desc, opts)
 	return function(client, bufnr)
 		client.server_capabilities.documentFormattingProvider = true
 		client.server_capabilities.documentRangeFormattingProvider = true
 		vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 			group = "LspFormatting",
 			desc = desc,
-			pattern = file_pattern_tbl,
+			buffer = bufnr,
 			callback = function()
 				vim.lsp.buf.format({ bufnr = bufnr })
 			end,
@@ -61,11 +61,7 @@ local servers = {
 	end,
 	yamlls = function(opts)
 		local enhanced_opts = {}
-		enhanced_opts.on_attach = make_formatting_on_attach(
-			{ "*.yaml, *.yml" },
-			"Formatting command for yaml files",
-			opts
-		)
+		enhanced_opts.on_attach = make_formatting_on_attach("Formatting command for yaml files", opts)
 		return enhanced_opts
 	end,
 	cssls = function()
@@ -78,23 +74,6 @@ local servers = {
 	bashls = function()
 		return {}
 	end,
-	--	rust_analyzer = function(options)
-	--		local custom_opts = vim.tbl_deep_extend("force", options, {
-	--			settings = {
-	--				["rust-analyzer"] = {
-	--					completion = {
-	--						postfix = {
-	--							enable = false,
-	--						},
-	--					},
-	--					checkOnSave = {
-	--						command = "clippy",
-	--					},
-	--				},
-	--			},
-	--		})
-	--		return custom_opts
-	--	end,
 	rust_analyzer_rust_tools = function(options)
 		local extension_path = vim.env.HOME .. "/.vscode/extensions/vadimcn.vscode-lldb-1.7.0/"
 		local codelldb_path = extension_path .. "adapter/codelldb"
@@ -147,11 +126,7 @@ local servers = {
 	end,
 	hls = function(opts) -- haskell
 		local enhanced_opts = {}
-		enhanced_opts.on_attach = make_formatting_on_attach(
-			{ "*.hs" },
-			"Format on save for haskell language server",
-			opts
-		)
+		enhanced_opts.on_attach = make_formatting_on_attach("Format on save for haskell language server", opts)
 		return enhanced_opts
 	end,
 	dockerls = function()
@@ -173,8 +148,6 @@ function M.setup(options)
 	local mason = require("mason")
 	local lsp_config = require("lspconfig")
 
-	-- per https://github.com/williamboman/nvim-lsp-installer/discussions/636
-	-- server:setup no longer used
 	lsp_installer.setup({
 		ensure_installed = vim.tbl_keys(servers),
 		automatic_installation = true,
