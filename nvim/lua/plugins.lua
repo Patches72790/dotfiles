@@ -13,16 +13,16 @@ local function plugins_startup()
 		end,
 	})
 
-	use({
-		"lervag/vimtex",
-		config = function()
-			vim.api.nvim_set_option("tex_flavor", "latex")
-			vim.api.nvim_set_option("vimtext_view_method", "zathura")
-			vim.api.nvim_set_option("quickfix_mode", 0)
-			vim.api.nvim_set_option("tex_conceal", "abdmg")
-			vim.api.nvim_set_option("conceallevel", 1)
-		end,
-	})
+	--	use({
+	--		"lervag/vimtex",
+	--		config = function()
+	--			vim.api.nvim_set_option("tex_flavor", "latex")
+	--			vim.api.nvim_set_option("vimtext_view_method", "zathura")
+	--			vim.api.nvim_set_option("quickfix_mode", 0)
+	--			vim.api.nvim_set_option("tex_conceal", "abdmg")
+	--			vim.api.nvim_set_option("conceallevel", 1)
+	--		end,
+	--	})
 
 	use({
 		"Patches72790/neo-notes.nvim",
