@@ -44,6 +44,7 @@ local cmp_configuration = {
 		{ name = "path" },
 		{ name = "luasnip" },
 		--{ name = "cmdline" },
+		{ name = "omni" },
 	}),
 	view = {
 		entries = "custom",

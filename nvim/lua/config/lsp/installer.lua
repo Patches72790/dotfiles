@@ -141,6 +141,9 @@ local servers = {
 	rnix = function()
 		return {}
 	end,
+	ltex = function()
+		return {}
+	end,
 }
 
 function M.setup(options)

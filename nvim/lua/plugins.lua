@@ -13,16 +13,12 @@ local function plugins_startup()
 		end,
 	})
 
-	--	use({
-	--		"lervag/vimtex",
-	--		config = function()
-	--			vim.api.nvim_set_option("tex_flavor", "latex")
-	--			vim.api.nvim_set_option("vimtext_view_method", "zathura")
-	--			vim.api.nvim_set_option("quickfix_mode", 0)
-	--			vim.api.nvim_set_option("tex_conceal", "abdmg")
-	--			vim.api.nvim_set_option("conceallevel", 1)
-	--		end,
-	--	})
+	use({
+		"lervag/vimtex",
+		config = function()
+			require("config.vimtex").setup()
+		end,
+	})
 
 	use({
 		"Patches72790/neo-notes.nvim",
@@ -135,6 +131,7 @@ local function plugins_startup()
 			{ "hrsh7th/cmp-buffer", after = "nvim-cmp" },
 			{ "lukas-reineke/cmp-rg", after = "nvim-cmp" },
 			{ "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
+			{ "hrsh7th/cmp-omni", after = "nvim-cmp" },
 			"onsails/lspkind-nvim", -- VScode pictograms
 			"dmitmel/cmp-digraphs",
 		},
@@ -151,7 +148,7 @@ local function plugins_startup()
 	})
 
 	-- colorschemes
-	use({ "ellisonleao/gruvbox.nvim", "doums/darcula" })
+	use({ "ellisonleao/gruvbox.nvim", "doums/darcula", "shaunsingh/nord.nvim" })
 
 	-- git
 	use({

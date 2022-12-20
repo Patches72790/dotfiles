@@ -87,11 +87,21 @@ end
 
 local function init_user_commands() end
 
+local function init_colorscheme()
+	vim.g.nord_contrast = true
+	vim.g.nord_borders = true
+	vim.g.nord_disable_background = false
+	vim.g.nord_italic = false
+	vim.g.nord_uniform_diff_background = true
+	vim.g.nord_bold = false
+	require("nord").set()
+end
+
 function M.setup()
 	init_nvim_options()
 	init_movement_keymaps()
 	init_user_commands()
-	vim.api.nvim_command("colorscheme gruvbox")
+	init_colorscheme()
 	-- initialize global helpers
 	require("config.globals")
 end
