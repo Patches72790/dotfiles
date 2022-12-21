@@ -3,14 +3,15 @@ local M = {}
 -- Dependencies for vimtex to work properly
 --
 -- Optionally install dependency manager:
---      tlmgr (tex live manager)
+--      texlive (in apt repository)
+--      tlmgr (tex live package manager)
 -- Install:
 --      latexmk | latexrun (latex compiler)
 --      biber (bibliography program)
 --      zathura (linux) | skim (macos) (pdf viewer)
 
 M.setup = function()
-	if vim.fn.has("macunix") then
+	if vim.fn.has("macunix") == 1 then
 		vim.g.vimtex_view_method = "skim"
 	else
 		vim.g.vimtex_view_method = "zathura"
