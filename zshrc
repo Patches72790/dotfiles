@@ -3,13 +3,14 @@ source $HOME/dotfiles/sh-utils/index
 source $HOME/dotfiles/nnn/nnn.conf
 
 # If you come from bash you might have to change your $PATH.
-GO_PATH="/usr/local/go/bin:$HOME/go/bin"
+GOBIN="/usr/local/go/bin:$HOME/go/bin"
+GOROOT="/usr/local/go"
 NVIM_PATH="/usr/local/nvim/bin"
 LOCAL_BIN_PATH="$HOME/.local/bin"
 CARGO_PATH="$HOME/.cargo/bin"
 JAVA_PATH="/usr/local/opt/openjdk@17/bin"
 GHC_PATH="$HOME/.ghcup/bin"
-export PATH="$GHC_PATH:$JAVA_PATH:$GO_PATH:$NVIM_PATH:$LOCAL_BIN_PATH:$CARGO_PATH:$HOME/bin:/usr/local/bin:$PATH"
+export PATH="$GHC_PATH:$JAVA_PATH:$GOBIN:$GOROOT:$NVIM_PATH:$LOCAL_BIN_PATH:$CARGO_PATH:$HOME/bin:/usr/local/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"

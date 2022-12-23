@@ -14,6 +14,9 @@ function M.setup()
 			"query",
 			"haskell",
 			"yaml",
+			"json",
+			"html",
+			"css",
 		},
 		highlight = { enable = true },
 		playground = {
