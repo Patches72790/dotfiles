@@ -12,6 +12,8 @@ function M.setup()
 			"go",
 			"lua",
 			"query",
+			"haskell",
+			"yaml",
 		},
 		highlight = { enable = true },
 		playground = {
