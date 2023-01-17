@@ -11,7 +11,7 @@ local sources = {
 	}), -- darker formatter for python = black + isort
 	formatting.stylua,
 	formatting.prettierd,
-	diagnostics.eslint,
+	diagnostics.eslint_d,
 	formatting.shfmt,
 	formatting.gofmt,
 	formatting.rustfmt.with({ extra_args = { "--edition=2021" } }),

@@ -84,6 +84,7 @@ local function plugins_startup()
 		requires = {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
+			"jayp0521/mason-null-ls.nvim",
 			"jose-elias-alvarez/null-ls.nvim",
 			"simrat39/rust-tools.nvim",
 		},

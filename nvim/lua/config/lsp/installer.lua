@@ -166,6 +166,13 @@ function M.setup(options)
 		},
 	})
 
+	require("config.lsp.null-ls").setup()
+	require("mason-null-ls").setup({
+		ensure_installed = nil,
+		automatic_installation = true,
+		automatic_setup = false,
+	})
+
 	-- use lspconfig for server setup
 	for server_name, enhanced_setup_opts_func in pairs(servers) do
 		local enhanced_server_opts = enhanced_setup_opts_func(options)
