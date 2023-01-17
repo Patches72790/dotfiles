@@ -17,8 +17,8 @@ local cmp_configuration = {
 			behavior = cmp.ConfirmBehavior.Replace,
 			select = false,
 		}),
-		["<C-j>"] = cmp.mapping.select_next_item(),
-		["<C-k>"] = cmp.mapping.select_prev_item(),
+		["<Tab>"] = cmp.mapping.select_next_item(),
+		["<S-Tab>"] = cmp.mapping.select_prev_item(),
 	}),
 	formatting = {
 		format = lspkind.cmp_format({
@@ -43,8 +43,6 @@ local cmp_configuration = {
 		{ name = "nvim_lua" },
 		{ name = "path" },
 		{ name = "luasnip" },
-		{ name = "cmdline" },
-		{ name = "omni" },
 	}),
 	view = {
 		entries = "custom",
@@ -54,7 +52,7 @@ local cmp_configuration = {
 -- used with ':' on cmdline
 local cmp_cmdline_config = {
 	mapping = cmp.mapping.preset.cmdline(),
-	cmp.config.sources({
+	sources = cmp.config.sources({
 		{ name = "cmdline" },
 		{ name = "path" },
 	}),
@@ -64,7 +62,14 @@ local cmp_cmdline_config = {
 local cmp_cmdline_search_config = {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
-		{ name = "buffer" },
+		{ name = "path" },
+	}, {
+		{
+			name = "cmdline",
+			option = {
+				ignore_cmds = { "Man", "!" },
+			},
+		},
 	}),
 }
 
