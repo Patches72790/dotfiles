@@ -55,6 +55,7 @@ fi
 alias gdec="git log --decorate=full --oneline --graph"
 alias nvconfig="cd $HOME/dotfiles/nvim && nvim"
 alias nv-notes="cd $HOME/Notes && nvim"
+alias lsd="ls -halF"
 export NV_NOTES_PATH="$HOME/Notes"
 
 # Antlr 4 Aliases
