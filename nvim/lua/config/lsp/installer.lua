@@ -74,7 +74,7 @@ local servers = {
 	bashls = function()
 		return {}
 	end,
-	rust_analyzer_rust_tools = function(options)
+	rust_analyzer = function(options)
 		local extension_path = vim.env.HOME .. "/.vscode/extensions/vadimcn.vscode-lldb-1.7.0/"
 		local codelldb_path = extension_path .. "adapter/codelldb"
 		local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
@@ -142,6 +142,9 @@ local servers = {
 		return {}
 	end,
 	ltex = function()
+		return {}
+	end,
+	["terraformls"] = function()
 		return {}
 	end,
 }
