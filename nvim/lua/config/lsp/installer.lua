@@ -144,7 +144,7 @@ local servers = {
 	ltex = function()
 		return {}
 	end,
-	["terraformls"] = function()
+	terraformls = function()
 		return {}
 	end,
 }
