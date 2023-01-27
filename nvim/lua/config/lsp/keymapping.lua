@@ -35,6 +35,7 @@ local function keymappings(client, bufnr)
 			s = { "<cmd>Telescope lsp_document_symbols<CR>", "Document Symbols" },
 			S = { "<cmd>Telescope lsp_dynamic_workspace_symbols<CR>", "Dynamic Document Symbols" },
 			t = { "<cmd>TroubleToggle<CR>", "Trouble" },
+			o = { "<cmd>nohl<CR>", "Turn off highlights" },
 		},
 	}
 
