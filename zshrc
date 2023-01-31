@@ -4,6 +4,7 @@ source $HOME/dotfiles/nnn/nnn.conf
 
 # If you come from bash you might have to change your $PATH.
 GOBIN="/usr/local/go/bin"
+export GOBIN=$GOBIN
 GOROOT="/usr/local/go"
 NVIM_PATH="/usr/local/nvim/bin"
 LOCAL_BIN_PATH="$HOME/.local/bin"
