@@ -17,6 +17,7 @@ local sources = {
 	formatting.rustfmt.with({ extra_args = { "--edition=2021" } }),
 	formatting.taplo,
 	formatting.remark,
+	formatting.xmlformat,
 }
 
 local filetype_to_buffer_event = {

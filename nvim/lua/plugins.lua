@@ -106,7 +106,7 @@ local function plugins_startup()
 		"mfussenegger/nvim-jdtls",
 	})
 
-	-- debugger (nvim-dap)
+	--debugger(nvim - dap)
 	use({
 		"mfussenegger/nvim-dap",
 		config = function()
@@ -172,6 +172,11 @@ local function plugins_startup()
 	-- markdown previewer
 	use({
 		"ellisonleao/glow.nvim",
+		config = function()
+			require("glow").setup({
+				style = "dark",
+			})
+		end,
 	})
 
 	-- startup screen

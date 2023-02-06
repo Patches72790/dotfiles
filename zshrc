@@ -56,7 +56,7 @@ fi
 # For a full list of active aliases, run `alias`.
 alias gdec="git log --decorate=full --oneline --graph"
 alias nvconfig="cd $HOME/dotfiles/nvim && nvim"
-alias nv-notes="cd $HOME/Notes && nvim"
+alias nv-notes="cd $HOME/ReadingNotes && nvim"
 alias lsd="ls -halF"
 export NV_NOTES_PATH="$HOME/Notes"
 
