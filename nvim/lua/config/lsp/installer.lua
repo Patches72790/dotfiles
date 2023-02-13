@@ -18,7 +18,7 @@ end
 
 -- server options to be used in setup function for lsp_installer
 local servers = {
-	["sumneko_lua"] = function(opts)
+	["lua_ls"] = function(opts)
 		local default_opts = {}
 		default_opts.settings = {
 			Lua = {
