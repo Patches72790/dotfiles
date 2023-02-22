@@ -67,7 +67,7 @@ local servers = {
 	cssls = function()
 		return {}
 	end,
-	["pyright"] = function(_)
+	pyright = function(_)
 		return {}
 	end,
 	-- other language servers
@@ -147,15 +147,46 @@ local servers = {
 	terraformls = function()
 		return {}
 	end,
+	remark = function()
+		return {}
+	end,
 }
+
+local setup_handlers = function(options)
+	local lspconfig = require("lspconfig")
+	return {
+		-- default handler
+		function(server_name)
+			lspconfig[server_name].setup(options)
+		end,
+		["rust_analyzer"] = function()
+			local server_opts = servers["rust_analyzer"](options)
+			require("rust-tools").setup(server_opts)
+		end,
+		["tsserver"] = function()
+			local server_opts = servers["tsserver"](options)
+			lspconfig["tsserver"].setup(server_opts)
+		end,
+		["lua_ls"] = function()
+			local server_opts = servers["lua_ls"](options)
+			lspconfig["lua_ls"].setup(server_opts)
+		end,
+		["hls"] = function()
+			local server_opts = servers["hls"](options)
+			lspconfig["hls"].setup(server_opts)
+		end,
+		["yamlls"] = function()
+			local server_opts = servers["yamlls"](options)
+			lspconfig["yamlls"].setup(server_opts)
+		end,
+	}
+end
 
 function M.setup(options)
 	local lsp_installer = require("mason-lspconfig")
 	local mason = require("mason")
-	local lsp_config = require("lspconfig")
 
 	lsp_installer.setup({
-		ensure_installed = vim.tbl_keys(servers),
 		automatic_installation = true,
 	})
 
@@ -169,23 +200,16 @@ function M.setup(options)
 		},
 	})
 
+	-- auto setup server handlers
+	lsp_installer.setup_handlers(setup_handlers(options))
+
+	-- initializes null ls directly
 	require("config.lsp.null-ls").setup()
 	require("mason-null-ls").setup({
 		ensure_installed = nil,
 		automatic_installation = true,
 		automatic_setup = false,
 	})
-
-	-- use lspconfig for server setup
-	for server_name, enhanced_setup_opts_func in pairs(servers) do
-		local enhanced_server_opts = enhanced_setup_opts_func(options)
-		if server_name == "rust_analyzer_rust_tools" then
-			require("rust-tools").setup(enhanced_server_opts)
-		else
-			local server_opts = vim.tbl_deep_extend("force", options, enhanced_server_opts)
-			lsp_config[server_name].setup(server_opts)
-		end
-	end
 end
 
 return M
