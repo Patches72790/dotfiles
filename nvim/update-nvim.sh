@@ -1,5 +1,5 @@
 #!/bin/bash
-                
+
 # Get machine type
 unameOutput="$(uname -s)"
 case "${unameOutput}" in
@@ -22,10 +22,10 @@ echo "Removing old version of neovim..."
 test -e /usr/local/nvim && sudo rm -rf /usr/local/nvim
 
 echo "Extracting tar..."
-tar xf nvim-linux64.tar.gz
+tar xf nvim-${machine}.tar.gz
 
 echo "Moving executable to /usr/local/nvim/"
-sudo mv nvim-linux64 /usr/local/nvim
+sudo mv nvim-${machine} /usr/local/nvim
 
 echo "Cleaning up temp directories..."
 cd ..
