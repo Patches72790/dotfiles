@@ -42,16 +42,10 @@ local function configure_snippets(ls)
 	ls.add_snippets("all", {
 		s(
 			"todo",
-			fmt("{comment} TODO[{project}-{jira}] => {note}", {
+			fmt("{comment} TODO => {note}", {
 				comment = f(function()
 					return FILETYPE_COMMENTS[vim.bo.filetype]
 				end),
-				project = c(1, {
-					t("BROAD"),
-					t("AT"),
-					t("TRX"),
-				}),
-				jira = i(2),
 				note = i(3),
 			})
 		),

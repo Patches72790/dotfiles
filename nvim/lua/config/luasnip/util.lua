@@ -8,6 +8,8 @@ local M = {
 		bash = "#",
 		haskell = "--",
 		lua = "--",
+		go = "//",
+		java = "//",
 	},
 }
 
