@@ -150,6 +150,9 @@ local servers = {
 	remark = function()
 		return {}
 	end,
+	xmlformat = function()
+		return {}
+	end,
 }
 
 local setup_handlers = function(options)

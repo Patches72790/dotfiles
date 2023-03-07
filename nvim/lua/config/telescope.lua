@@ -28,7 +28,7 @@ end
 function M.setup()
 	telescope.setup({
 		defaults = {
-			layout_strategy = "vertical",
+			layout_strategy = "horizontal",
 			layout_config = { height = 0.95 },
 			file_ignore_patterns = {
 				"node_modules",
@@ -46,6 +46,7 @@ function M.setup()
 
 	configure_keymap()
 	configure()
+	telescope.load_extension("file_browser")
 end
 
 return M

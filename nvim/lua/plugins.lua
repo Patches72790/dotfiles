@@ -5,6 +5,7 @@ local function plugins_startup()
 	-- auto-update packer
 	use({ "wbthomason/packer.nvim" })
 
+	use({ "stevearc/dressing.nvim" })
 	use({
 		"s1n7ax/nvim-terminal",
 		config = function()
@@ -32,7 +33,8 @@ local function plugins_startup()
 	})
 
 	use({
-		"Patches72790/dev-search.nvim",
+		--"Patches72790/dev-search.nvim",
+		"/Users/plharvey/projects/dev-search.nvim",
 		requires = {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope.nvim",
@@ -67,7 +69,11 @@ local function plugins_startup()
 	-- telescope search tool
 	use({
 		"nvim-telescope/telescope.nvim",
-		requires = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-ui-select.nvim" },
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope-ui-select.nvim",
+			"nvim-telescope/telescope-file-browser.nvim",
+		},
 		config = function()
 			require("config.telescope").setup()
 		end,
