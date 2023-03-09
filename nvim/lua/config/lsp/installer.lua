@@ -17,7 +17,7 @@ local make_formatting_on_attach = function(desc, opts)
 end
 
 -- server options to be used in setup function for lsp_installer
-local servers = {
+local server_handlers = {
 	["lua_ls"] = function(opts)
 		local default_opts = {}
 		default_opts.settings = {
@@ -64,16 +64,6 @@ local servers = {
 		enhanced_opts.on_attach = make_formatting_on_attach("Formatting command for yaml files", opts)
 		return enhanced_opts
 	end,
-	cssls = function()
-		return {}
-	end,
-	pyright = function(_)
-		return {}
-	end,
-	-- other language servers
-	bashls = function()
-		return {}
-	end,
 	rust_analyzer = function(options)
 		local extension_path = vim.env.HOME .. "/.vscode/extensions/vadimcn.vscode-lldb-1.7.0/"
 		local codelldb_path = extension_path .. "adapter/codelldb"
@@ -115,46 +105,20 @@ local servers = {
 		}
 		return rust_opts
 	end,
-	clangd = function() -- C, C++, etc.
-		return {}
-	end,
-	vimls = function() -- vimscript
-		return {}
-	end,
-	gopls = function() -- Go
-		return {}
-	end,
 	hls = function(opts) -- haskell
 		local enhanced_opts = {}
 		enhanced_opts.on_attach = make_formatting_on_attach("Format on save for haskell language server", opts)
 		return enhanced_opts
 	end,
-	dockerls = function()
-		return {}
-	end,
-	awk_ls = function()
-		return {}
-	end,
-	jdtls = function()
-		return {}
-	end,
-	rnix = function()
-		return {}
-	end,
-	ltex = function()
-		return {}
-	end,
-	terraformls = function()
-		return {}
-	end,
-	remark = function()
-		return {}
-	end,
-	xmlformat = function()
-		return {}
+	jdtls = function(opts)
+		local enhanced_opts = {}
+		enhanced_opts.on_attach = make_formatting_on_attach("Format on save for jdtls", opts)
+		return enhanced_opts
 	end,
 }
 
+-- Add additional configuration for servers into server handlers table
+-- other servers are setup by default
 local setup_handlers = function(options)
 	local lspconfig = require("lspconfig")
 	return {
@@ -163,27 +127,46 @@ local setup_handlers = function(options)
 			lspconfig[server_name].setup(options)
 		end,
 		["rust_analyzer"] = function()
-			local server_opts = servers["rust_analyzer"](options)
+			local server_opts = server_handlers["rust_analyzer"](options)
 			require("rust-tools").setup(server_opts)
 		end,
 		["tsserver"] = function()
-			local server_opts = servers["tsserver"](options)
+			local server_opts = server_handlers["tsserver"](options)
 			lspconfig["tsserver"].setup(server_opts)
 		end,
 		["lua_ls"] = function()
-			local server_opts = servers["lua_ls"](options)
+			local server_opts = server_handlers["lua_ls"](options)
 			lspconfig["lua_ls"].setup(server_opts)
 		end,
 		["hls"] = function()
-			local server_opts = servers["hls"](options)
+			local server_opts = server_handlers["hls"](options)
 			lspconfig["hls"].setup(server_opts)
 		end,
 		["yamlls"] = function()
-			local server_opts = servers["yamlls"](options)
+			local server_opts = server_handlers["yamlls"](options)
 			lspconfig["yamlls"].setup(server_opts)
+		end,
+		["jdtls"] = function()
+			local server_opts = server_handlers["jdtls"](options)
+			lspconfig["jdtls"].setup(server_opts)
 		end,
 	}
 end
+
+local ensure_installed_servers = {
+	"rust_analyzer",
+	"tsserver",
+	"lua_ls",
+	"hls",
+	"yamlls",
+	"jdtls",
+	"gopls",
+	"yamlls",
+	"bashls",
+	"clangd",
+	"dockerls",
+	"terraformls",
+}
 
 function M.setup(options)
 	local lsp_installer = require("mason-lspconfig")
@@ -191,6 +174,7 @@ function M.setup(options)
 
 	lsp_installer.setup({
 		automatic_installation = true,
+		ensure_installed = ensure_installed_servers,
 	})
 
 	mason.setup({
