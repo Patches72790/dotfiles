@@ -121,7 +121,33 @@ local server_handlers = {
 	end,
 	jdtls = function(opts)
 		return {
-			on_attach = make_formatting_on_attach("Format on save for jdtls", opts),
+			cmd = {
+				os.getenv("HOME") .. "/.local/share/nvim/mason/bin/jdtls",
+			},
+			on_attach = function(client, bufnr)
+				-- setup nvim-dap here optionally
+				opts.on_attach(client, bufnr)
+			end,
+			settings = {
+				java = {
+					-- see jdtls specific config settings
+					configuration = {
+						runtimes = {
+							{
+								name = "JavaSE-11",
+								path = "/usr/lib/jvm/java-11-openjdk/",
+							},
+							{
+								name = "JavaSE-17",
+								path = "/usr/lib/jvm/java-17-openjdk/",
+							},
+						},
+					},
+				},
+			},
+			--init_options = {
+			--bundles = {}
+			--}
 		}
 	end,
 }
@@ -132,7 +158,7 @@ local server_handlers_fn = function(server_name, options)
 	local server_handler = server_handlers[server_name]
 	if server_handler ~= nil then
 		local more_opts = vim.tbl_deep_extend("force", options, server_handler(options))
-		P(more_opts)
+		--P(more_opts)
 		return more_opts
 	end
 
@@ -154,9 +180,11 @@ local setup_handlers = function(options)
 			require("rust-tools").setup(server_opts)
 		end,
 		["jdtls"] = function()
-			local server_opts = server_handlers_fn("jdtls", options)
+			--local server_opts = server_handlers_fn("jdtls", options)
 			-- TODO add support for nvim_jdtls here and use their method instead of default lsp
-			lspconfig["jdtls"].setup(server_opts)
+			--lspconfig["jdtls"].setup(server_opts)
+			local server_opts = server_handlers["jdtls"](options)
+			--require("jdtls").start_or_attach(server_opts)
 		end,
 		["tsserver"] = function()
 			local server_opts = server_handlers_fn("tsserver", options)

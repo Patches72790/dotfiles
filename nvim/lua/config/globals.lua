@@ -1,3 +1,5 @@
+-- Prints the table given t with vim.inspect
+-- returns the table after printing
 P = function(t)
 	print(vim.inspect(t))
 	return t
@@ -8,6 +10,6 @@ RELOAD = function(...)
 end
 
 R = function(name)
-    RELOAD(name)
-    return require(name)
+	RELOAD(name)
+	return require(name)
 end

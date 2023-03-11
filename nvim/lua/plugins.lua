@@ -33,8 +33,8 @@ local function plugins_startup()
 	})
 
 	use({
-		--"Patches72790/dev-search.nvim",
-		"/Users/plharvey/projects/dev-search.nvim",
+		"Patches72790/dev-search.nvim",
+		--"/Users/plharvey/projects/dev-search.nvim",
 		requires = {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope.nvim",
@@ -73,6 +73,7 @@ local function plugins_startup()
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-ui-select.nvim",
 			"nvim-telescope/telescope-file-browser.nvim",
+			"nvim-telescope/telescope-dap.nvim",
 		},
 		config = function()
 			require("config.telescope").setup()
@@ -93,6 +94,8 @@ local function plugins_startup()
 			"jayp0521/mason-null-ls.nvim",
 			"jose-elias-alvarez/null-ls.nvim",
 			"simrat39/rust-tools.nvim",
+			"mfussenegger/nvim-jdtls",
+			"mfussenegger/nvim-dap",
 		},
 	})
 
@@ -105,24 +108,6 @@ local function plugins_startup()
 		config = function()
 			require("config.treesitter").setup()
 		end,
-	})
-
-	-- java specialized language server
-	use({
-		"mfussenegger/nvim-jdtls",
-	})
-
-	--debugger(nvim - dap)
-	use({
-		"mfussenegger/nvim-dap",
-		config = function()
-			require("config.debugging").setup()
-		end,
-		requires = {
-			"mfussenegger/nvim-dap-python",
-			"nvim-telescope/telescope-dap.nvim",
-			"rcarriga/nvim-dap-ui",
-		},
 	})
 
 	-- autocomplete
