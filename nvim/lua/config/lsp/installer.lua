@@ -121,35 +121,50 @@ local server_handlers = {
 	end,
 	jdtls = function(opts)
 		return {
-			cmd = {
-				os.getenv("HOME") .. "/.local/share/nvim/mason/bin/jdtls",
-			},
-			on_attach = function(client, bufnr)
-				-- setup nvim-dap here optionally
-				opts.on_attach(client, bufnr)
-			end,
-			settings = {
-				java = {
-					-- see jdtls specific config settings
-					configuration = {
-						runtimes = {
-							{
-								name = "JavaSE-11",
-								path = "/usr/lib/jvm/java-11-openjdk/",
-							},
-							{
-								name = "JavaSE-17",
-								path = "/usr/lib/jvm/java-17-openjdk/",
-							},
-						},
-					},
-				},
-			},
-			--init_options = {
-			--bundles = {}
-			--}
+			on_attach = make_formatting_on_attach("Format on save for java language server", opts),
 		}
 	end,
+	--jdtls = function(opts)
+	--	return {
+	--		cmd = {
+	--			os.getenv("HOME") .. "/.local/share/nvim/mason/bin/jdtls",
+	--		},
+	--		on_attach = function(client, bufnr)
+	--			-- setup nvim-dap here optionally
+	--			P(opts)
+	--			opts.on_attach(client, bufnr)
+	--		end,
+	--		root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git", "mvnw" }, { upward = true })[1]),
+	--		settings = {
+	--			java = {
+	--				-- see jdtls specific config settings
+	--				configuration = {
+	--					runtimes = {
+	--						--		{
+	--						--			name = "JavaSE-11",
+	--						--			path = "/usr/lib/jvm/java-11-openjdk/",
+	--						--		},
+	--						--							{
+	--						--								name = "JavaSE-17",
+	--						--								path = "/usr/lib/jvm/java-17-openjdk/",
+	--						--							},
+	--						{
+	--							name = "JavaSE-19",
+	--							path = "/Users/plharvey/Library/Java/JavaVirtualMachines/openjdk-19.0.1/Contents/Home",
+	--						},
+	--						{
+	--							name = "JavaSE-17",
+	--							path = "/Users/plharvey/Library/Java/JavaVirtualMachines/temurin-17.0.6/Contents/Home",
+	--						},
+	--					},
+	--				},
+	--			},
+	--		},
+	--		--init_options = {
+	--		--bundles = {}
+	--		--}
+	--	}
+	--end,
 }
 
 -- Fetches the appropriate server handler options and merges with default options
@@ -180,10 +195,10 @@ local setup_handlers = function(options)
 			require("rust-tools").setup(server_opts)
 		end,
 		["jdtls"] = function()
-			--local server_opts = server_handlers_fn("jdtls", options)
+			local server_opts = server_handlers_fn("jdtls", options)
+			lspconfig["jdtls"].setup(server_opts)
 			-- TODO add support for nvim_jdtls here and use their method instead of default lsp
-			--lspconfig["jdtls"].setup(server_opts)
-			local server_opts = server_handlers["jdtls"](options)
+			--local server_opts = server_handlers["jdtls"](options)
 			--require("jdtls").start_or_attach(server_opts)
 		end,
 		["tsserver"] = function()
