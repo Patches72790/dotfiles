@@ -122,49 +122,23 @@ local server_handlers = {
 	jdtls = function(opts)
 		return {
 			on_attach = make_formatting_on_attach("Format on save for java language server", opts),
+			settings = {
+				java = {
+					format = {
+						enabled = true,
+					},
+					saveActions = {
+						organizeImports = true,
+					},
+					import = {
+						maven = {
+							enabled = true,
+						},
+					},
+				},
+			},
 		}
 	end,
-	--jdtls = function(opts)
-	--	return {
-	--		cmd = {
-	--			os.getenv("HOME") .. "/.local/share/nvim/mason/bin/jdtls",
-	--		},
-	--		on_attach = function(client, bufnr)
-	--			-- setup nvim-dap here optionally
-	--			P(opts)
-	--			opts.on_attach(client, bufnr)
-	--		end,
-	--		root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git", "mvnw" }, { upward = true })[1]),
-	--		settings = {
-	--			java = {
-	--				-- see jdtls specific config settings
-	--				configuration = {
-	--					runtimes = {
-	--						--		{
-	--						--			name = "JavaSE-11",
-	--						--			path = "/usr/lib/jvm/java-11-openjdk/",
-	--						--		},
-	--						--							{
-	--						--								name = "JavaSE-17",
-	--						--								path = "/usr/lib/jvm/java-17-openjdk/",
-	--						--							},
-	--						{
-	--							name = "JavaSE-19",
-	--							path = "/Users/plharvey/Library/Java/JavaVirtualMachines/openjdk-19.0.1/Contents/Home",
-	--						},
-	--						{
-	--							name = "JavaSE-17",
-	--							path = "/Users/plharvey/Library/Java/JavaVirtualMachines/temurin-17.0.6/Contents/Home",
-	--						},
-	--					},
-	--				},
-	--			},
-	--		},
-	--		--init_options = {
-	--		--bundles = {}
-	--		--}
-	--	}
-	--end,
 }
 
 -- Fetches the appropriate server handler options and merges with default options
