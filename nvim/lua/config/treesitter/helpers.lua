@@ -10,7 +10,7 @@ function M.query()
 	local language_tree = vim.treesitter.get_parser(buffer, "lua")
 	local syntax_tree = language_tree:parse()
 	local root = syntax_tree[1]:root()
-	local query = vim.treesitter.parse_query(
+	local query = vim.treesitter.query.parse(
 
 		"lua",
 		[[
