@@ -6,9 +6,10 @@ local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics
 
 local sources = {
-	require("config.lsp.null-ls.sources.darker").with({
-		extra_args = { "--isort" },
-	}), -- darker formatter for python = black + isort
+	--	require("config.lsp.null-ls.sources.darker").with({
+	--		extra_args = { "--isort" },
+	--	}), -- darker formatter for python = black + isort
+	formatting.black,
 	formatting.stylua,
 	formatting.prettierd,
 	diagnostics.eslint_d,
