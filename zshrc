@@ -11,7 +11,8 @@ LOCAL_BIN_PATH="$HOME/.local/bin"
 CARGO_PATH="$HOME/.cargo/bin"
 JAVA_PATH="/usr/local/opt/openjdk@17/bin"
 GHC_PATH="$HOME/.ghcup/bin"
-export PATH="$GHC_PATH:$JAVA_PATH:$GOBIN:$GOROOT:$NVIM_PATH:$LOCAL_BIN_PATH:$CARGO_PATH:$HOME/bin:/usr/local/bin:$PATH"
+ORACLE_SQL_PATH="/usr/local/bin/osql/bin"
+export PATH="$GHC_PATH:$JAVA_PATH:$GOBIN:$GOROOT:$NVIM_PATH:$LOCAL_BIN_PATH:$CARGO_PATH:$ORACLE_SQL_PATH:$HOME/bin:/usr/local/bin:$PATH"
 export GOPATH="$HOME/go"
 
 # Path to your oh-my-zsh installation.
