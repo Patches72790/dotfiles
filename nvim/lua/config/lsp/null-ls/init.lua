@@ -6,18 +6,13 @@ local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics
 
 local sources = {
-	--	require("config.lsp.null-ls.sources.darker").with({
-	--		extra_args = { "--isort" },
-	--	}), -- darker formatter for python = black + isort
 	formatting.black,
 	formatting.stylua,
 	formatting.prettierd,
 	diagnostics.eslint_d,
 	formatting.shfmt,
 	formatting.gofmt,
-	formatting.rustfmt.with({ extra_args = { "--edition=2021" } }),
 	formatting.taplo,
-	--formatting.remark,
 	formatting.xmlformat,
 }
 

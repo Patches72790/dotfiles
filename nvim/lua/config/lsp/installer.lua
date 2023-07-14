@@ -95,16 +95,15 @@ local server_handlers = {
 			},
 			-- add the custom on_attach and resolved_capabilities from lsp/init.lua
 			server = vim.tbl_deep_extend("force", options, {
+				on_attach = make_formatting_on_attach("rust", options),
 				settings = {
-					["rust-analyzer"] = {
-						completion = {
-							postfix = {
-								enable = false,
-							},
+					completion = {
+						postfix = {
+							enable = false,
 						},
-						checkOnSave = {
-							command = "clippy",
-						},
+					},
+					checkOnSave = {
+						command = "clippy",
 					},
 				},
 			}),
