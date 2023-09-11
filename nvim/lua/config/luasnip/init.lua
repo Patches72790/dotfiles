@@ -56,6 +56,7 @@ local function configure_snippets(ls)
 	})
 
 	require("config.luasnip.js").configure_web_snippets(ls)
+	require("config.luasnip.html").configure_snippets(ls)
 end
 
 local function configure_luasnip()
