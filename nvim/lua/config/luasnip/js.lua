@@ -10,13 +10,6 @@ M.configure_web_snippets = function(ls)
 
 	add_snippets_for_filetypes(ls, { "javascriptreact", "javascript", "typescript", "typescriptreact" }, {
 		s(
-			"select",
-			fmt("const {} = useSelector(select{})", {
-				i(1),
-				i(2),
-			})
-		),
-		s(
 			"describe",
 			fmt('describe("{}", () => {{}})', {
 				i(1),
@@ -26,6 +19,30 @@ M.configure_web_snippets = function(ls)
 			"it",
 			fmt('it("{}", () => {{}})', {
 				i(1),
+			})
+		),
+		s(
+			"fnexp",
+			fmt("{} = ({}) => {{{}}}", {
+				i(1),
+				i(2),
+				i(3),
+			})
+		),
+		s(
+			"fndecl",
+			fmt("const {} = ({}) => {{{}}}", {
+				i(1),
+				i(2),
+				i(3),
+			})
+		),
+
+		s(
+			"intfce",
+			fmt("export interface {} {{\n{}\n}}", {
+				i(1),
+				i(2),
 			})
 		),
 	})

@@ -10,6 +10,7 @@ local M = {
 		lua = "--",
 		go = "//",
 		java = "//",
+		terraform = "//",
 	},
 }
 
