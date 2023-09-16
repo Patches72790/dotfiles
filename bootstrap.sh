@@ -1,13 +1,18 @@
 #!/bin/bash
 
 function load_dotfiles {
+    if [[ -d "$HOME/dotfiles" ]]; then
+        echo "Dotfiles directory already exists at $HOME/dotfiles"
+        return
+    fi
+
     echo "Preparing to load dotfiles repo."
     echo "Installing prerequisite xclip..."
     sudo apt-get install -y xclip
 
     # need to setup ssh-keygen first on machine
-    ssh-keygen -f github
-    xclip -sel c < $HOME/.ssh/github
+    ssh-keygen -f $HOME/.ssh/github-key
+    xclip -sel c < $HOME/.ssh/github-key
     echo "SSH public keygen copied to clipboard"
 
     # wait until user presses 'y'
@@ -35,37 +40,27 @@ function install_zsh {
         sudo apt install zsh
         sudo chsh -s $(which zsh)
 	echo "Please relogin to reset your default shell."
+        exit 1
     fi
 
     # check for zsh correct installation
-    if [[ $(echo $SHELL) != *"zsh"* ]]; then
+    if [[ $my_shell != *"zsh"* ]]; then
         echo "Zsh is not your shell. Either install or relogin to continue."
         exit 1
     fi
         
-    # oh my zsh install
-    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-    # setup symlink for zsh
-    ln -s $HOME/dotfiles/.zshrc $HOME/.zshrc
+    sh ./zsh/setup.sh
     source $HOME/.zshrc
 }
 
 function install_nvim {
     if [[ -e "/usr/local/nvim/bin/nvim" ]]; then 
         echo "Nvim already installed exiting..."
-	return
+	    return
     fi
-    # nvim install
-    curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-    chmod u+x nvim.appimage
 
-    # move app image to bin folder
-    sudo mkdir -p /usr/local/nvim/bin
-    sudo mv nvim.appimage /usr/local/nvim/bin/nvim
-
-    # setup config file
-    ln -s $HOME/dotfiles/nvim $XDG_CONFIG_HOME/nvim
+    sh nvim/update-nvim.sh
+    sh nvim/setup
 }
 
 
@@ -73,9 +68,6 @@ function install_nvim {
 function install_node {
     # install nvm
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | sh
-
-    # source zsh
-    source $HOME/.zshrc
 }
 
 # rust
@@ -97,5 +89,5 @@ function install_fd_and_rg {
 #install_zsh
 #install_nvim
 install_node
-#install_rust
-#install_fd_and_rg
+install_rust
+install_fd_and_rg
