@@ -55,8 +55,9 @@ local function configure_snippets(ls)
 		s("req", fmt("local {} = require('{}')", { i(1, "default"), rep(1) })),
 	})
 
-	require("config.luasnip.js").configure_web_snippets(ls)
+	require("config.luasnip.js").configure_snippets(ls)
 	require("config.luasnip.html").configure_snippets(ls)
+	require("config.luasnip.rust").configure_snippets(ls)
 end
 
 local function configure_luasnip()
