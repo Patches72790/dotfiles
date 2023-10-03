@@ -2,10 +2,9 @@ local M = {}
 
 local function configure_lsp_diagnostics()
 	vim.diagnostic.config({
-		--virtual_text = {
-		--	source = "always",
-		--},
+		underline = true,
 		float = {
+			border = "rounded",
 			source = "always",
 		},
 	})

@@ -84,32 +84,17 @@ local server_handlers = {
 		local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
 
 		local rust_opts = {
-			tools = {
-				autoSetHints = true,
-				hover_with_actions = false,
-				inlay_hints = {
-					show_parameter_hints = true,
-					parameter_hints_prefix = "",
-					other_hints_prefix = "",
-				},
-			},
 			-- add the custom on_attach and resolved_capabilities from lsp/init.lua
 			server = vim.tbl_deep_extend("force", options, {
 				on_attach = make_formatting_on_attach("rust", options),
 				settings = {
-					completion = {
-						postfix = {
-							enable = false,
+					["rust-analyzer"] = {
+						check = {
+							command = "clippy",
 						},
-					},
-					checkOnSave = {
-						command = "clippy",
 					},
 				},
 			}),
-			dap = {
-				adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
-			},
 		}
 		return rust_opts
 	end,
