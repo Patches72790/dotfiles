@@ -23,7 +23,6 @@ local filetype_to_buffer_event = {
 function M.setup(_)
 	local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 	null_ls.setup({
-		debug = true,
 		sources = sources,
 		debounce = 150,
 		on_attach = function(client, bufnr)
