@@ -4,34 +4,6 @@ local use = packer.use
 local function plugins_startup()
 	-- auto-update packer
 	use({ "wbthomason/packer.nvim" })
-
-	use({ "stevearc/dressing.nvim" })
-	use({
-		"s1n7ax/nvim-terminal",
-		config = function()
-			vim.o.hidden = true
-			require("nvim-terminal").setup()
-		end,
-	})
-
-	use({
-		"lervag/vimtex",
-		config = function()
-			require("config.vimtex").setup()
-		end,
-	})
-
-	use({
-		"Patches72790/neo-notes.nvim",
-		requires = {
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim",
-		},
-		config = function()
-			require("notes").setup()
-		end,
-	})
-
 	use({
 		"Patches72790/dev-search.nvim",
 		--"/Users/plharvey/projects/dev-search.nvim",
@@ -84,7 +56,7 @@ local function plugins_startup()
 	use({
 		"neovim/nvim-lspconfig",
 		event = "VimEnter",
-		wants = { "mason.nvim", "cmp-nvim-lsp", "null-ls.nvim" },
+		wants = { "mason.nvim", "cmp-nvim-lsp", "none-ls.nvim" },
 		config = function()
 			require("config.lsp").setup()
 		end,
@@ -92,7 +64,9 @@ local function plugins_startup()
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			"jayp0521/mason-null-ls.nvim",
-			"jose-elias-alvarez/null-ls.nvim",
+			--"jose-elias-alvarez/null-ls.nvim",
+			-- archived 08/01/2023 now use none-ls.nvim
+			"nvimtools/none-ls.nvim",
 			"simrat39/rust-tools.nvim",
 			"mfussenegger/nvim-jdtls",
 			"mfussenegger/nvim-dap",
@@ -178,6 +152,7 @@ local function plugins_startup()
 		end,
 	})
 
+	-- hot key finder helper
 	use({
 		"folke/which-key.nvim",
 		config = function()
@@ -185,6 +160,7 @@ local function plugins_startup()
 		end,
 	})
 
+	-- smooth scrolling plugin
 	use({
 		"karb94/neoscroll.nvim",
 		config = function()
