@@ -1,20 +1,21 @@
 -- Bootstrapping for pre-installing packer
 local fn = vim.fn
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
-	fn.system({
+local lazy_path = fn.stdpath("data") .. "/lazy/lazy.nvim"
+if vim.loop.fs_stat(lazy_path) then
+	vim.fn.system({
 		"git",
 		"clone",
-		"--depth",
-		"1",
-		"https://github.com/wbthomason/packer.nvim",
-		install_path,
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazy_path,
 	})
-	vim.cmd("packadd packer.nvim")
+
+	vim.opt.rtp:append(lazy_path)
 end
 
--- initialize plugins
-require("plugins")
+-- initialize plugins from ~/.config/nvim/lua/plugins.lua
+require("lazy").setup(require("plugins"))
 
 -- initialize keymaps and window/buffer options
 require("config.general").setup()

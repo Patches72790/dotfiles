@@ -17,6 +17,11 @@ function M.setup()
 			"json",
 			"html",
 			"css",
+			"regex",
+			"markdown",
+			"markdown_inline",
+			"vim",
+			"bash",
 		},
 		highlight = { enable = true },
 		playground = {
