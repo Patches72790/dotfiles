@@ -5,7 +5,7 @@ window:
 
 font:
   normal:
-    family: SauceCodePro Nerd Font Mono
+    family: Source Code Pro
     style: Regular
   size: 14
 
