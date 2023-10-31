@@ -27,7 +27,8 @@ return {
 
 	{
 		"neovim/nvim-lspconfig",
-		--event = "VimEnter",
+		event = "VimEnter",
+		lazy = true,
 		dependencies = {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
@@ -78,17 +79,18 @@ return {
 
 	{
 		"L3MON4D3/LuaSnip",
+		event = "VeryLazy",
 		config = function()
 			require("config.luasnip").setup()
 		end,
 	},
 
 	"ellisonleao/gruvbox.nvim",
-	"doums/darcula",
 	"shaunsingh/nord.nvim",
 
 	{
 		"lewis6991/gitsigns.nvim",
+		event = "VeryLazy",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
 			require("config.gitsigns").setup()
@@ -119,12 +121,18 @@ return {
 
 	{
 		"karb94/neoscroll.nvim",
+		event = "VeryLazy",
 		config = function()
 			require("neoscroll").setup()
 		end,
 	},
 
-	-- lazy.nvim
+	{
+
+		"folke/neodev.nvim",
+		opts = {},
+	},
+
 	{
 		"folke/noice.nvim",
 		event = "VeryLazy",

@@ -165,6 +165,7 @@ local setup_handlers = function(options)
 		end,
 		["lua_ls"] = function()
 			local server_opts = server_handlers_fn("lua_ls", options)
+			require("neodev").setup()
 			lspconfig["lua_ls"].setup(server_opts)
 		end,
 		["hls"] = function()
@@ -197,11 +198,6 @@ function M.setup(options)
 	local lsp_installer = require("mason-lspconfig")
 	local mason = require("mason")
 
-	lsp_installer.setup({
-		automatic_installation = true,
-		--ensure_installed = ensure_installed_servers,
-	})
-
 	mason.setup({
 		ui = {
 			icons = {
@@ -212,16 +208,22 @@ function M.setup(options)
 		},
 	})
 
+	lsp_installer.setup({
+		automatic_installation = true,
+		ensure_installed = ensure_installed_servers,
+	})
+
 	-- auto setup server handlers
 	lsp_installer.setup_handlers(setup_handlers(options))
 
 	-- initializes null ls directly
-	require("config.lsp.null-ls").setup()
 	require("mason-null-ls").setup({
-		ensure_installed = nil,
+		ensure_installed = {},
 		automatic_installation = true,
 		automatic_setup = false,
 	})
+
+	require("config.lsp.null-ls").setup()
 end
 
 return M
