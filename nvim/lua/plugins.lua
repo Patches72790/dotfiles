@@ -87,6 +87,7 @@ return {
 
 	"ellisonleao/gruvbox.nvim",
 	"shaunsingh/nord.nvim",
+	"rose-pine/neovim",
 
 	{
 		"lewis6991/gitsigns.nvim",
