@@ -19,6 +19,11 @@ end
 
 -- server options to be used in setup function for lsp_installer
 local server_handlers = {
+	["gopls"] = function(opts)
+		return {
+			on_attach = make_formatting_on_attach("Format on save for gopls language server", opts),
+		}
+	end,
 	["lua_ls"] = function(opts)
 		return {
 			settings = {
@@ -146,6 +151,10 @@ local setup_handlers = function(options)
 		-- default handler
 		function(server_name)
 			lspconfig[server_name].setup(options)
+		end,
+		["gopls"] = function()
+			local server_opts = server_handlers["gopls"](options)
+			lspconfig["gopls"].setup(server_opts)
 		end,
 		["rust_analyzer"] = function()
 			-- rust analyzer uses rust-tools, which handles lsp settings on its own

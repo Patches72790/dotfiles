@@ -11,7 +11,6 @@ local sources = {
 	formatting.prettierd,
 	diagnostics.eslint_d,
 	formatting.shfmt,
-	formatting.gofmt,
 	formatting.taplo,
 	formatting.xmlformat,
 }
