@@ -19,6 +19,11 @@ end
 
 -- server options to be used in setup function for lsp_installer
 local server_handlers = {
+	["terraformls"] = function(opts)
+		return {
+			on_attach = make_formatting_on_attach("Format on save for terraform language server", opts),
+		}
+	end,
 	["gopls"] = function(opts)
 		return {
 			on_attach = make_formatting_on_attach("Format on save for gopls language server", opts),
@@ -151,6 +156,10 @@ local setup_handlers = function(options)
 		-- default handler
 		function(server_name)
 			lspconfig[server_name].setup(options)
+		end,
+		["terraformls"] = function()
+			local server_opts = server_handlers["terraformls"](options)
+			lspconfig["terraformls"].setup(server_opts)
 		end,
 		["gopls"] = function()
 			local server_opts = server_handlers["gopls"](options)

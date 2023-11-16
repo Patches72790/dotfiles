@@ -58,6 +58,7 @@ local function configure_snippets(ls)
 	require("config.luasnip.js").configure_snippets(ls)
 	require("config.luasnip.html").configure_snippets(ls)
 	require("config.luasnip.rust").configure_snippets(ls)
+	require("config.luasnip.terraform").configure_snippets(ls)
 end
 
 local function configure_luasnip()
