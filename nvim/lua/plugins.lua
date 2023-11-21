@@ -40,6 +40,11 @@ return {
 			"mfussenegger/nvim-jdtls",
 			"mfussenegger/nvim-dap",
 		},
+		init_options = {
+			userLanguages = {
+				rust = "html",
+			},
+		},
 		config = function()
 			require("config.lsp").setup()
 		end,
