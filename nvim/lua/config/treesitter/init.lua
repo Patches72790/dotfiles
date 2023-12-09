@@ -2,6 +2,10 @@ local M = {}
 
 function M.setup()
 	require("nvim-treesitter.configs").setup({
+		sync_install = false,
+		auto_install = true,
+		ignore_install = {},
+		modules = {},
 		ensure_installed = {
 			"rust",
 			"python",
