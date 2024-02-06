@@ -14,7 +14,6 @@ mod tests {{\
 
 M.configure_snippets = function(ls)
 	local s = ls.snippet
-	local t = ls.text_node
 	local i = ls.insert_node
 	local fmt = require("luasnip.extras.fmt").fmt
 

@@ -20,4 +20,15 @@ M.add_snippets_for_filetypes = function(luasnip, filetypes, snippets)
 	end
 end
 
+M.configure_ls_table = function(ls)
+	return {
+		snippet = ls.snippet,
+		insert = ls.insert_node,
+		text = ls.text_node,
+		dynamic = ls.dynamic_node,
+		format = require("luasnip.extras.fmt").fmt,
+		rep = require("luasnip.extras").rep,
+	}
+end
+
 return M
