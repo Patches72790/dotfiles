@@ -3,16 +3,13 @@ local M = {}
 local null_ls = require("null-ls")
 local null_ls_utils = require("null-ls.utils")
 local formatting = null_ls.builtins.formatting
-local diagnostics = null_ls.builtins.diagnostics
 
 local sources = {
 	formatting.black,
 	formatting.stylua,
 	formatting.prettierd,
-	diagnostics.eslint_d,
 	formatting.shfmt,
-	formatting.taplo,
-	formatting.xmlformat,
+	formatting.gofmt,
 }
 
 local filetype_to_buffer_event = {
