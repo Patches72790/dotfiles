@@ -8,6 +8,12 @@ if {} != nil {{\
 }}\
 "
 
+local errf_string = '\
+if {} != nil {{\
+    return fmt.Errorf("{}", {})\
+}}\
+'
+
 M.configure_snippets = function(ls)
 	local s = ls.snippet
 	local i = ls.insert_node
@@ -16,6 +22,8 @@ M.configure_snippets = function(ls)
 
 	add_snippets_for_filetypes(ls, { "go" }, {
 		s("err", fmt(err_string, { i(1), rep(1) })),
+
+		s("errf", fmt(errf_string, { i(1), i(2), rep(1) })),
 	})
 end
 
