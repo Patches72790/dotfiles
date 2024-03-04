@@ -1,27 +1,18 @@
 local M = {}
 
-local function on_attach(client, bufnr)
-	-- configure the keymappings
-	require("config.lsp.keymapping").setup(client, bufnr)
-
-	require("config.lsp.diagnostics").setup()
-end
-
--- update nvim cmp capabilities
+-- get lsp capabilities
 local capabilities = vim.tbl_deep_extend(
 	"force",
 	vim.lsp.protocol.make_client_capabilities(),
 	require("cmp_nvim_lsp").default_capabilities()
 )
 
--- setup LSP handlers
---require("config.lsp.handlers").setup()
-
 function M.setup()
 	vim.api.nvim_create_autocmd("LspAttach", {
 		group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
 		callback = function(event)
 			require("config.lsp.diagnostics").setup()
+
 			local map = function(keys, func, desc)
 				vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 			end
@@ -40,7 +31,6 @@ function M.setup()
 	})
 
 	local opts = {
-		--on_attach = on_attach,
 		capabilities = capabilities,
 		flags = {
 			debounce_text_changes = 150,

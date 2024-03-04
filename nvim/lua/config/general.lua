@@ -15,11 +15,16 @@ local nvim_options = {
 		fileformat = "unix",
 	},
 	global = {
+		updatetime = 250,
+		timeoutlen = 300,
 		cursorline = true,
 		inccommand = "split",
-		number = true,
+		signcolumn = "yes",
+		splitright = true,
+		splitbelow = true,
 		tabstop = 4,
 		shiftwidth = 4,
+		ignorecase = true,
 		smartindent = true,
 		expandtab = true,
 		autoindent = true,
@@ -31,7 +36,7 @@ local nvim_options = {
 		nu = true,
 		wrap = false,
 		swapfile = false,
-		backup = true,
+		backup = false,
 		writebackup = true,
 		undodir = os.getenv("HOME") .. "/dotfiles/nvim/undodir",
 		backupdir = os.getenv("HOME") .. "/dotfiles/nvim/backupdir",
@@ -90,16 +95,26 @@ end
 local function init_user_commands() end
 
 local function init_keymaps()
-	vim.keymap.set("n", "<leader><Esc>", "<cmd>nohl<CR>", { desc = "Turn on highlighting" })
+	vim.keymap.set("n", "<leader><Esc>", "<cmd>nohl<CR>", { desc = "Turn off highlighting", silent = true })
 
-	vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save Buffer" })
-	vim.keymap.set("n", "<leader>q", ":qa<CR>", { desc = "Close Window" })
-	vim.keymap.set("n", "<leader>x", ":x<CR>", { desc = "Close Buffer" })
+	vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save Buffer", silent = true })
+	vim.keymap.set("n", "<leader>q", ":qa<CR>", { desc = "Close Window", silent = true })
+	vim.keymap.set("n", "<leader>x", ":x<CR>", { desc = "Close Buffer", silent = true })
 
-	vim.keymap.set("n", "[a", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
-	vim.keymap.set("n", "]a", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
-	vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
-	vim.keymap.set("n", "<leader>t", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+	vim.keymap.set("n", "[a", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic", silent = true })
+	vim.keymap.set("n", "]a", vim.diagnostic.goto_next, { desc = "Go to next diagnostic", silent = true })
+	vim.keymap.set(
+		"n",
+		"<leader>e",
+		vim.diagnostic.open_float,
+		{ desc = "Show diagnostic [E]rror messages", silent = true }
+	)
+	vim.keymap.set(
+		"n",
+		"<leader>t",
+		vim.diagnostic.setloclist,
+		{ desc = "Open diagnostic [Q]uickfix list", silent = true }
+	)
 end
 
 function M.setup()

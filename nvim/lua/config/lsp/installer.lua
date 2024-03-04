@@ -26,7 +26,7 @@ local server_handlers = {
 	end,
 	["gopls"] = function(opts)
 		return {
-			on_attach = make_formatting_on_attach("Format on save for gopls language server", opts),
+			--on_attach = make_formatting_on_attach("Format on save for gopls language server", opts),
 		}
 	end,
 	["lua_ls"] = function(opts)
@@ -57,11 +57,6 @@ local server_handlers = {
 					},
 				},
 			},
-			--			on_attach = function(client, bufnr)
-			--				client.server_capabilities.documentFormattingProvider = false
-			--				client.server_capabilities.documentRangeFormattingProvider = false
-			--				opts.on_attach(client, bufnr)
-			--			end,
 		}
 	end,
 	["tsserver"] = function(opts)
@@ -96,7 +91,6 @@ local server_handlers = {
 		local rust_opts = {
 			-- add the custom on_attach and resolved_capabilities from lsp/init.lua
 			server = vim.tbl_deep_extend("force", options, {
-				on_attach = make_formatting_on_attach("rust", options),
 				settings = {
 					["rust-analyzer"] = {
 						check = {
@@ -108,13 +102,11 @@ local server_handlers = {
 		}
 		return rust_opts
 	end,
-	--[[
 	hls = function(opts) -- haskell
 		return {
-			on_attach = make_formatting_on_attach("Format on save for haskell language server", opts),
+			--on_attach = make_formatting_on_attach("Format on save for haskell language server", opts),
 		}
 	end,
-    ]]
 	jdtls = function(opts)
 		return {
 			on_attach = make_formatting_on_attach("Format on save for java language server", opts),
@@ -203,7 +195,7 @@ local ensure_installed_servers = {
 	"rust_analyzer",
 	"tsserver",
 	"lua_ls",
-	"hls",
+	--"hls",
 	"yamlls",
 	"jdtls",
 	"gopls",

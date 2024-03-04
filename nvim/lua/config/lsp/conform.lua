@@ -6,11 +6,12 @@ M.setup = function()
 			lua = { "stylua" },
 			python = { "black" },
 			javascript = { { "prettierd", "prettier" } },
-			go = { "gofmt" },
+			go = { "goimports", "gofmt" },
+			rust = {},
 		},
 		format_on_save = {
 			timeout_ms = 500,
-			lsp_fallbck = true,
+			lsp_fallback = true,
 		},
 	})
 end
