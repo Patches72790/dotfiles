@@ -17,8 +17,6 @@ if not vim.loop.fs_stat(lazy_path) then
 	})
 end
 
--- initialize keymaps and window/buffer options
---require("config.general").setup()
 -- initialize plugins from ~/.config/nvim/lua/plugins.lua
 require("lazy").setup(require("plugins"))
 

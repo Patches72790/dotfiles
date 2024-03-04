@@ -134,7 +134,7 @@ local server_handlers = {
 local server_handlers_fn = function(server_name, options)
 	local server_handler = server_handlers[server_name]
 	if server_handler ~= nil then
-		local more_opts = vim.tbl_deep_extend("force", options, server_handler(options))
+		local more_opts = vim.tbl_deep_extend("force", {}, options, server_handler(options))
 		--P(more_opts)
 		return more_opts
 	end

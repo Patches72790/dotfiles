@@ -8,10 +8,17 @@ local capabilities = vim.tbl_deep_extend(
 )
 
 function M.setup()
+	-- Define the on attach handler
 	vim.api.nvim_create_autocmd("LspAttach", {
 		group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
 		callback = function(event)
-			require("config.lsp.diagnostics").setup()
+			vim.diagnostic.config({
+				underline = true,
+				float = {
+					border = "rounded",
+					source = "always",
+				},
+			})
 
 			local map = function(keys, func, desc)
 				vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })

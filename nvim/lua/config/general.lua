@@ -92,8 +92,6 @@ local function init_movement_keymaps()
 	end
 end
 
-local function init_user_commands() end
-
 local function init_keymaps()
 	vim.keymap.set("n", "<leader><Esc>", "<cmd>nohl<CR>", { desc = "Turn off highlighting", silent = true })
 
@@ -118,10 +116,12 @@ local function init_keymaps()
 end
 
 function M.setup()
+	vim.g.mapleader = " "
+	vim.g.maplocalleader = " "
+
 	init_keymaps()
 	init_nvim_options()
 	init_movement_keymaps()
-	init_user_commands()
 	-- initialize global helpers
 	require("config.globals")
 end
