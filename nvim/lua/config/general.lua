@@ -15,6 +15,8 @@ local nvim_options = {
 		fileformat = "unix",
 	},
 	global = {
+		cursorline = true,
+		inccommand = "split",
 		number = true,
 		tabstop = 4,
 		shiftwidth = 4,
@@ -87,23 +89,24 @@ end
 
 local function init_user_commands() end
 
-local function init_colorscheme()
-	--	vim.g.nord_contrast = true
-	--	vim.g.nord_borders = true
-	--	vim.g.nord_disable_background = false
-	--	vim.g.nord_italic = false
-	--	vim.g.nord_uniform_diff_background = true
-	--	vim.g.nord_bold = false
-	--	require("nord").set()
+local function init_keymaps()
+	vim.keymap.set("n", "<leader><Esc>", "<cmd>nohl<CR>", { desc = "Turn on highlighting" })
 
-	vim.cmd([[colorscheme gruvbox]])
+	vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save Buffer" })
+	vim.keymap.set("n", "<leader>q", ":qa<CR>", { desc = "Close Window" })
+	vim.keymap.set("n", "<leader>x", ":x<CR>", { desc = "Close Buffer" })
+
+	vim.keymap.set("n", "[a", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
+	vim.keymap.set("n", "]a", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
+	vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
+	vim.keymap.set("n", "<leader>t", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 end
 
 function M.setup()
+	init_keymaps()
 	init_nvim_options()
 	init_movement_keymaps()
 	init_user_commands()
-	init_colorscheme()
 	-- initialize global helpers
 	require("config.globals")
 end

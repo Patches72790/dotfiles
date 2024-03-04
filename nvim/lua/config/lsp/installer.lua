@@ -57,11 +57,11 @@ local server_handlers = {
 					},
 				},
 			},
-			on_attach = function(client, bufnr)
-				client.server_capabilities.documentFormattingProvider = false
-				client.server_capabilities.documentRangeFormattingProvider = false
-				opts.on_attach(client, bufnr)
-			end,
+			--			on_attach = function(client, bufnr)
+			--				client.server_capabilities.documentFormattingProvider = false
+			--				client.server_capabilities.documentRangeFormattingProvider = false
+			--				opts.on_attach(client, bufnr)
+			--			end,
 		}
 	end,
 	["tsserver"] = function(opts)
@@ -108,11 +108,13 @@ local server_handlers = {
 		}
 		return rust_opts
 	end,
+	--[[
 	hls = function(opts) -- haskell
 		return {
 			on_attach = make_formatting_on_attach("Format on save for haskell language server", opts),
 		}
 	end,
+    ]]
 	jdtls = function(opts)
 		return {
 			on_attach = make_formatting_on_attach("Format on save for java language server", opts),
@@ -234,14 +236,7 @@ function M.setup(options)
 	-- auto setup server handlers
 	lsp_installer.setup_handlers(setup_handlers(options))
 
-	-- initializes null ls directly
-	require("mason-null-ls").setup({
-		ensure_installed = {},
-		automatic_installation = true,
-		automatic_setup = false,
-	})
-
-	require("config.lsp.null-ls").setup()
+	require("config.lsp.conform").setup()
 end
 
 return M

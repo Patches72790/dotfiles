@@ -15,9 +15,9 @@ export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
+	export EDITOR='vim'
 else
-  export EDITOR='nvim'
+	export EDITOR='nvim'
 fi
 
 # Compilation flags
@@ -38,6 +38,11 @@ alias gpsup="git push -u"
 alias gfa="git fetch -a"
 alias gb="git branch"
 alias gst="git status"
+alias gd="git diff"
+alias gc="git commit"
+alias gcam="gc -am"
+alias gcb="git checkout -b"
+
 export NV_NOTES_PATH="$HOME/Notes"
 
 # neovim variables
@@ -49,7 +54,7 @@ alias nv="nvim"
 
 # node env variable
 export NVM_DIR="$XDG_CONFIG_HOME/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env

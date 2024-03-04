@@ -1,24 +1,23 @@
 local M = {}
 
 local telescope = require("telescope")
-local map = require("config.util").map
 
 local function configure_keymap()
-	-- dap extension mappings
-	telescope.load_extension("dap")
-	map("n", "<leader>ds", ":Telescope dap frames<CR>")
-	map("n", "<leader>db", ":Telescope dap list_breakpoints<CR>")
-
+	local builtin = require("telescope.builtin")
 	-- general telescope mappings
 	local silent = { silent = true }
-	map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", silent)
-	map("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", silent)
-	map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", silent)
-	map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", silent)
-	map("n", "<leader>fc", "<cmd> lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", silent)
-	map("n", "<leader>rr", "<cmd> lua require('telescope.builtin').registers()<CR>", silent)
-	map("n", "<leader>km", "<cmd> lua require('telescope.builtin').keymaps()<CR>", silent)
-	map("n", "<leader>hh", "<cmd> lua require('telescope.builtin').help_tags()<CR>", silent)
+	vim.keymap.set("n", "<leader>ff", builtin.find_files, silent)
+	vim.keymap.set("n", "<leader>fg", builtin.live_grep, silent)
+	vim.keymap.set("n", "<leader>fb", builtin.buffers, silent)
+	vim.keymap.set("n", "<leader>hh", builtin.help_tags, silent)
+	vim.keymap.set("n", "<leader>fc", builtin.current_buffer_fuzzy_find, silent)
+	vim.keymap.set("n", "<leader>rr", builtin.registers, silent)
+	vim.keymap.set("n", "<leader>km", builtin.keymaps, silent)
+
+	-- dap extension mappings
+	telescope.load_extension("dap")
+	vim.keymap.set("n", "<leader>ds", ":Telescope dap frames<CR>")
+	vim.keymap.set("n", "<leader>db", ":Telescope dap list_breakpoints<CR>")
 end
 
 local function configure()

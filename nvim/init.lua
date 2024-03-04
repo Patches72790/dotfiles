@@ -1,6 +1,10 @@
+-- initialize keymaps and window/buffer options
+require("config.general").setup()
+
 -- Bootstrapping for pre-installing packer
 local fn = vim.fn
 local lazy_path = fn.stdpath("data") .. "/lazy/lazy.nvim"
+
 vim.opt.rtp:append(lazy_path)
 if not vim.loop.fs_stat(lazy_path) then
 	vim.fn.system({
@@ -13,8 +17,9 @@ if not vim.loop.fs_stat(lazy_path) then
 	})
 end
 
+-- initialize keymaps and window/buffer options
+--require("config.general").setup()
 -- initialize plugins from ~/.config/nvim/lua/plugins.lua
 require("lazy").setup(require("plugins"))
 
--- initialize keymaps and window/buffer options
-require("config.general").setup()
+vim.cmd([[colorscheme gruvbox]])

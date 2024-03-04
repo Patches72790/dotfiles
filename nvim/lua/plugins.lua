@@ -37,6 +37,7 @@ return {
 			"simrat39/rust-tools.nvim",
 			"mfussenegger/nvim-jdtls",
 			"mfussenegger/nvim-dap",
+			"stevearc/conform.nvim",
 		},
 		config = function()
 			require("config.lsp").setup()
@@ -114,7 +115,7 @@ return {
 	{
 		"folke/which-key.nvim",
 		config = function()
-			require("config.whichkey").setup()
+			require("which-key").setup()
 		end,
 	},
 
