@@ -3,7 +3,7 @@ local dap = require("dap")
 
 local lldb_adapter = {
 	type = "executable",
-	command = "lldb-vscode-13",
+	command = "code-lldb",
 	name = "lldb",
 }
 
@@ -11,9 +11,7 @@ local rust_configuration = {
 	name = "Launch Rust",
 	type = "lldb",
 	request = "launch",
-	program = function()
-		return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-	end,
+	program = "${file}",
 	cwd = "${workspaceFolder}",
 	stopOnEntry = false,
 	args = function()
@@ -23,7 +21,6 @@ local rust_configuration = {
 }
 
 function M.setup()
-	dap.adapters.lldb = lldb_adapter
 	dap.configurations.rust = { rust_configuration }
 end
 

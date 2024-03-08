@@ -1,35 +1,8 @@
 local M = {}
 
--- creates a formatting on attach function for the given language server
-local make_formatting_on_attach = function(desc, opts)
-	return function(client, bufnr)
-		client.server_capabilities.documentFormattingProvider = true
-		client.server_capabilities.documentRangeFormattingProvider = true
-		vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-			group = "LspFormatting",
-			desc = desc,
-			buffer = bufnr,
-			callback = function()
-				vim.lsp.buf.format({ bufnr = bufnr })
-			end,
-		})
-		opts.on_attach(client, bufnr)
-	end
-end
-
 -- server options to be used in setup function for lsp_installer
 local server_handlers = {
-	["terraformls"] = function(opts)
-		return {
-			on_attach = make_formatting_on_attach("Format on save for terraform language server", opts),
-		}
-	end,
-	["gopls"] = function(opts)
-		return {
-			--on_attach = make_formatting_on_attach("Format on save for gopls language server", opts),
-		}
-	end,
-	["lua_ls"] = function(opts)
+	lua_ls = function()
 		return {
 			settings = {
 				Lua = {
@@ -59,16 +32,7 @@ local server_handlers = {
 			},
 		}
 	end,
-	["tsserver"] = function(opts)
-		return {
-			on_attach = function(client, bufnr)
-				client.server_capabilities.documentFormattingProvider = false
-				client.server_capabilities.documentRangeFormattingProvider = false
-				opts.on_attach(client, bufnr)
-			end,
-		}
-	end,
-	yamlls = function(opts)
+	yamlls = function()
 		return {
 			settings = {
 				yaml = {
@@ -84,14 +48,10 @@ local server_handlers = {
 		}
 	end,
 	rust_analyzer = function(options)
-		local extension_path = vim.env.HOME .. "/.vscode/extensions/vadimcn.vscode-lldb-1.7.0/"
-		local codelldb_path = extension_path .. "adapter/codelldb"
-		local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
-
-		local rust_opts = {
+		return {
 			-- add the custom on_attach and resolved_capabilities from lsp/init.lua
 			server = vim.tbl_deep_extend("force", options, {
-				settings = {
+				default_settings = {
 					["rust-analyzer"] = {
 						check = {
 							command = "clippy",
@@ -100,16 +60,9 @@ local server_handlers = {
 				},
 			}),
 		}
-		return rust_opts
 	end,
-	hls = function(opts) -- haskell
+	jdtls = function()
 		return {
-			--on_attach = make_formatting_on_attach("Format on save for haskell language server", opts),
-		}
-	end,
-	jdtls = function(opts)
-		return {
-			on_attach = make_formatting_on_attach("Format on save for java language server", opts),
 			settings = {
 				java = {
 					format = {
@@ -123,6 +76,15 @@ local server_handlers = {
 							enabled = true,
 						},
 					},
+				},
+			},
+		}
+	end,
+	terraformls = function()
+		return {
+			init_options = {
+				terraform = {
+					path = "/opt/homebrew/bin/terraform",
 				},
 			},
 		}
@@ -152,17 +114,25 @@ local setup_handlers = function(options)
 			lspconfig[server_name].setup(options)
 		end,
 		["terraformls"] = function()
-			local server_opts = server_handlers["terraformls"](options)
+			local server_opts = server_handlers_fn("terraformls", options)
 			lspconfig["terraformls"].setup(server_opts)
+			vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+				desc = "Terraform-ls format on save",
+				group = vim.api.nvim_create_augroup("terraform-ls-format", { clear = true }),
+				pattern = { "*.tf", "*.tfvars" },
+				callback = function()
+					vim.lsp.buf.format()
+				end,
+			})
 		end,
-		["gopls"] = function()
-			local server_opts = server_handlers["gopls"](options)
-			lspconfig["gopls"].setup(server_opts)
-		end,
+
 		["rust_analyzer"] = function()
 			-- rust analyzer uses rust-tools, which handles lsp settings on its own
-			local server_opts = server_handlers["rust_analyzer"](options)
-			require("rust-tools").setup(server_opts)
+			--local server_opts = server_handlers["rust_analyzer"](options)
+			--require("rust-tools").setup(server_opts)
+			vim.g.rustaceanvim = function()
+				return server_handlers["rust_analyzer"](options)
+			end
 		end,
 		["jdtls"] = function()
 			local server_opts = server_handlers_fn("jdtls", options)
@@ -171,18 +141,10 @@ local setup_handlers = function(options)
 			--local server_opts = server_handlers["jdtls"](options)
 			--require("jdtls").start_or_attach(server_opts)
 		end,
-		["tsserver"] = function()
-			local server_opts = server_handlers_fn("tsserver", options)
-			lspconfig["tsserver"].setup(server_opts)
-		end,
 		["lua_ls"] = function()
 			local server_opts = server_handlers_fn("lua_ls", options)
 			require("neodev").setup()
 			lspconfig["lua_ls"].setup(server_opts)
-		end,
-		["hls"] = function()
-			local server_opts = server_handlers_fn("hls", options)
-			lspconfig["hls"].setup(server_opts)
 		end,
 		["yamlls"] = function()
 			local server_opts = server_handlers_fn("yamlls", options)
@@ -195,7 +157,6 @@ local ensure_installed_servers = {
 	"rust_analyzer",
 	"tsserver",
 	"lua_ls",
-	--"hls",
 	"yamlls",
 	"jdtls",
 	"gopls",
@@ -204,6 +165,7 @@ local ensure_installed_servers = {
 	"clangd",
 	"dockerls",
 	"terraformls",
+	"hls",
 }
 
 function M.setup(options)
@@ -225,7 +187,7 @@ function M.setup(options)
 		ensure_installed = ensure_installed_servers,
 	})
 
-	-- auto setup server handlers
+	-- setup lsp servers - must be called AFTER mason and mason-lspconfig setup
 	lsp_installer.setup_handlers(setup_handlers(options))
 
 	require("config.lsp.conform").setup()

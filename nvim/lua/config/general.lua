@@ -116,8 +116,8 @@ local function init_keymaps()
 end
 
 function M.setup()
-	vim.g.mapleader = " "
-	vim.g.maplocalleader = " "
+	--	vim.g.mapleader = " "
+	--	vim.g.maplocalleader = " "
 
 	init_keymaps()
 	init_nvim_options()

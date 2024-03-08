@@ -14,12 +14,12 @@ local function configure_exts()
 end
 
 local function configure_debuggers()
-	require("config.debugging.python").setup()
-	--require("config.debugging.rust").setup()
+	--require("config.debugging.python").setup()
+	require("config.debugging.rust").setup()
 end
 
 function M.setup()
-	configure_exts()
+	--configure_exts()
 	configure_debuggers()
 	configure()
 	require("config.debugging.keymap").setup()
