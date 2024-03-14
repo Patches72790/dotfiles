@@ -34,10 +34,10 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 			"jayp0521/mason-null-ls.nvim",
 			"nvimtools/none-ls.nvim",
-			--"simrat39/rust-tools.nvim",
 			"mrcjkb/rustaceanvim",
 			"mfussenegger/nvim-jdtls",
 			"mfussenegger/nvim-dap",
+			"rcarriga/nvim-dap-ui",
 			"stevearc/conform.nvim",
 		},
 		config = function()

@@ -2,9 +2,13 @@ local M = {}
 local dap = require("dap")
 
 local lldb_adapter = {
-	type = "executable",
-	command = "code-lldb",
-	name = "lldb",
+	type = "server",
+	name = "codelldb",
+	port = "${port}",
+	executable = {
+		command = vim.fn.stdpath("data") .. "/mason/bin/codelldb",
+		args = { "--port", "${port}" },
+	},
 }
 
 local rust_configuration = {
@@ -13,14 +17,10 @@ local rust_configuration = {
 	request = "launch",
 	program = "${file}",
 	cwd = "${workspaceFolder}",
-	stopOnEntry = false,
-	args = function()
-		return vim.fn.input("Args for rust executable: ")
-	end,
-	runInTerminal = false,
 }
 
 function M.setup()
+	dap.adapters.lldb = lldb_adapter
 	dap.configurations.rust = { rust_configuration }
 end
 

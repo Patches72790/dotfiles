@@ -45,7 +45,7 @@ function M.setup()
 	}
 
 	require("config.lsp.installer").setup(opts)
-	require("config.debugging").setup()
+	require("config.dap").setup()
 end
 
 return M
