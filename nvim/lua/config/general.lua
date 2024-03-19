@@ -93,7 +93,10 @@ local function init_movement_keymaps()
 end
 
 local function init_keymaps()
-	vim.keymap.set("n", "<leader><Esc>", "<cmd>nohl<CR>", { desc = "Turn off highlighting", silent = true })
+	vim.keymap.set("n", "<leader><Esc>", function()
+		vim.cmd("nohl")
+		require("notify").dismiss({ silent = true, pending = true })
+	end, { desc = "Turn off highlighting and dismiss Noice", silent = true })
 
 	vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save Buffer", silent = true })
 	vim.keymap.set("n", "<leader>q", ":qa<CR>", { desc = "Close Window", silent = true })
@@ -116,9 +119,6 @@ local function init_keymaps()
 end
 
 function M.setup()
-	--	vim.g.mapleader = " "
-	--	vim.g.maplocalleader = " "
-
 	init_keymaps()
 	init_nvim_options()
 	init_movement_keymaps()
