@@ -7,6 +7,7 @@ LOCAL_BIN_PATH="$HOME/.local/bin"
 CARGO_PATH="$HOME/.cargo/bin"
 JAVA_PATH="/usr/local/opt/openjdk@17/bin"
 GHC_PATH="$HOME/.ghcup/bin"
+ORACLE_SQL_PATH="/usr/local/bin/osql/bin"
 export PATH="$GHC_PATH:$JAVA_PATH:$GOBIN:$GOROOT:$NVIM_PATH:$LOCAL_BIN_PATH:$CARGO_PATH:$ORACLE_SQL_PATH:$HOME/bin:/usr/local/bin:$PATH"
 export GOPATH="$HOME/go"
 
@@ -42,6 +43,8 @@ alias gd="git diff"
 alias gc="git commit"
 alias gcam="gc -am"
 alias gcb="git checkout -b"
+alias dcb="docker compose --build"
+alias dcud="dcb -d"
 
 export NV_NOTES_PATH="$HOME/Notes"
 
@@ -58,3 +61,6 @@ export NVM_DIR="$XDG_CONFIG_HOME/nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
+
+PROMPT_COMMAND='PS1_CMD1=$(git branch 2>/dev/null | grep '"'"'*'"'"' | colrm 1 2)'
+PS1='\[\e[38;5;121m\]\u\[\e[0m\] \[\e[38;5;214;1m\]\W\[\e[0m\] (\[\e[38;5;37m\]${PS1_CMD1}\[\e[0m\])\[\e[38;5;135m\] λ\[\e[0m\] '

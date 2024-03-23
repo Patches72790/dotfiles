@@ -120,16 +120,15 @@ return {
 		end,
 	},
 
-	{
-		"karb94/neoscroll.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("neoscroll").setup()
-		end,
-	},
+	--	{
+	--		"karb94/neoscroll.nvim",
+	--		event = "VeryLazy",
+	--		config = function()
+	--			require("neoscroll").setup()
+	--		end,
+	--	},
 
 	{
-
 		"folke/neodev.nvim",
 		opts = {},
 	},

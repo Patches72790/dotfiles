@@ -93,7 +93,7 @@ local function init_movement_keymaps()
 end
 
 local function init_keymaps()
-	vim.keymap.set("n", "<leader><Esc>", function()
+	vim.keymap.set("n", "<leader><Space>", function()
 		vim.cmd("nohl")
 		require("notify").dismiss({ silent = true, pending = true })
 	end, { desc = "Turn off highlighting and dismiss Noice", silent = true })
