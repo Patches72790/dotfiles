@@ -1,16 +1,3 @@
-# If you come from bash you might have to change your $PATH.
-GOBIN="/usr/local/go/bin"
-export GOBIN=$GOBIN
-GOROOT="/usr/local/go"
-NVIM_PATH="/usr/local/nvim/bin"
-LOCAL_BIN_PATH="$HOME/.local/bin"
-CARGO_PATH="$HOME/.cargo/bin"
-JAVA_PATH="/usr/local/opt/openjdk@17/bin"
-GHC_PATH="$HOME/.ghcup/bin"
-ORACLE_SQL_PATH="/usr/local/bin/osql/bin"
-export PATH="$GHC_PATH:$JAVA_PATH:$GOBIN:$GOROOT:$NVIM_PATH:$LOCAL_BIN_PATH:$CARGO_PATH:$ORACLE_SQL_PATH:$HOME/bin:/usr/local/bin:$PATH"
-export GOPATH="$HOME/go"
-
 # User configuration
 export LANG=en_US.UTF-8
 
@@ -60,7 +47,6 @@ alias nv="nvim"
 export NVM_DIR="$XDG_CONFIG_HOME/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
 [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
 
 PROMPT_COMMAND='PS1_CMD1=$(git branch 2>/dev/null | grep '"'"'*'"'"' | colrm 1 2)'
