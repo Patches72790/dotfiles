@@ -8,16 +8,12 @@ else
 	export EDITOR='nvim'
 fi
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
+# Aliases
 alias gdec="git log --decorate=full --oneline --graph"
 alias nvconfig="cd $HOME/dotfiles/nvim && nvim"
 alias nv-notes="cd $HOME/ReadingNotes && nvim"
+alias glg='git log --oneline --decorate --graph --all'
+alias grf="git reflog"
 alias lsd="ls -halF"
 alias l="lsd"
 alias gl="git pull"
@@ -31,10 +27,14 @@ alias gd="git diff"
 alias gc="git commit"
 alias gcam="gc -am"
 alias gcb="git checkout -b"
+alias gsw="git switch"
+alias grb="git rebase"
+alias grbom="git rebase origin/$(git_main_branch)"
+alias grbi="git rebase --interactive"
+alias grba="git rebase --abort"
+alias grbc="git rebase --continue"
 alias dcb="docker compose --build"
 alias dcud="dcb -d"
-
-export NV_NOTES_PATH="$HOME/Notes"
 
 # neovim variables
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -43,11 +43,12 @@ export LOCAL_PLUGINS_HOME="$HOME/Projects/nvim-plugins/"
 export REACT_EDITOR="none"
 alias nv="nvim"
 
-# node env variable
+# node ghcup env variables
 export NVM_DIR="$XDG_CONFIG_HOME/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
 
+# bash prompt
 PROMPT_COMMAND='PS1_CMD1=$(git branch 2>/dev/null | grep '"'"'*'"'"' | colrm 1 2)'
 PS1='\[\e[38;5;121m\]\u\[\e[0m\] \[\e[38;5;214;1m\]\W\[\e[0m\] (\[\e[38;5;37m\]${PS1_CMD1}\[\e[0m\])\[\e[38;5;135m\] λ\[\e[0m\] '
