@@ -1,12 +1,15 @@
-# If you come from bash you might have to change your $PATH.
+# Set path environment variables ONCE
 GOBIN="/usr/local/go/bin"
 GOROOT="/usr/local/go"
 NVIM_PATH="/usr/local/nvim/bin"
 LOCAL_BIN_PATH="$HOME/.local/bin"
 CARGO_PATH="$HOME/.cargo/bin"
-JAVA_PATH="/usr/local/opt/openjdk@17/bin"
+#JAVA_PATH="/usr/local/opt/openjdk@17/bin"
 GHC_PATH="$HOME/.ghcup/bin"
 ORACLE_SQL_PATH="/usr/local/bin/osql/bin"
-export PATH="$GHC_PATH:$JAVA_PATH:$GOBIN:$GOROOT:$NVIM_PATH:$LOCAL_BIN_PATH:$CARGO_PATH:$ORACLE_SQL_PATH:$HOME/bin:/usr/local/bin:$PATH"
+BREW_PATH="/opt/homebrew/bin"
+
+export PATH="$BREW_PATH:$GHC_PATH:$GOBIN:$GOROOT:$NVIM_PATH:$LOCAL_BIN_PATH:$CARGO_PATH:$ORACLE_SQL_PATH:$HOME/bin:/usr/local/bin:$PATH"
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/openjdk17"
 
 source /Users/plharvey/.bashrc

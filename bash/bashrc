@@ -29,12 +29,12 @@ alias gcam="gc -am"
 alias gcb="git checkout -b"
 alias gsw="git switch"
 alias grb="git rebase"
-alias grbom="git rebase origin/$(git_main_branch)"
 alias grbi="git rebase --interactive"
 alias grba="git rebase --abort"
 alias grbc="git rebase --continue"
 alias dcb="docker compose --build"
 alias dcud="dcb -d"
+alias gco="git checkout"
 
 # neovim variables
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -51,4 +51,4 @@ export NVM_DIR="$XDG_CONFIG_HOME/nvm"
 
 # bash prompt
 PROMPT_COMMAND='PS1_CMD1=$(git branch 2>/dev/null | grep '"'"'*'"'"' | colrm 1 2)'
-PS1='\[\e[38;5;121m\]\u\[\e[0m\] \[\e[38;5;214;1m\]\W\[\e[0m\] (\[\e[38;5;37m\]${PS1_CMD1}\[\e[0m\])\[\e[38;5;135m\] λ\[\e[0m\] '
+PS1='\[\e[38;5;121m\]\u\[\e[0m\] \[\e[38;5;214;1m\]\W\[\e[0m\] \[\e[38;5;37m\]${PS1_CMD1}\[\e[0m\]\[\e[38;5;135m\] λ\[\e[0m\] '
