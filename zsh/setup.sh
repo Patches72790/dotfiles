@@ -8,4 +8,5 @@ chsh zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # link zshrc file
+ln -s $HOME/dotfiles/zsh/zprofile $HOME/.zprofile
 ln -s $HOME/dotfiles/zsh/zshrc $HOME/.zshrc
