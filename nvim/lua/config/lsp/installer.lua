@@ -61,6 +61,73 @@ local server_handlers = {
 			}),
 		}
 	end,
+	nvim_jdtls = function()
+		local home = os.getenv("HOME")
+		local mason_path = vim.fn.stdpath("data") .. "/mason/packages"
+		local root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git", "mvnw", "pom.xml" }, { upward = true })[1])
+
+		local project_name = vim.fn.fnamemodify(root_dir, ":p:h:t")
+		local workspace_dir = home .. "/.cache/jdtls/workspace" .. project_name
+
+		local jdtls_path = mason_path .. "/jdtls"
+		local lombok_path = jdtls_path .. "/lombok.jar"
+		local config_path = jdtls_path .. "/config_mac"
+		local path_to_jar = jdtls_path
+			.. "/plugins/org.eclipse.equinox.launcher.cocoa.macosx.aarch64_1.2.900.v20240129-1338.jar"
+
+		return {
+			cmd = {
+				"java",
+
+				"-Declipse.application=org.eclipse.jdt.ls.core.id1",
+				"-Dosgi.bundles.defaultStartLevel=4",
+				"-Declipse.product=org.eclipse.jdt.ls.core.product",
+				"-Dlog.protocol=true",
+				"-Dlog.level=ALL",
+				"-Xmx1g",
+				"-javaagent:" .. lombok_path,
+				"--add-modules=ALL-SYSTEM",
+				"--add-opens",
+				"java.base/java.util=ALL-UNNAMED",
+				"--add-opens",
+				"java.base/java.lang=ALL-UNNAMED",
+
+				-- 💀
+				"-jar",
+				path_to_jar,
+				-- 💀
+				"-configuration",
+				config_path,
+				"-data",
+				workspace_dir,
+			},
+			init_options = {
+				extendedClientCapabilities = require("jdtls").extendedClientCapabilities,
+			},
+			root_dir = root_dir,
+			settings = {
+				java = {
+					format = {
+						enabled = true,
+					},
+					saveActions = {
+						organizeImports = true,
+					},
+					import = {
+						maven = {
+							enabled = true,
+						},
+					},
+					eclipse = {
+						downloadSources = true,
+					},
+					maven = {
+						downloadSources = true,
+					},
+				},
+			},
+		}
+	end,
 	jdtls = function()
 		return {
 			settings = {

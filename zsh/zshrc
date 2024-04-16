@@ -6,6 +6,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 export LANG=en_US.UTF-8
+export VISUAL='nvim'
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -14,14 +15,20 @@ else
   export EDITOR='nvim'
 fi
 
+function echo_git_ignore() {
+    echo $1 >> ".gitignore"
+}
+
 # aliases
+alias gpf="git push --force"
+alias egig="echo_git_ignore"
 alias gdec="git log --decorate=full --oneline --graph"
 alias nvconfig="cd $HOME/dotfiles/nvim && nvim"
 alias l="ls -halF"
 alias gdec="git log --decorate=full --oneline --graph"
 alias nvconfig="cd $HOME/dotfiles/nvim && nvim"
 alias nv-notes="cd $HOME/ReadingNotes && nvim"
-alias glg='git log --oneline --decorate --graph --all'
+alias glg='git log --oneline --decorate --graph'
 alias grf="git reflog"
 alias gl="git pull"
 alias ga="git add"
@@ -42,6 +49,7 @@ alias grbc="git rebase --continue"
 alias dcb="docker compose --build"
 alias dcud="dcb -d"
 alias gco="git checkout"
+alias grs="git reset"
 
 # neovim variables
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -53,9 +61,30 @@ alias nv="nvim"
 alias dive="docker run -ti --rm  -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive"
 
 # node env variable
-export NVM_DIR="$XDG_CONFIG_HOME/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+function lazy_load_nvm() {
+    unset -f node nvm npm
+    export NVM_DIR="$XDG_CONFIG_HOME/nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+}
+
+function node() {
+    lazy_load_nvm
+    node $@
+}
+
+function npm() {
+    lazy_load_nvm
+    npm $@
+}
+
+function nvm() {
+    lazy_load_nvm
+    nvm $@
+}
+
+lazy_load_nvm
+
 [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
 
 # Prompt
