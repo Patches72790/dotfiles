@@ -39,6 +39,7 @@ return {
 			"mfussenegger/nvim-dap",
 			"rcarriga/nvim-dap-ui",
 			"stevearc/conform.nvim",
+			"nvim-neotest/nvim-nio",
 		},
 		config = function()
 			require("config.lsp").setup()
