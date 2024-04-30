@@ -183,14 +183,6 @@ local setup_handlers = function(options)
 		["terraformls"] = function()
 			local server_opts = server_handlers_fn("terraformls", options)
 			lspconfig["terraformls"].setup(server_opts)
-			vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-				desc = "Terraform-ls format on save",
-				group = vim.api.nvim_create_augroup("terraform-ls-format", { clear = true }),
-				pattern = { "*.tf", "*.tfvars" },
-				callback = function()
-					vim.lsp.buf.format()
-				end,
-			})
 		end,
 
 		["rust_analyzer"] = function()

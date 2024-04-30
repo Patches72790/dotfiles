@@ -34,7 +34,7 @@ alias gl="git pull"
 alias ga="git add"
 alias gp="git push"
 alias gpsup="git push -u"
-alias gfa="git fetch -a"
+alias gfa="git fetch -a -p"
 alias gb="git branch"
 alias gst="git status"
 alias gd="git diff"
@@ -83,7 +83,7 @@ function nvm() {
     nvm $@
 }
 
-lazy_load_nvm
+#lazy_load_nvm
 
 [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
 
