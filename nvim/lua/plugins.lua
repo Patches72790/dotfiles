@@ -29,6 +29,11 @@ return {
 		"neovim/nvim-lspconfig",
 		event = "VimEnter",
 		lazy = true,
+		init_options = {
+			userLanguages = {
+				rust = "html",
+			},
+		},
 		dependencies = {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
