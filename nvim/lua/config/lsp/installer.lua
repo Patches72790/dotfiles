@@ -213,6 +213,8 @@ local setup_handlers = function(options)
 end
 
 local ensure_installed_servers = {
+	"rnix",
+	"pyright",
 	"rust_analyzer",
 	"tsserver",
 	"lua_ls",

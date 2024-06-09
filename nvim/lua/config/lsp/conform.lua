@@ -20,6 +20,7 @@ M.setup = function()
 			dockerfile = {},
 			terraform = { "terraform_fmt" },
 			haskell = {},
+			nix = {},
 		},
 		format_on_save = function(bufnr)
 			if vim.g.conform_autoformat_disabled or vim.b[bufnr].conform_autoformat_disabled then
