@@ -27,8 +27,7 @@ alias nvconfig="cd $HOME/dotfiles/nvim && nvim"
 alias l="ls -halF"
 alias gdec="git log --decorate=full --oneline --graph"
 alias nvconfig="cd $HOME/dotfiles/nvim && nvim"
-alias nv-notes="cd $HOME/ReadingNotes && nvim"
-alias glg='git log --oneline --decorate --graph'
+alias glg='git log --oneline --graph'
 alias grf="git reflog"
 alias gl="git pull"
 alias ga="git add"
@@ -50,6 +49,9 @@ alias dcb="docker compose --build"
 alias dcud="dcb -d"
 alias gco="git checkout"
 alias grs="git reset"
+alias gbav="gb -av"
+alias gbdc="gbav | egrep '(\[gone\])' | egrep -v '(master|main)' | awk '{ print \$1 }'"
+alias gbda="gbdc | xargs git branch -D"
 
 # neovim variables
 export XDG_CONFIG_HOME="$HOME/.config"
