@@ -63,27 +63,27 @@ alias nv="nvim"
 alias dive="docker run -ti --rm  -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive"
 
 # node env variable
-function lazy_load_nvm() {
-    unset -f node nvm npm
-    export NVM_DIR="$XDG_CONFIG_HOME/nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-}
-
-function node() {
-    lazy_load_nvm
-    node $@
-}
-
-function npm() {
-    lazy_load_nvm
-    npm $@
-}
-
-function nvm() {
-    lazy_load_nvm
-    nvm $@
-}
+#function lazy_load_nvm() {
+#    unset -f node nvm npm
+#    export NVM_DIR="$XDG_CONFIG_HOME/nvm"
+#    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+#}
+#
+#function node() {
+#    lazy_load_nvm
+#    node $@
+#}
+#
+#function npm() {
+#    lazy_load_nvm
+#    npm $@
+#}
+#
+#function nvm() {
+#    lazy_load_nvm
+#    nvm $@
+#}
 
 #lazy_load_nvm
 

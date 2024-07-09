@@ -1,5 +1,5 @@
 [shell]
-program = "/usr/local/bin/tmux"
+program = "tmux"
 args = ["new-session", "-A", "-D", "-s", "main"]
 
 [window]

@@ -151,7 +151,7 @@ local server_handlers = {
 		return {
 			init_options = {
 				terraform = {
-					path = "/opt/homebrew/bin/terraform",
+					path = os.getenv("HOME") .. "/.nix-profile/bin/terraform",
 				},
 			},
 		}
