@@ -52,6 +52,7 @@ alias grs="git reset"
 alias gbav="gb -av"
 alias gbdc="gbav | egrep '(\[gone\])' | egrep -v '(master|main)' | awk '{ print \$1 }'"
 alias gbda="gbdc | xargs git branch -D"
+alias nixup="darwin-rebuild switch -I darwin-config=$HOME/.config/nix/darwin/configuration.nix"
 
 # neovim variables
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -61,31 +62,6 @@ export REACT_EDITOR="none"
 alias nv="nvim"
 # dive docker inspection
 alias dive="docker run -ti --rm  -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive"
-
-# node env variable
-#function lazy_load_nvm() {
-#    unset -f node nvm npm
-#    export NVM_DIR="$XDG_CONFIG_HOME/nvm"
-#    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-#    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-#}
-#
-#function node() {
-#    lazy_load_nvm
-#    node $@
-#}
-#
-#function npm() {
-#    lazy_load_nvm
-#    npm $@
-#}
-#
-#function nvm() {
-#    lazy_load_nvm
-#    nvm $@
-#}
-
-#lazy_load_nvm
 
 [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
 

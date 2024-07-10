@@ -1,6 +1,5 @@
 { config, pkgs, ... }:
 
-
 {
   imports = [
     <home-manager/nix-darwin>
@@ -26,6 +25,7 @@
       ripgrep
       git
       awscli
+      tomcat10
     ];
 
   home-manager.users.plharvey = { pkgs, ... }: {
@@ -36,7 +36,7 @@
 
     home.packages = with pkgs; [
       neovim
-      temurin-bin-21
+      jdk21_headless
       maven
       deno
       nodejs_20
@@ -44,6 +44,8 @@
       alacritty
       terraform
       go
+      sqlite
+      docker_27
     ];
 
     home.stateVersion = "24.05";
@@ -92,7 +94,7 @@
 
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
-  # environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
+  environment.darwinConfig = "$HOME/.config/nix/darwin/configuration.nix";
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
