@@ -11,6 +11,10 @@
     home = "/Users/plharvey";
   };
 
+  nixpkgs.config = {
+    allowUnfree = true;
+  };
+
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages =
@@ -26,6 +30,8 @@
       git
       awscli
       tomcat10
+      sshpass
+      tree
     ];
 
   home-manager.users.plharvey = { pkgs, ... }: {
@@ -45,7 +51,10 @@
       terraform
       go
       sqlite
-      docker_27
+      obsidian
+      iterm2
+      stack
+      ghc
     ];
 
     home.stateVersion = "24.05";
@@ -114,8 +123,8 @@
   local.dock = {
     enable = true;
     entries = [
-      { path = "${pkgs.alacritty}/Applications/Alacritty.app/"; }
-      { path = "/Applications/iTerm.app/"; }
+      { path = "${pkgs.iterm2}/Applications/iTerm2.app/"; }
+      { path = "${pkgs.obsidian}/Applications/Obsidian.app/"; }
       { path = "/Applications/Firefox.app/"; }
       { path = "/Applications/Anki.app/"; }
       { path = "/Applications/Microsoft Outlook.app/"; }
