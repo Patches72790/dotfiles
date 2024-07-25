@@ -3,11 +3,12 @@ local M = {}
 -- Empty tables use the LSP for formatting
 M.setup = function()
 	require("conform").setup({
+
 		formatters_by_ft = {
 			lua = { "stylua" },
 			python = { "blackd-client", "black" },
-			javascript = { { "prettierd", "prettier" } },
-			typescript = { { "prettierd", "prettier" } },
+			javascript = { "prettierd", "prettier" },
+			typescript = { "prettierd", "prettier" },
 			markdown = { "prettierd" },
 			css = { "prettierd" },
 			scss = { "prettierd" },
@@ -17,12 +18,12 @@ M.setup = function()
 			go = { "goimports", "gofmt" },
 			sh = { "shfmt" },
 			xml = { "xmlformat" },
-			rust = {},
-			java = {},
-			dockerfile = {},
-			terraform = { "terraform_fmt" },
-			haskell = {},
-			nix = {},
+			rust = { "rustfmt", lsp_format = "fallback" },
+			java = { lsp_format = "fallback" },
+			dockerfile = { lsp_format = "fallback" },
+			terraform = { "terraform_fmt", lsp_format = "fallback" },
+			haskell = { lsp_format = "fallback" },
+			nix = { lsp_format = "fallback" },
 		},
 		format_on_save = function(bufnr)
 			if vim.g.conform_autoformat_disabled or vim.b[bufnr].conform_autoformat_disabled then
@@ -30,9 +31,12 @@ M.setup = function()
 			end
 			return {
 				timeout_ms = 500,
-				lsp_fallback = true,
+				lsp_format = "fallback",
 			}
 		end,
+		format_after_save = {
+			lsp_format = "fallback",
+		},
 	})
 
 	vim.api.nvim_create_user_command("ConformFormatDisable", function(args)
