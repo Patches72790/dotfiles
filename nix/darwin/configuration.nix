@@ -1,5 +1,10 @@
-{ config, pkgs, ... }:
+{ config
+, pkgs
+, ...
+}:
 
+let unstableTarball = fetchTarball https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz;
+in
 {
   imports = [
     <home-manager/nix-darwin>
@@ -13,6 +18,10 @@
 
   nixpkgs.config = {
     allowUnfree = true;
+    packageOverrides = pkgs: {
+      unstable = import unstableTarball
+        { config = config.nixpkgs.config; };
+    };
   };
 
   # List packages installed in system profile. To search by name, run:
@@ -38,10 +47,14 @@
     # Wtf terraform?
     nixpkgs.config = {
       allowUnfree = true;
+      packageOverrides = pkgs: {
+        unstable = import unstableTarball
+          { config = config.nixpkgs.config; };
+      };
     };
 
     home.packages = with pkgs; [
-      neovim
+      pkgs.unstable.neovim
       jdk21_headless
       maven
       deno
