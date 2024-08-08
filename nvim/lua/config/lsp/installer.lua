@@ -133,6 +133,9 @@ local server_handlers = {
 			settings = {
 				java = {
 					format = {
+						settings = {
+							url = os.getenv("HOME") .. "/dotfiles/formatting/java/google-style.xml",
+						},
 						enabled = true,
 					},
 					saveActions = {
