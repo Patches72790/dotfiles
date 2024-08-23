@@ -109,6 +109,10 @@ local server_handlers = {
 				java = {
 					format = {
 						enabled = true,
+						settings = {
+							url = os.getenv("HOME") .. "/dotfiles/formatting/java/google-style.xml",
+							profile = "GoogleStyle",
+						},
 					},
 					saveActions = {
 						organizeImports = true,
@@ -133,10 +137,11 @@ local server_handlers = {
 			settings = {
 				java = {
 					format = {
+						enabled = true,
 						settings = {
 							url = os.getenv("HOME") .. "/dotfiles/formatting/java/google-style.xml",
+							profile = "GoogleStyle",
 						},
-						enabled = true,
 					},
 					saveActions = {
 						organizeImports = true,
