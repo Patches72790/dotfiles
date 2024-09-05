@@ -3,7 +3,8 @@
 , ...
 }:
 
-let unstableTarball = fetchTarball https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz;
+let
+  unstableTarball = fetchTarball https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz;
 in
 {
   imports = [
@@ -41,6 +42,7 @@ in
       tomcat10
       sshpass
       tree
+      pkgs.unstable.sshfs
     ];
 
   home-manager.users.plharvey = { pkgs, ... }: {
