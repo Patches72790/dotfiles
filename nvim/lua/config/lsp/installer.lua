@@ -224,7 +224,7 @@ local ensure_installed_servers = {
 	"rnix",
 	"pyright",
 	"rust_analyzer",
-	"tsserver",
+	"ts_ls",
 	"lua_ls",
 	"yamlls",
 	"jdtls",

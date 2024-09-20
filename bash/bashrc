@@ -52,3 +52,18 @@ export NVM_DIR="$XDG_CONFIG_HOME/nvm"
 # bash prompt
 PROMPT_COMMAND='PS1_CMD1=$(git branch 2>/dev/null | grep '"'"'*'"'"' | colrm 1 2)'
 PS1='\[\e[38;5;121m\]\u\[\e[0m\] \[\e[38;5;214;1m\]\W\[\e[0m\] \[\e[38;5;37m\]${PS1_CMD1}\[\e[0m\]\[\e[38;5;135m\] λ\[\e[0m\] '
+
+# >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
+case ":$PATH:" in
+    *:/Users/plharvey/.juliaup/bin:*)
+        ;;
+
+    *)
+        export PATH=/Users/plharvey/.juliaup/bin${PATH:+:${PATH}}
+        ;;
+esac
+
+# <<< juliaup initialize <<<

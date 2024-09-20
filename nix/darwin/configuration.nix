@@ -19,6 +19,7 @@ in
 
   nixpkgs.config = {
     allowUnfree = true;
+    allowUnsupportedSystem = true; #for julia? 
     packageOverrides = pkgs: {
       unstable = import unstableTarball
         { config = config.nixpkgs.config; };
@@ -43,6 +44,7 @@ in
       sshpass
       tree
       pkgs.unstable.sshfs
+      julia
     ];
 
   home-manager.users.plharvey = { pkgs, ... }: {

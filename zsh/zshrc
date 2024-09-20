@@ -72,5 +72,11 @@ function git_branch_cmd() {
 setopt PROMPT_SUBST
 export PS1='%{%F{109}%}%n %{%F{106}%}$(git_branch_cmd) %{%F{72}%}%1~ %{%F{96}%}λ %{%f%}'
 
-#export DIRENV_SKIP_TIMEOUT=TRUE
-#eval "$(direnv hook zsh)"
+# >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
+path=('/Users/plharvey/.juliaup/bin' $path)
+export PATH
+
+# <<< juliaup initialize <<<

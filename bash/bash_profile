@@ -13,3 +13,18 @@ export PATH="$BREW_PATH:$GHC_PATH:$GOBIN:$GOROOT:$NVIM_PATH:$LOCAL_BIN_PATH:$CAR
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/openjdk17"
 
 source /Users/plharvey/.bashrc
+
+# >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
+case ":$PATH:" in
+    *:/Users/plharvey/.juliaup/bin:*)
+        ;;
+
+    *)
+        export PATH=/Users/plharvey/.juliaup/bin${PATH:+:${PATH}}
+        ;;
+esac
+
+# <<< juliaup initialize <<<
