@@ -44,7 +44,7 @@ in
       sshpass
       tree
       pkgs.unstable.sshfs
-      julia
+      graphviz
     ];
 
   home-manager.users.plharvey = { pkgs, ... }: {
@@ -64,7 +64,7 @@ in
       deno
       nodejs_20
       python311
-      alacritty
+      #alacritty
       terraform
       go
       sqlite
@@ -83,39 +83,7 @@ in
   programs.tmux.enableVim = true;
 
   programs.tmux.extraConfig = ''
-    set -s escape-time 10
-    set -s focus-events on
-    set -g mouse on
-    set -g history-limit 100000
-    set-window-option -g mode-keys vi
-
-    # Set control + space to prefix key
-    unbind C-b
-    set -g prefix C-Space
-
-    # Quick binding for reloading config with prefix + r
-    unbind r
-    bind r source-file ~/.config/tmux/tmux.conf \; display "Reloaded tmux config"
-
-    # set bindings for pane splits
-    unbind v
-    unbind h
-    unbind n 
-    unbind w
-
-    unbind % # Split vertically
-    unbind '"' # Split horizontally
-
-    bind v split-window -h -c "#{pane_current_path}"
-    bind h split-window -v -c "#{pane_current_path}"
-    bind w new-window -c "#{pane_current_path}"
-    bind n command-prompt "rename-window '%%'"
-
-    ## By using vim keys
-    bind -n C-h select-pane -L
-    bind -n C-j select-pane -D
-    bind -n C-k select-pane -U
-    bind -n C-l select-pane -R
+    source-file -q ~/.config/tmux/tmux.conf
   '';
 
   # Use a custom configuration.nix location.
