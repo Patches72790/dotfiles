@@ -63,10 +63,11 @@ in
       maven
       deno
       nodejs_20
-      python311
-      #alacritty
+      python312
+      alacritty
       terraform
-      go
+      pkgs.unstable.go
+      pkgs.unstable.rustup
       sqlite
       obsidian
       iterm2

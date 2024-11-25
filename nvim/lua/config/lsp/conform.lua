@@ -5,7 +5,7 @@ M.setup = function()
 	require("conform").setup({
 		formatters_by_ft = {
 			lua = { "stylua" },
-			python = { "blackd-client", "black" },
+			python = { "blackd-client", "black", lsp_format = "fallback" },
 			javascript = { "prettierd" },
 			typescript = { "prettierd" },
 			markdown = { "prettierd" },
@@ -18,7 +18,7 @@ M.setup = function()
 			sh = { "shfmt" },
 			xml = { "xmlformat" },
 			rust = { "rustfmt", lsp_format = "fallback" },
-			java = { lsp_format = "fallback" },
+			--java = { lsp_format = "fallback" },
 			dockerfile = { lsp_format = "fallback" },
 			terraform = { "terraform_fmt", lsp_format = "fallback" },
 			haskell = { lsp_format = "fallback" },
