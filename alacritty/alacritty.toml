@@ -1,4 +1,4 @@
-[shell]
+[terminal.shell]
 program = "tmux"
 args = ["new-session", "-A", "-D", "-s", "main"]
 
