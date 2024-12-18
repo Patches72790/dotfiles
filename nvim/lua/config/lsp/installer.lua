@@ -144,11 +144,29 @@ local server_handlers = {
 						},
 					},
 					saveActions = {
-						organizeImports = true,
+						organizeImports = false,
+					},
+					completion = {
+						favoriteStaticMembers = {
+							"lombok.*",
+							"org.junit.Assert.*",
+							"org.junit.Assume.*",
+							"org.junit.jupiter.api.Assertions.*",
+							"org.junit.jupiter.api.Assumptions.*",
+							"org.junit.jupiter.api.DynamicContainer.*",
+							"org.junit.jupiter.api.DynamicTest.*",
+						},
 					},
 					import = {
 						maven = {
 							enabled = true,
+						},
+						exclusions = {
+							"**/node_modules/**",
+							"**/.metadata/**",
+							"**/archetype-resources/**",
+							"**/META-INF/maven/**",
+							"/**/test/**",
 						},
 					},
 				},

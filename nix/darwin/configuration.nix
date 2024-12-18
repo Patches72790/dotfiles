@@ -64,7 +64,7 @@ in
       deno
       nodejs_20
       python312
-      alacritty
+      pkgs.unstable.alacritty
       terraform
       pkgs.unstable.go
       pkgs.unstable.rustup
@@ -75,7 +75,7 @@ in
       ghc
     ];
 
-    home.stateVersion = "24.05";
+    home.stateVersion = "24.11";
   };
 
   programs.tmux.enable = true;
@@ -121,5 +121,5 @@ in
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
-  system.stateVersion = 4;
+  system.stateVersion = 5;
 }
