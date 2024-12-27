@@ -45,6 +45,8 @@ in
       tree
       pkgs.unstable.sshfs
       graphviz
+      wireguard-go
+      wireguard-tools
     ];
 
   home-manager.users.plharvey = { pkgs, ... }: {

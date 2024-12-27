@@ -26,6 +26,17 @@ return {
 	},
 
 	{
+		"saghen/blink.cmp",
+		dependencies = "rafamadriz/friendly-snippets",
+
+		version = "*",
+		opts_extend = { "sources.default" },
+		config = function()
+			require("config.blink").setup()
+		end,
+	},
+
+	{
 		"neovim/nvim-lspconfig",
 		event = "VimEnter",
 		lazy = true,
@@ -36,6 +47,7 @@ return {
 		},
 		dependencies = {
 			"williamboman/mason.nvim",
+			"saghen/blink.cmp",
 			"williamboman/mason-lspconfig.nvim",
 			"jayp0521/mason-null-ls.nvim",
 			"nvimtools/none-ls.nvim",
@@ -60,27 +72,6 @@ return {
 		},
 		config = function()
 			require("config.treesitter").setup()
-		end,
-	},
-
-	{
-		"hrsh7th/nvim-cmp",
-		dependencies = {
-			"L3MON4D3/LuaSnip",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-nvim-lua",
-			"saadparwaiz1/cmp_luasnip",
-			"hrsh7th/cmp-buffer",
-			"lukas-reineke/cmp-rg",
-			"hrsh7th/cmp-cmdline",
-			"hrsh7th/cmp-omni",
-			"onsails/lspkind-nvim", -- VScode pictograms
-			"dmitmel/cmp-digraphs",
-		},
-		config = function()
-			require("config.nvim-cmp").setup()
 		end,
 	},
 
@@ -126,14 +117,6 @@ return {
 			require("which-key").setup()
 		end,
 	},
-
-	--	{
-	--		"karb94/neoscroll.nvim",
-	--		event = "VeryLazy",
-	--		config = function()
-	--			require("neoscroll").setup()
-	--		end,
-	--	},
 
 	{
 		"folke/neodev.nvim",
