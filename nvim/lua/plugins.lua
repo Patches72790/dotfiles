@@ -75,13 +75,13 @@ return {
 		end,
 	},
 
-	{
-		"L3MON4D3/LuaSnip",
-		event = "VeryLazy",
-		config = function()
-			require("config.luasnip").setup()
-		end,
-	},
+	--{
+	--	"L3MON4D3/LuaSnip",
+	--	event = "VeryLazy",
+	--	config = function()
+	--		require("config.luasnip").setup()
+	--	end,
+	--},
 
 	"ellisonleao/gruvbox.nvim",
 	"shaunsingh/nord.nvim",

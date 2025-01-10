@@ -10,7 +10,7 @@ local opts = {
 		nerd_font_variant = "mono",
 	},
 	sources = {
-		default = { "lsp", "path", "snippets", "buffer", "luasnip" },
+		default = { "lsp", "path", "snippets", "buffer" },
 	},
 	signature = { enabled = true },
 }
