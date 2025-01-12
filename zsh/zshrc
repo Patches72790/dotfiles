@@ -83,8 +83,8 @@ export PATH
 
 # SSHFS Initialization MacOS
 function setup_obsidian_sshfs () {
-    REMOTE="patroclusserver-tailscale:/home/patroclus/obsidian"
-    LOCAL="/Users/plharvey/obsidian-mnt"
+    REMOTE="patroclusserver:/home/patroclus/obsidian"
+    LOCAL="$HOME/obsidian-mnt"
     OPTS="allow_other,delay_connect,reconnect"
     ALREADY_MNTED=$(df | grep $REMOTE | awk '{print $2}')
 
