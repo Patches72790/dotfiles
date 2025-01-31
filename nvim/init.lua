@@ -20,4 +20,4 @@ end
 -- initialize plugins from ~/.config/nvim/lua/plugins.lua
 require("lazy").setup(require("plugins"))
 
-vim.cmd([[colorscheme gruvbox]])
+vim.cmd([[colorscheme material-darker]])

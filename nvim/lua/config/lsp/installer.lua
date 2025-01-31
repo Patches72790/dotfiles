@@ -253,6 +253,7 @@ local ensure_installed_servers = {
 	"dockerls",
 	"terraformls",
 	"hls",
+	"eslint",
 }
 
 function M.setup(options)

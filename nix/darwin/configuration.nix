@@ -47,6 +47,9 @@ in
       graphviz
       wireguard-go
       wireguard-tools
+      git-crypt
+      gnupg
+      glab
     ];
 
   home-manager.users.plharvey = { pkgs, ... }: {

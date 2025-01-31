@@ -75,14 +75,7 @@ return {
 		end,
 	},
 
-	--{
-	--	"L3MON4D3/LuaSnip",
-	--	event = "VeryLazy",
-	--	config = function()
-	--		require("config.luasnip").setup()
-	--	end,
-	--},
-
+	"marko-cerovac/material.nvim",
 	"ellisonleao/gruvbox.nvim",
 	"shaunsingh/nord.nvim",
 	"rose-pine/neovim",

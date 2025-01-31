@@ -10,7 +10,7 @@ end
 function M.setup()
 	lualine.setup({
 		options = {
-			theme = "gruvbox",
+			theme = "auto",
 		},
 		sections = {
 			lualine_c = {},
