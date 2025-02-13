@@ -50,6 +50,8 @@ in
       git-crypt
       gnupg
       glab
+      _1password-cli
+      httpie
     ];
 
   home-manager.users.plharvey = { pkgs, ... }: {

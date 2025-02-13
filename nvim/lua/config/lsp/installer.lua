@@ -219,13 +219,13 @@ local setup_handlers = function(options)
 				return server_handlers["rust_analyzer"](options)
 			end
 		end,
-		["jdtls"] = function()
-			local server_opts = server_handlers_fn("jdtls", options)
-			lspconfig["jdtls"].setup(server_opts)
-			-- TODO add support for nvim_jdtls here and use their method instead of default lsp
-			--local server_opts = server_handlers["jdtls"](options)
-			--require("jdtls").start_or_attach(server_opts)
-		end,
+		--["jdtls"] = function()
+		--	local server_opts = server_handlers_fn("jdtls", options)
+		--	lspconfig["jdtls"].setup(server_opts)
+		--	-- TODO add support for nvim_jdtls here and use their method instead of default lsp
+		--	--local server_opts = server_handlers["jdtls"](options)
+		--	--require("jdtls").start_or_attach(server_opts)
+		--end,
 		["lua_ls"] = function()
 			local server_opts = server_handlers_fn("lua_ls", options)
 			require("neodev").setup()
@@ -245,7 +245,7 @@ local ensure_installed_servers = {
 	"ts_ls",
 	"lua_ls",
 	"yamlls",
-	"jdtls",
+	--"jdtls",
 	"gopls",
 	"yamlls",
 	"bashls",

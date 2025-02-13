@@ -116,6 +116,7 @@ return {
 		opts = {},
 	},
 
+	--[[ 
 	{
 		"folke/noice.nvim",
 		event = "VeryLazy",
@@ -149,6 +150,7 @@ return {
 			"rcarriga/nvim-notify",
 		},
 	},
+    ]]
 
 	{
 		"toppair/peek.nvim",
