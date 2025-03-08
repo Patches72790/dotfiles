@@ -24,6 +24,21 @@ return {
 	},
 
 	{
+
+		"echasnovski/mini.nvim",
+		config = function()
+			-- Around/inside objects commands
+			require("mini.ai").setup({ n_lines = 500 })
+
+			-- Mutate around/inside objects more easily
+			require("mini.surround").setup()
+
+			local statusline = require("mini.statusline")
+			statusline.setup()
+		end,
+	},
+
+	{
 		"stevearc/oil.nvim",
 		---@module 'oil'
 		---@type oil.SetupOpts
@@ -91,14 +106,6 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
 			require("config.gitsigns").setup()
-		end,
-	},
-
-	{
-		"nvim-lualine/lualine.nvim",
-		dependencies = { "kyazdani42/nvim-web-devicons" },
-		config = function()
-			require("config.lualine").setup()
 		end,
 	},
 
