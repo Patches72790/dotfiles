@@ -76,7 +76,6 @@ in
       pkgs.unstable.go
       pkgs.unstable.rustup
       sqlite
-      obsidian
       iterm2
       stack
       ghc
@@ -117,7 +116,7 @@ in
     enable = true;
     entries = [
       { path = "${pkgs.iterm2}/Applications/iTerm2.app/"; }
-      { path = "${pkgs.obsidian}/Applications/Obsidian.app/"; }
+      { path = "/Applications/Obsidian.app/"; }
       { path = "/Applications/Firefox.app/"; }
       { path = "/Applications/Anki.app/"; }
       { path = "/Applications/Microsoft Outlook.app/"; }

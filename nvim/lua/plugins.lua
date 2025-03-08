@@ -1,18 +1,5 @@
 return {
 	{
-		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v2.x",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"kyazdani42/nvim-web-devicons",
-			"MunifTanjim/nui.nvim",
-		},
-		config = function()
-			require("config.neo-tree").setup()
-		end,
-	},
-
-	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
@@ -34,6 +21,21 @@ return {
 		config = function()
 			require("config.blink").setup()
 		end,
+	},
+
+	{
+		"stevearc/oil.nvim",
+		---@module 'oil'
+		---@type oil.SetupOpts
+		opts = {},
+		-- Optional dependencies
+		-- dependencies = { { "echasnovski/mini.icons", opts = {} } },
+		dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
+		config = function()
+			require("oil").setup()
+		end,
+		-- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
+		lazy = false,
 	},
 
 	{
@@ -75,10 +77,13 @@ return {
 		end,
 	},
 
-	"marko-cerovac/material.nvim",
-	"ellisonleao/gruvbox.nvim",
-	"shaunsingh/nord.nvim",
-	"rose-pine/neovim",
+	-- themes
+	{
+		"marko-cerovac/material.nvim",
+		"ellisonleao/gruvbox.nvim",
+		"shaunsingh/nord.nvim",
+		"rose-pine/neovim",
+	},
 
 	{
 		"lewis6991/gitsigns.nvim",
@@ -98,13 +103,6 @@ return {
 	},
 
 	{
-		"goolord/alpha-nvim",
-		config = function()
-			require("config.alpha")
-		end,
-	},
-
-	{
 		"folke/which-key.nvim",
 		config = function()
 			require("which-key").setup()
@@ -115,42 +113,6 @@ return {
 		"folke/neodev.nvim",
 		opts = {},
 	},
-
-	--[[ 
-	{
-		"folke/noice.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("noice").setup({
-				lsp = {
-					-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-					override = {
-						["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-						["vim.lsp.util.stylize_markdown"] = true,
-						["cmp.entry.get_documentation"] = true,
-					},
-				},
-				-- you can enable a preset for easier configuration
-				presets = {
-					bottom_search = true, -- use a classic bottom cmdline for search
-					command_palette = true, -- position the cmdline and popupmenu together
-					long_message_to_split = true, -- long messages will be sent to a split
-					inc_rename = false, -- enables an input dialog for inc-rename.nvim
-					lsp_doc_border = false, -- add a border to hover docs and signature help
-				},
-			})
-		end,
-		opts = {},
-		dependencies = {
-			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-			"MunifTanjim/nui.nvim",
-			-- OPTIONAL:
-			--   `nvim-notify` is only needed, if you want to use the notification view.
-			--   If not available, we use `mini` as the fallback
-			"rcarriga/nvim-notify",
-		},
-	},
-    ]]
 
 	{
 		"toppair/peek.nvim",

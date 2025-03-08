@@ -5,6 +5,17 @@ local opts = {
 		["<C-j>"] = { "select_next", "fallback" },
 		["<C-k>"] = { "select_prev", "fallback" },
 	},
+	completion = {
+		menu = {
+			draw = {
+				columns = {
+					{ "label", "label_description", gap = 1 },
+					{ "kind_icon", "kind" },
+				},
+			},
+		},
+	},
+
 	appearance = {
 		use_nvim_cmp_as_default = true,
 		nerd_font_variant = "mono",

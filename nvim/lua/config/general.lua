@@ -95,9 +95,9 @@ end
 local function init_keymaps()
 	vim.keymap.set("n", "<leader><Space>", function()
 		vim.cmd("nohl")
-		require("notify").dismiss({ silent = true, pending = true })
-	end, { desc = "Turn off highlighting and dismiss Noice", silent = true })
+	end, { desc = "Turn off highlighting", silent = true })
 
+	vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open Oil", silent = true })
 	vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save Buffer", silent = true })
 	vim.keymap.set("n", "<leader>q", ":qa<CR>", { desc = "Close Window", silent = true })
 	vim.keymap.set("n", "<leader>x", ":x<CR>", { desc = "Close Buffer", silent = true })

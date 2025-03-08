@@ -1,12 +1,5 @@
 local M = {}
 
--- get lsp capabilities
-local capabilities = vim.tbl_deep_extend(
-	"force",
-	vim.lsp.protocol.make_client_capabilities(),
-	require("blink.cmp").get_lsp_capabilities()
-)
-
 function M.setup()
 	-- Define the on attach handler
 	vim.api.nvim_create_autocmd("LspAttach", {
@@ -14,9 +7,11 @@ function M.setup()
 		callback = function(event)
 			vim.diagnostic.config({
 				underline = true,
+				virtual_text = true,
 				float = {
 					border = "rounded",
-					source = "always",
+					severity_sort = true,
+					source = true,
 				},
 			})
 
@@ -36,6 +31,10 @@ function M.setup()
 			map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 		end,
 	})
+
+	local capabilities = vim.lsp.protocol.make_client_capabilities()
+	-- blink merges the capabilities
+	capabilities = require("blink.cmp").get_lsp_capabilities(capabilities, true)
 
 	local opts = {
 		capabilities = capabilities,

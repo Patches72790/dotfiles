@@ -160,6 +160,7 @@ local server_handlers = {
 					import = {
 						maven = {
 							enabled = true,
+							downloadSources = true,
 						},
 						exclusions = {
 							"**/node_modules/**",
