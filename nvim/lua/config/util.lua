@@ -52,15 +52,15 @@ function M.info(msg, name)
 end
 
 function M.set_current_window_option(option, value)
-	vim.api.nvim_win_set_option(0, option, value)
+	vim.api.nvim_set_option_value(option, value, { win = 0, scope = "local" })
 end
 
 function M.set_current_buffer_option(option, value)
-	vim.api.nvim_buf_set_option(0, option, value)
+	vim.api.nvim_set_option_value(option, value, { buf = vim.api.nvim_get_current_buf() })
 end
 
 function M.set_global_option(option, value)
-	vim.api.nvim_set_option(option, value)
+	vim.api.nvim_set_option_value(option, value, { scope = "global" })
 end
 
 return M

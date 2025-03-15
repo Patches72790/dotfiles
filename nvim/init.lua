@@ -1,3 +1,5 @@
+require("config.general").setup()
+
 -- Bootstrapping for pre-installing packer
 local fn = vim.fn
 local lazy_path = fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -18,6 +20,3 @@ end
 require("lazy").setup(require("plugins"))
 
 vim.cmd([[colorscheme material-darker]])
-
--- initialize keymaps and window/buffer options
-require("config.general").setup()

@@ -4,7 +4,11 @@ local set_buf_opt = require("config.util").set_current_buffer_option
 local set_global_opt = require("config.util").set_global_option
 
 local nvim_options = {
-	window = { number = true },
+	window = {
+		relativenumber = true,
+		scrolloff = 10,
+		cursorline = true,
+	},
 	buffer = {
 		tabstop = 4,
 		shiftwidth = 4,
@@ -15,17 +19,19 @@ local nvim_options = {
 		fileformat = "unix",
 	},
 	global = {
+		inccommand = "split",
+		confirm = true,
 		updatetime = 250,
 		timeoutlen = 300,
-		cursorline = true,
-		inccommand = "split",
 		signcolumn = "yes",
 		splitright = true,
 		splitbelow = true,
+		smartcase = true,
 		tabstop = 4,
 		shiftwidth = 4,
 		ignorecase = true,
 		smartindent = true,
+		breakindent = true,
 		expandtab = true,
 		autoindent = true,
 		undofile = true,
@@ -33,7 +39,6 @@ local nvim_options = {
 		guifont = "FiraMono Nerd Font Mono:h11",
 		hlsearch = true,
 		errorbells = false,
-		nu = true,
 		wrap = false,
 		swapfile = false,
 		backup = false,
@@ -42,7 +47,6 @@ local nvim_options = {
 		backupdir = os.getenv("HOME") .. "/dotfiles/nvim/backupdir",
 		directory = os.getenv("HOME") .. "/dotfiles/nvim/backupdir",
 		completeopt = "menuone,noselect,noinsert",
-		relativenumber = true,
 		termguicolors = true,
 		background = "dark",
 	},
