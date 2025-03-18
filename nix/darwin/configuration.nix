@@ -79,7 +79,7 @@ in
       iterm2
       stack
       ghc
-      lean4
+      elan
     ];
 
     home.stateVersion = "24.11";
