@@ -8,6 +8,7 @@ local nvim_options = {
 		relativenumber = true,
 		scrolloff = 10,
 		cursorline = true,
+		number = true,
 	},
 	buffer = {
 		tabstop = 4,
