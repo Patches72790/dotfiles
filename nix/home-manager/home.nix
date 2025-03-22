@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, nixpkgs, unstable, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -18,10 +18,10 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    nodejs_22
-    deno
-    neovim
-    python311
+    unstable.nodejs_22
+    unstable.neovim
+    unstable.python313
+    unstable.rustup
     go
     sqlite
     ripgrep
