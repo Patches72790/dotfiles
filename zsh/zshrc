@@ -80,24 +80,3 @@ path=('/Users/plharvey/.juliaup/bin' $path)
 export PATH
 
 # <<< juliaup initialize <<<
-
-# SSHFS Initialization MacOS
-function setup_obsidian_sshfs () {
-    REMOTE="patroclusserver:/home/patroclus/obsidian"
-    LOCAL="$HOME/obsidian-mnt"
-    OPTS="allow_other,delay_connect,reconnect"
-    ALREADY_MNTED=$(df | grep $REMOTE | awk '{print $2}')
-
-    if [[ -z "$ALREADY_MNTED" ]]; then
-        sshfs -o $OPTS $REMOTE $LOCAL
-        test $? && echo "Successfully mounted" || echo "Error mounting via sshfs"
-    elif [[ "$ALREADY_MNTED" = "0" ]]; then
-        echo "Mounted but not initialized. Attempting to unmount, then remount..."
-        sudo diskutil unmount $LOCAL
-
-        echo "Successfully unmounted. Check your tailscale connection then try again."
-        #sshfs -o $OPTS $REMOTE $LOCAL
-    else
-        echo "$REMOTE already mounted at $LOCAL"
-    fi
-}
