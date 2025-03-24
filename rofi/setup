@@ -1,4 +1,0 @@
-#!/bin/bash
-
-mkdir -p $HOME/.config/rofi
-ln -s $HOME/dotfiles/rofi/config.rasi $XDG_CONFIG_HOME/rofi/config.rasi
