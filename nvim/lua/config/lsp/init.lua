@@ -1,5 +1,12 @@
 local M = {}
 
+-- To instead override globally
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+	opts = vim.tbl_deep_extend("force", opts, { border = "rounded" })
+	return orig_util_open_floating_preview(contents, syntax, opts, ...)
+end
+
 function M.setup()
 	-- Define the on attach handler
 	vim.api.nvim_create_autocmd("LspAttach", {

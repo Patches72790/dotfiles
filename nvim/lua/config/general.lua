@@ -6,9 +6,12 @@ local set_global_opt = require("config.util").set_global_option
 local nvim_options = {
 	window = {
 		relativenumber = true,
+		number = true,
 		scrolloff = 10,
 		cursorline = true,
-		number = true,
+		foldmethod = "expr",
+		foldexpr = "nvim_treesitter#foldexpr()",
+		foldenable = false,
 	},
 	buffer = {
 		tabstop = 4,
@@ -20,8 +23,10 @@ local nvim_options = {
 		fileformat = "unix",
 	},
 	global = {
+		relativenumber = true,
+		number = true,
 		inccommand = "split",
-		confirm = true,
+		--confirm = true,
 		updatetime = 250,
 		timeoutlen = 300,
 		signcolumn = "yes",
@@ -123,10 +128,26 @@ local function init_keymaps()
 	)
 end
 
+local autoCommands = {}
+
+-- function to create a list of commands and convert them to autocommands
+-------- This function is taken from https://github.com/norcalli/nvim_utils
+function M.nvim_create_augroups(definitions)
+	for group_name, definition in pairs(definitions) do
+		vim.api.nvim_create_autocmd(definition.events, {
+			group = vim.api.nvim_create_augroup(group_name, { clear = true }),
+			pattern = definition.pattern,
+			command = definition.cmd,
+			desc = definition.desc,
+		})
+	end
+end
+
 function M.setup()
 	init_keymaps()
 	init_nvim_options()
 	init_movement_keymaps()
+	M.nvim_create_augroups(autoCommands)
 	-- initialize global helpers
 	require("config.globals")
 end
