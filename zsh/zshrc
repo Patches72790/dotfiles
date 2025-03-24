@@ -52,7 +52,8 @@ alias grs="git reset"
 alias gbav="gb -av"
 alias gbdc="gbav | egrep '(\[gone\])' | egrep -v '(master|main)' | awk '{ print \$1 }'"
 alias gbda="gbdc | xargs git branch -D"
-alias nixup="darwin-rebuild switch -I darwin-config=$HOME/.config/nix/darwin/configuration.nix"
+alias nixup="darwin-rebuild switch --flake $HOME/dotfiles/nix-darwin"
+alias hmsw="home-manager switch"
 
 # neovim variables
 export XDG_CONFIG_HOME="$HOME/.config"
