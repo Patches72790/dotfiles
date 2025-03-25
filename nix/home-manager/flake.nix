@@ -13,10 +13,10 @@
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... } @ inputs:
     let
-      inherit (self) outputs;
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-      unstable-pkgs = nixpkgs-unstable.legacyPackages.${system};
+      commonArgs = { inherit system; config.allowUnfree = true; };
+      pkgs = import nixpkgs commonArgs;
+      unstable = import nixpkgs-unstable commonArgs;
     in
     {
       homeConfigurations."patroclus" = home-manager.lib.homeManagerConfiguration {
@@ -28,7 +28,7 @@
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
-        extraSpecialArgs = { inherit inputs outputs; unstable = unstable-pkgs; };
+        extraSpecialArgs = { inherit pkgs unstable inputs; };
       };
     };
 }
