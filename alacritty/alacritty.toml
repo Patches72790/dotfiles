@@ -1,6 +1,6 @@
-[terminal.shell]
-program = "tmux"
-args = ["new-session", "-A", "-D", "-s", "main"]
+#[terminal.shell]
+#program = "tmux"
+#args = ["new-session", "-A", "-D", "-s", "main"]
 
 [window]
 padding = { x = 5, y = 5 }

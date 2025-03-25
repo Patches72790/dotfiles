@@ -1,17 +1,13 @@
-{ config, pkgs, lib, unstable, ... }: {
-  # Wtf terraform?
-  nixpkgs.config = {
-    allowUnfree = true;
-  };
+{ config, pkgs, unstable, ... }: {
 
   home.packages = with pkgs; [
+    unstable.obsidian
+    unstable.vscode
     unstable.neovim
     jdk21_headless
     maven
-    deno
-    nodejs_20
+    nodejs_22
     python312
-    unstable.alacritty
     terraform
     unstable.go
     unstable.rustup

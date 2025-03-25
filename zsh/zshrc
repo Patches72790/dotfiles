@@ -2,7 +2,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 # Path to custom plugins folder
 export ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
-source $ZSH/oh-my-zsh.sh
+#source $ZSH/oh-my-zsh.sh
 
 # User configuration
 export LANG=en_US.UTF-8

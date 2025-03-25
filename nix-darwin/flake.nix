@@ -10,12 +10,24 @@
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # for creating symlinks for terminal apps to run with spotlight
+    mac-app-util.url = "github:hraban/mac-app-util";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, nixpkgs-unstable, home-manager }:
+  outputs =
+    inputs@{ self
+    , nix-darwin
+    , nixpkgs
+    , nixpkgs-unstable
+    , home-manager
+    , mac-app-util
+    }:
     let
       system = "aarch64-darwin";
-      unstable = nixpkgs-unstable.legacyPackages.${system};
+      commonArgs = { inherit system; config.allowUnfree = true; };
+      pkgs = import nixpkgs commonArgs;
+      unstable = import nixpkgs-unstable commonArgs;
     in
     {
       # Build darwin flake using:
@@ -24,19 +36,26 @@
         modules = [
           ./darwin/configuration.nix
 
+          mac-app-util.darwinModules.default
+
           home-manager.darwinModules.home-manager
           {
             home-manager = {
               # include the home-manager module
               users.plharvey = import ./darwin/home.nix;
+
+              # for creating symlinks for terminal apps to run with spotlight
+              sharedModules = [
+                mac-app-util.homeManagerModules.default
+              ];
+
+              extraSpecialArgs = { inherit pkgs unstable inputs; };
             };
             users.users.plharvey.home = "/Users/plharvey";
           }
-
-          { home-manager.extraSpecialArgs = { inherit inputs; unstable = unstable; }; }
         ];
 
-        specialArgs = { inherit inputs; unstable = nixpkgs-unstable; };
+        specialArgs = { inherit pkgs unstable inputs; };
       };
     };
 }

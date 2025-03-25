@@ -1,6 +1,7 @@
 { config
 , pkgs
-, nixpkgs
+, unstable
+, lib
 , ...
 }:
 
@@ -15,17 +16,17 @@
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
 
-  nixpkgs.hostPlatform = "aarch64-darwin";
-  nixpkgs.config = {
-    allowUnfree = true;
-    allowUnsupportedSystem = true; #for julia? 
+  nixpkgs = {
+    hostPlatform = "aarch64-darwin";
   };
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages =
     with pkgs; [
+      _1password-cli
       home-manager
+      unstable.alacritty
       vim
       curl
       direnv
@@ -45,7 +46,6 @@
       git-crypt
       gnupg
       glab
-      _1password-cli
       httpie
     ];
 
