@@ -4,6 +4,7 @@
     unstable.obsidian
     unstable.vscode
     unstable.neovim
+    unstable.jetbrains.idea-ultimate
     jdk21_headless
     maven
     nodejs_22
