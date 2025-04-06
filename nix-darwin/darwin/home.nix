@@ -17,6 +17,8 @@
     stack
     ghc
     elan
+    unstable.inkscape
+    unstable.gimp
   ];
 
   home.stateVersion = "24.11";
