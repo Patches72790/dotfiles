@@ -47,11 +47,10 @@
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    # TODO - Figure out how to load dotfiles directly
     ".vimrc".source = ./dotfiles/vimrc;
     ".config/tmux/tmux.conf".source = ./dotfiles/tmux.conf;
-    ".config/alacritty/alacritty.toml".source = ./dotfiles/alacritty/alacritty.toml;
-    ".zshrc".source = ./dotfiles/zsh/zshrc;
+    ".config/alacritty/alacritty.toml".source = ./dotfiles/alacritty.toml;
+    ".zshrc".source = ./dotfiles/zshrc;
   };
 
   # Home Manager can also manage your environment variables through
