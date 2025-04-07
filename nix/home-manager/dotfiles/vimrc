@@ -1,0 +1,30 @@
+" general default settings
+set number
+set relativenumber
+syntax on
+set expandtab
+set tabstop=4 shiftwidth=4
+set smartindent
+set autoindent
+set hlsearch
+set noerrorbells
+set nu
+set nowrap
+set smartcase
+set noswapfile
+set undofile
+set incsearch
+set undodir=~/.config/vim/undodir
+set backupdir=~/.config/vim/backupdir
+set directory=~/.config/vim/backupdir
+set completeopt=menuone,noselect,noinsert
+set writebackup
+set backup
+
+" color settings
+" colorscheme gruvbox
+" colorscheme darcula
+set background=dark
+set termguicolors
+
+inoremap "<cmd>w" "<leader>w"
