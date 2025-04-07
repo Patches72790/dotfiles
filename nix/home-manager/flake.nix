@@ -1,6 +1,9 @@
 {
   description = "Home Manager configuration of patroclus";
 
+  # To update, run:
+  # nix flake update
+  # home-manager switch
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "nixpkgs/nixos-24.11";

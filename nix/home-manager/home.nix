@@ -22,14 +22,27 @@
     unstable.neovim
     unstable.python313
     unstable.rustup
-    go
+    unstable.discord
+    unstable.go
     sqlite
     ripgrep
     fzf
     fd
     jdk21_headless
-    sshfs
+    unstable.inkscape-with-extensions
+    unstable.gimp
+    unstable.firefox
+    unstable.vscode
+    unstable.sunshine
+    unstable.blender
+    unstable.obs-studio
   ];
+
+  programs.git = {
+    enable = true;
+    userName = "patches72790";
+    userEmail = "patches72790@gmail.com";
+  };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -39,8 +52,13 @@
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
 
+    # TODO - Figure out how to load dotfiles directly
+    #".config/tmux/tmux.conf".source = "/home/patroclus/dotfiles/tmux/tmux.conf";
+    #".config/alacritty/alacritty.toml".source = "/home/patroclus/dotfiles/alacritty/alacritty.toml";
+    #".zshrc".source = "/home/patroclus/dotfiles/zsh/zshrc";
+
     # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
+    # " .gradle/gradle.properties ".text = ''
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
@@ -63,7 +81,7 @@
   #  /etc/profiles/per-user/patroclus/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    EDITOR = "nvim ";
   };
 
   # Let Home Manager install and manage itself.
