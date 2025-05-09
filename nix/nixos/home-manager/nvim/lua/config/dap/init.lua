@@ -1,0 +1,50 @@
+local M = {}
+
+---Configures general utilities for the debugging tool
+local function configure()
+	-- sign definitions
+	vim.fn.sign_define("DapBreakpoint", { text = "🟥", texthl = "", linehl = "", numhl = "" })
+	vim.fn.sign_define("DapBreakpointRejected", { text = "🟦", texthl = "", linehl = "", numhl = "" })
+	vim.fn.sign_define("DapStopped", { text = "⭐️", texthl = "", linehl = "", numhl = "" })
+end
+
+local function configure_debuggers()
+	--require("config.debugging.python").setup()
+	--require("config.dap.rust").setup()
+	require("config.dap.go").setup()
+end
+
+local function configure_keymaps()
+	local dap = require("dap")
+	local dapui = require("dapui")
+	vim.keymap.set("n", "<leader><leader>r", dap.toggle_breakpoint, { desc = "DAP Toggle Breakpoint" })
+	vim.keymap.set("n", "<leader><leader>c", dap.continue, { desc = "DAP Continue" })
+	vim.keymap.set("n", "<leader><leader>t", dap.terminate, { desc = "DAP Terminate" })
+	vim.keymap.set("n", "<leader><leader>s", dap.step_over, { desc = "DAP Step Over" })
+	vim.keymap.set("n", "<leader><leader>i", dap.step_into, { desc = "DAP Step Into" })
+	vim.keymap.set("n", "<leader><leader>o", dap.step_out, { desc = "DAP Step Out" })
+	vim.keymap.set("n", "<leader><leader>b", dap.step_back, { desc = "DAP Step Back" })
+
+	-- configure dapui event handlers
+	dap.listeners.before.attach.dapui_config = function()
+		dapui.open()
+	end
+	dap.listeners.before.launch.dapui_config = function()
+		dapui.open()
+	end
+	dap.listeners.before.event_terminated.dapui_config = function()
+		dapui.close()
+	end
+	dap.listeners.before.event_exited.dapui_config = function()
+		dapui.close()
+	end
+end
+
+function M.setup()
+	configure()
+	configure_debuggers()
+	require("dapui").setup() -- initialize nvim-dap-ui
+	configure_keymaps()
+end
+
+return M

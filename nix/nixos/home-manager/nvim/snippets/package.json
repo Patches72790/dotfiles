@@ -1,0 +1,11 @@
+{
+  "name": "patroclus-snippets",
+  "contributes": {
+    "snippets": [
+      {
+        "language": "markdown",
+        "path": "./markdown.json"
+      }
+    ]
+  }
+}
