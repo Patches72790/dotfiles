@@ -58,4 +58,6 @@ function M.setup()
 	telescope.load_extension("file_browser")
 end
 
+M.setup()
+
 return M

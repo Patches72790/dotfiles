@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./nvim
     ./zsh
   ];
   # Home Manager needs a bit of information about you and the paths it should
@@ -23,7 +22,7 @@
   # environment.
   home.packages = with pkgs; [
     unstable.nodejs_22
-    #unstable.neovim
+    unstable.neovim
     unstable.python313
     unstable.rustup
     unstable.discord
@@ -40,6 +39,7 @@
     unstable.sunshine
     unstable.blender
     unstable.obs-studio
+    libgcc
   ];
 
   programs.git = {
@@ -54,7 +54,6 @@
     ".vimrc".source = ./dotfiles/vimrc;
     ".config/tmux/tmux.conf".source = ./dotfiles/tmux.conf;
     ".config/alacritty/alacritty.toml".source = ./dotfiles/alacritty.toml;
-    #".zshrc".source = ./dotfiles/zshrc;
   };
 
   home.sessionVariables = {
