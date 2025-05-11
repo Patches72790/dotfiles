@@ -44,29 +44,33 @@
           system = (system-fn "patroclus");
           config.allowUnfree = true;
         };
-
-        unstable = import nixpkgs-unstable {
-          system = (system-fn "patroclus");
-          config.allowUnfree = true;
-        };
-
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
         modules = [ ./manjaro ];
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
-        extraSpecialArgs = { inherit pkgs unstable inputs; };
+        extraSpecialArgs = {
+          inherit inputs;
+          pkgs = import nixpkgs {
+            system = (system-fn "patroclus");
+            config.allowUnfree = true;
+          };
+          unstable = import nixpkgs-unstable {
+            system = (system-fn "patroclus");
+            config.allowUnfree = true;
+          };
+        };
       };
 
       darwinConfigurations."DOIT-X3PG99RC-X" = nix-darwin.lib.darwinSystem {
         pkgs = import nixpkgs {
-          system = (system-fn "patroclus");
+          system = (system-fn "plharvey");
           config.allowUnfree = true;
         };
 
         unstable = import nixpkgs-unstable {
-          system = (system-fn "patroclus");
+          system = (system-fn "plharvey");
           config.allowUnfree = true;
         };
 
@@ -79,20 +83,42 @@
           {
             home-manager = {
               # include the home-manager module
-              users.plharvey = import ./darwin/home.nix;
+              users.plharvey = import ./darwin;
 
               # for creating symlinks for terminal apps to run with spotlight
               sharedModules = [
                 mac-app-util.homeManagerModules.default
               ];
 
-              extraSpecialArgs = { inherit pkgs unstable inputs; };
+              extraSpecialArgs = {
+                inherit inputs;
+                pkgs = import nixpkgs {
+                  system = (system-fn "plharvey");
+                  config.allowUnfree = true;
+                };
+                unstable = import nixpkgs-unstable {
+                  system = (system-fn "plharvey");
+                  config.allowUnfree = true;
+                };
+
+              };
             };
             users.users.plharvey.home = "/Users/plharvey";
           }
         ];
 
-        specialArgs = { inherit pkgs unstable inputs; };
+        specialArgs = {
+          inherit inputs;
+          pkgs = import nixpkgs {
+            system = (system-fn "plharvey");
+            config.allowUnfree = true;
+          };
+          unstable = import nixpkgs-unstable {
+            system = (system-fn "plharvey");
+            config.allowUnfree = true;
+          };
+
+        };
       };
     };
 }
