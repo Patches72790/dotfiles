@@ -29,6 +29,7 @@
     , nixpkgs-unstable
     , home-manager
     , mac-app-util
+    , nixpkgs-darwin
     , nix-darwin
     , ...
     } @ inputs:
@@ -64,12 +65,7 @@
       };
 
       darwinConfigurations."DOIT-X3PG99RC-X" = nix-darwin.lib.darwinSystem {
-        pkgs = import nixpkgs {
-          system = (system-fn "plharvey");
-          config.allowUnfree = true;
-        };
-
-        unstable = import nixpkgs-unstable {
+        pkgs = import nixpkgs-darwin {
           system = (system-fn "plharvey");
           config.allowUnfree = true;
         };
@@ -83,7 +79,7 @@
           {
             home-manager = {
               # include the home-manager module
-              users.plharvey = import ./darwin;
+              users.plharvey = import ./darwin/home.nix;
 
               # for creating symlinks for terminal apps to run with spotlight
               sharedModules = [
@@ -92,7 +88,7 @@
 
               extraSpecialArgs = {
                 inherit inputs;
-                pkgs = import nixpkgs {
+                pkgs = import nixpkgs-darwin {
                   system = (system-fn "plharvey");
                   config.allowUnfree = true;
                 };
@@ -109,7 +105,7 @@
 
         specialArgs = {
           inherit inputs;
-          pkgs = import nixpkgs {
+          pkgs = import nixpkgs-darwin {
             system = (system-fn "plharvey");
             config.allowUnfree = true;
           };
