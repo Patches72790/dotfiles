@@ -214,7 +214,7 @@ local ensure_installed_servers = {
     "terraformls",
     "eslint",
     --"hls",
-    --"jdtls",
+    "jdtls",
 }
 
 function M.setup(options)
@@ -238,8 +238,7 @@ function M.setup(options)
 
     for _, server in pairs(ensure_installed_servers) do
         vim.lsp.enable(server)
-        local opts = get_server_opts(server, options)
-        vim.lsp.config(server, opts)
+        vim.lsp.config(server, options)
     end
 
     require("config.lsp.conform").setup()
