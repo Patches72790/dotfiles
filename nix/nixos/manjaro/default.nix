@@ -1,9 +1,14 @@
-{ config, pkgs, nixpkgs, unstable, ... }:
+{ config, pkgs, unstable, system, lib, ... }:
 
+let
+  nixGL = import ./util/nixgl.nix { inherit pkgs config lib; };
+in
 {
   imports = [
     ./zsh
+    #./options
   ];
+
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "patroclus";
@@ -37,9 +42,10 @@
     unstable.firefox
     unstable.vscode
     unstable.sunshine
-    unstable.blender
+    (nixGL unstable.blender)
+    (nixGL unstable.alacritty)
+    nixgl.auto.nixGLDefault
     unstable.obs-studio
-    libgcc
   ];
 
   programs.git = {

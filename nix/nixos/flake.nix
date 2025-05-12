@@ -13,6 +13,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixgl.url = "github:nix-community/nixGL";
+
     nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-24.11-darwin";
     nix-darwin = {
       url = "github:LnL7/nix-darwin/nix-darwin-24.11";
@@ -24,43 +26,35 @@
   };
 
   outputs =
-    { self
-    , nixpkgs
+    { nixpkgs
     , nixpkgs-unstable
     , home-manager
     , mac-app-util
     , nixpkgs-darwin
     , nix-darwin
+    , nixgl
     , ...
     } @ inputs:
     let
       system-fn = n: if n == "patroclus" then "x86_64-linux" else "aarch64-darwin";
-      #commonArgs = { inherit system; config.allowUnfree = true; };
-      #pkgs = import nixpkgs commonArgs;
-      #unstable = import nixpkgs-unstable commonArgs;
+      commonArgsFn = system-name: {
+        system = system-fn system-name;
+        config.allowUnfree = true;
+        overlays = [ nixgl.overlay ];
+      };
+      pkgFn = name: pkg: import pkg (commonArgsFn name);
     in
     {
       homeConfigurations."patroclus" = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          system = (system-fn "patroclus");
-          config.allowUnfree = true;
-        };
-        # Specify your home configuration modules here, for example,
-        # the path to your home.nix.
+        pkgs = (pkgFn "patroclus" nixpkgs);
+
         modules = [ ./manjaro ];
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
         extraSpecialArgs = {
-          inherit inputs;
-          pkgs = import nixpkgs {
-            system = (system-fn "patroclus");
-            config.allowUnfree = true;
-          };
-          unstable = import nixpkgs-unstable {
-            system = (system-fn "patroclus");
-            config.allowUnfree = true;
-          };
+          pkgs = (pkgFn "patroclus" nixpkgs);
+          unstable = (pkgFn "patroclus" nixpkgs-unstable);
         };
       };
 
