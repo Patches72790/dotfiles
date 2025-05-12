@@ -1,5 +1,9 @@
 { config, pkgs, unstable, ... }: {
 
+  imports = [
+    ../manjaro/zsh
+  ];
+
   home.packages = with pkgs; [
     unstable.obsidian
     unstable.vscode

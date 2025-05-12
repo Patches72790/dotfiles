@@ -53,20 +53,8 @@
   programs.tmux.enableFzf = true;
   programs.tmux.enableSensible = true;
   programs.tmux.enableVim = true;
-
   programs.tmux.extraConfig = ''
     source-file -q ~/.config/tmux/tmux.conf
-  '';
-
-  # Create /etc/zshrc that loads the nix-darwin environment.
-  programs.zsh.enable = true; # default shell on catalina
-  programs.zsh.enableBashCompletion = true;
-  programs.zsh.enableFzfCompletion = true;
-  programs.zsh.enableFzfGit = true;
-  programs.zsh.enableFzfHistory = true;
-
-  programs.zsh.shellInit = ''
-    source $HOME/.zshrc
   '';
 
   # Used for backwards compatibility, please read the changelog before changing.
