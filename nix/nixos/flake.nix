@@ -61,7 +61,7 @@
 
       # Configuration for nix-darwin on work MacOS
       darwinConfigurations."DOIT-X3PG99RC-X" = nix-darwin.lib.darwinSystem {
-        pkgs = (pkgFn "plharvey" nix-darwin);
+        pkgs = (pkgFn "plharvey" nixpkgs-darwin);
 
         modules = [
           ./darwin/configuration.nix
