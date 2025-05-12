@@ -1,8 +1,8 @@
 {
-  description = "Home Manager configuration of patroclus";
+  description = "Home Manager Configuration for Patroclus Machines";
 
   # To update, run:
-  # nix flake update
+  # nix flake update --flake .
   # home-manager switch --flake .
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
@@ -45,6 +45,7 @@
       pkgFn = name: pkg: import pkg (commonArgsFn name);
     in
     {
+      # Configuration for Linux home-manager
       homeConfigurations."patroclus" = home-manager.lib.homeManagerConfiguration {
         pkgs = (pkgFn "patroclus" nixpkgs);
 
@@ -58,11 +59,9 @@
         };
       };
 
+      # Configuration for nix-darwin on work MacOS
       darwinConfigurations."DOIT-X3PG99RC-X" = nix-darwin.lib.darwinSystem {
-        pkgs = import nixpkgs-darwin {
-          system = (system-fn "plharvey");
-          config.allowUnfree = true;
-        };
+        pkgs = (pkgFn "plharvey" nix-darwin);
 
         modules = [
           ./darwin/configuration.nix
@@ -81,33 +80,18 @@
               ];
 
               extraSpecialArgs = {
-                inherit inputs;
-                pkgs = import nixpkgs-darwin {
-                  system = (system-fn "plharvey");
-                  config.allowUnfree = true;
-                };
-                unstable = import nixpkgs-unstable {
-                  system = (system-fn "plharvey");
-                  config.allowUnfree = true;
-                };
-
+                pkgs = (pkgFn "plharvey" nixpkgs-darwin);
+                unstable = (pkgFn "plharvey" nixpkgs-unstable);
               };
             };
+
             users.users.plharvey.home = "/Users/plharvey";
           }
         ];
 
         specialArgs = {
-          inherit inputs;
-          pkgs = import nixpkgs-darwin {
-            system = (system-fn "plharvey");
-            config.allowUnfree = true;
-          };
-          unstable = import nixpkgs-unstable {
-            system = (system-fn "plharvey");
-            config.allowUnfree = true;
-          };
-
+          pkgs = (pkgFn "plharvey" nixpkgs-darwin);
+          unstable = (pkgFn "plharvey" nixpkgs-unstable);
         };
       };
     };

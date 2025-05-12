@@ -46,6 +46,11 @@ in
     (nixGL unstable.alacritty)
     nixgl.auto.nixGLDefault
     unstable.obs-studio
+    unstable.haskellPackages.xmonad
+
+    unstable.ghc
+    unstable.haskellPackages.haskell-language-server
+    unstable.haskellPackages.stack
   ];
 
   programs.git = {
