@@ -57,6 +57,10 @@
     source-file -q ~/.config/tmux/tmux.conf
   '';
 
+  environment.variables = {
+    EDITOR = "nvim";
+  };
+
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
   system.stateVersion = 5;

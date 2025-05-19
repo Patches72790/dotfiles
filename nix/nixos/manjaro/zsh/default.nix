@@ -40,6 +40,7 @@
 
       initExtra = ''
         	# Prompt
+            export EDITOR="nvim"
         	function git_branch_cmd() {
         	    echo "$(git branch 2>/dev/null | grep '*' | colrm 1 2)"
         	}

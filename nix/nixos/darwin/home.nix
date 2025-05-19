@@ -17,7 +17,7 @@
     unstable.go
     unstable.rustup
     sqlite
-    iterm2
+    unstable.iterm2
     stack
     ghc
     elan
