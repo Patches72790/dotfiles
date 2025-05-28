@@ -29,6 +29,8 @@
         gco = "git checkout";
         grs = "git reset";
         gbav = "gb -av";
+        gbdc = "gbav | egrep '(\[gone\])' | egrep -v '(master|main)' | awk '{ print \$1 }'";
+        gbda = "gbdc | xargs git branch -D";
       };
       #autosuggestions.enable = true;
       #history.size = 100000;
@@ -37,7 +39,7 @@
 
       plugins = [ ];
 
-      initExtra = ''
+      initContent = ''
         	# Prompt
             export EDITOR="nvim"
         	function git_branch_cmd() {

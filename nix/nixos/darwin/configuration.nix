@@ -7,14 +7,12 @@
 
 {
   nix = {
+    enable = true;
     package = pkgs.nix;
     settings = {
       "extra-experimental-features" = [ "nix-command" "flakes" ];
     };
   };
-
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
 
   nixpkgs = {
     hostPlatform = "aarch64-darwin";
