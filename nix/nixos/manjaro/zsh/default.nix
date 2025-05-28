@@ -35,7 +35,6 @@
       enableCompletion = true;
       historySubstringSearch.enable = true;
 
-      # TODO
       plugins = [ ];
 
       initExtra = ''
@@ -46,6 +45,19 @@
         	}
         	setopt PROMPT_SUBST
         	export PS1='%{%F{109}%}%n %{%F{106}%}$(git_branch_cmd) %{%F{72}%}%1~ %{%F{96}%}λ %{%f%}'
+
+            # Enable vi keybindings
+            bindkey -v
+
+            # Kill input from the current point to the end of line with Ctrl-k
+            bindkey '^k' kill-line
+            # Search the history incremantally with Ctrl-r
+            bindkey '^r' history-incremental-search-backward
+            # Insert and go through the "last words" of previous commands with Meta-.
+            # (or Escape-. for that matter).
+            bindkey '^[.' insert-last-word
+            # Show the man-page or other helpful infos with Meta-h
+            bindkey '^[h' run-help
       '';
     };
   };

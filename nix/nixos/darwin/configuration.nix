@@ -61,6 +61,14 @@
     EDITOR = "nvim";
   };
 
+  programs.zsh.shellInit = ''
+    function ssh-trad {
+        TOKEN=$(op read op://trad/svc-acct-gitlab-runner-1pass/credential)
+
+        OP_TOKEN=$TOKEN ssh-at-trad $@
+    }
+  '';
+
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
   system.stateVersion = 5;
