@@ -60,9 +60,8 @@
   };
 
   programs.zsh.shellInit = ''
-    function ssh-trad {
+    function trassh {
         TOKEN=$(op read op://trad/svc-acct-gitlab-runner-1pass/credential)
-
         OP_TOKEN=$TOKEN ssh-at-trad $@
     }
   '';
