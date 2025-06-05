@@ -26,7 +26,6 @@ in
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    unstable.nodejs_22
     unstable.neovim
     unstable.python313
     unstable.rustup
@@ -48,6 +47,7 @@ in
     unstable.obs-studio
     unstable.haskellPackages.xmonad
 
+    unstable.nodejs_24
     unstable.ghc
     unstable.haskellPackages.haskell-language-server
     unstable.haskellPackages.stack
