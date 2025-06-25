@@ -8,6 +8,7 @@ M.setup = function()
 			python = { "blackd-client", "black", lsp_format = "fallback" },
 			javascript = { "prettierd" },
 			typescript = { "prettierd" },
+			htmlangular = { "prettierd" },
 			markdown = { "prettierd" },
 			css = { "prettierd" },
 			scss = { "prettierd" },
