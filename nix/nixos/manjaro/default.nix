@@ -44,7 +44,7 @@ in
     (nixGL unstable.blender)
     (nixGL unstable.alacritty)
     nixgl.auto.nixGLDefault
-    unstable.obs-studio
+    #(nixGL unstable.obs-studio)
     unstable.haskellPackages.xmonad
 
     unstable.nodejs_24
