@@ -9,6 +9,7 @@
     unstable.vscode
     unstable.neovim
     unstable.jetbrains.idea-ultimate
+    unstable.opentofu
     jdk21_headless
     maven
     nodejs_22

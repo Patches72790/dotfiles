@@ -45,6 +45,8 @@
       gnupg
       glab
       httpie
+      cmake
+      cairo
     ];
 
   programs.tmux.enable = true;
