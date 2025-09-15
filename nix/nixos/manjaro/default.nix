@@ -40,7 +40,7 @@ in
     unstable.gimp
     unstable.firefox
     unstable.vscode
-    unstable.sunshine
+    #unstable.sunshine
     (nixGL unstable.blender)
     (nixGL unstable.alacritty)
     nixgl.auto.nixGLDefault
