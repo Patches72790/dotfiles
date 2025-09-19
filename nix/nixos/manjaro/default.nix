@@ -51,6 +51,7 @@ in
     unstable.ghc
     unstable.haskellPackages.haskell-language-server
     unstable.haskellPackages.stack
+    unstable.texlive.combined.scheme-full
   ];
 
   programs.git = {

@@ -24,7 +24,7 @@
     elan
     unstable.inkscape
     unstable.gimp
-    texliveFull
+    unstable.texliveFull
   ];
 
   home.stateVersion = "24.11";
