@@ -25,6 +25,9 @@
     unstable.inkscape
     unstable.gimp
     unstable.texliveFull
+    unstable.uv
+    unstable.typst
+    unstable.tinymist
   ];
 
   home.stateVersion = "24.11";
