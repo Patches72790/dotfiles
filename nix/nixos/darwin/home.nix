@@ -22,12 +22,12 @@
     stack
     ghc
     elan
-    unstable.inkscape
-    unstable.gimp
     unstable.texliveFull
     unstable.uv
     unstable.typst
     unstable.tinymist
+    cairo
+    pkg-config
   ];
 
   home.stateVersion = "24.11";
