@@ -8,7 +8,10 @@
         nv = "nvim";
         lsd = "ls -lah";
         l = "lsd";
-        hs = "home-manager switch --impure --flake .";
+        nixflkup = "nix flake update --flake $HOME/dotfiles/nix/nixos";
+        nixhsw = "home-manager switch --impure --flake .";
+        nixsw = "sudo nixos-rebuild switch --flake $HOME/dotfiles/nix/nixos#orpheus";
+        nixdsw = "sudo darwin-rebuild switch --flake $HOME/dotfiles/nix/nixos#DOIT-X3PG99RC-X";
         gpf = "git push --force";
         egig = "echo_git_ignore";
         gdec = "git log --decorate=full --oneline --graph";

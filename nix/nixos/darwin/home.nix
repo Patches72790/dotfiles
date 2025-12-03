@@ -5,6 +5,7 @@
   ];
 
   home.packages = with pkgs; [
+    config.nix.package
     unstable.obsidian
     unstable.vscode
     unstable.neovim
