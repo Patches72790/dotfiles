@@ -66,18 +66,11 @@
         modules = [
           ./darwin/configuration.nix
 
-          mac-app-util.darwinModules.default
-
           home-manager.darwinModules.home-manager
           {
             home-manager = {
               # include the home-manager module
               users.plharvey = import ./darwin/home.nix;
-
-              # for creating symlinks for terminal apps to run with spotlight
-              sharedModules = [
-                mac-app-util.homeManagerModules.default
-              ];
 
               extraSpecialArgs = {
                 pkgs = (pkgFn "plharvey" nixpkgs-darwin);
