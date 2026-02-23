@@ -2,6 +2,9 @@
 {
   config = {
     programs.zsh = {
+      sessionVariables = {
+        JAVA_HOME = builtins.toString pkgs.jdk25_headless.outPath;
+      };
       enable = true;
       syntaxHighlighting.enable = true;
       shellAliases = {

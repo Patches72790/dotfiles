@@ -35,7 +35,7 @@ in
     ripgrep
     fzf
     fd
-    jdk21_headless
+    jdk25_headless
     unstable.inkscape-with-extensions
     unstable.gimp
     unstable.firefox
