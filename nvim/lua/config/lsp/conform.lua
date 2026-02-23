@@ -24,6 +24,7 @@ M.setup = function()
 			terraform = { "terraform_fmt", lsp_format = "fallback" },
 			haskell = { lsp_format = "fallback" },
 			nix = { lsp_format = "fallback" },
+			typst = { lspformat = "tinymist" },
 		},
 		format_on_save = function(bufnr)
 			if vim.g.conform_autoformat_disabled or vim.b[bufnr].conform_autoformat_disabled then

@@ -9,9 +9,9 @@
     unstable.obsidian
     unstable.vscode
     unstable.neovim
-    unstable.jetbrains.idea-ultimate
+    unstable.jetbrains.idea
     unstable.opentofu
-    jdk21_headless
+    jdk25_headless
     maven
     nodejs_22
     python312

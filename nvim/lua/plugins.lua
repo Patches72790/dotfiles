@@ -1,22 +1,22 @@
 return {
 
-	--{
-	--    "Julian/lean.nvim",
-	--    event = { "BufReadPre *.lean", "BufNewFile *.lean" },
+	{
+		"Julian/lean.nvim",
+		event = { "BufReadPre *.lean", "BufNewFile *.lean" },
 
-	--    dependencies = {
-	--        "neovim/nvim-lspconfig",
-	--        "nvim-lua/plenary.nvim",
-	--        "nvim-telescope/telescope.nvim", -- for 2 Lean-specific pickers
-	--        -- 'andrewradev/switch.vim',        -- for switch support
-	--        -- 'tomtom/tcomment_vim',           -- for commenting
-	--    },
+		dependencies = {
+			"neovim/nvim-lspconfig",
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim", -- for 2 Lean-specific pickers
+			-- 'andrewradev/switch.vim',        -- for switch support
+			-- 'tomtom/tcomment_vim',           -- for commenting
+		},
 
-	--    ---@type lean.Config
-	--    opts = { -- see below for full configuration options
-	--        mappings = true,
-	--    },
-	--},
+		---@type lean.Config
+		opts = { -- see below for full configuration options
+			mappings = true,
+		},
+	},
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
@@ -145,6 +145,22 @@ return {
 			require("peek").setup()
 			vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
 			vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
+		end,
+	},
+
+	{
+		"chomosuke/typst-preview.nvim",
+		lazy = false, -- or ft = 'typst'
+		version = "1.*",
+		opts = {}, -- lazy.nvim will implicitly calls `setup {}`
+		config = function()
+			require("typst-preview").setup({
+				debug = true,
+				open_cmd = "open -a Preview %s",
+				dependencies_bin = {
+					["tinymist"] = "tinymist",
+				},
+			})
 		end,
 	},
 }

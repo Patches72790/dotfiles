@@ -16,6 +16,7 @@ local ensure_installed_servers = {
 	"eslint",
 	"hls",
 	"jdtls",
+	"tinymist",
 }
 
 function M.setup(options)
