@@ -24,6 +24,7 @@
     with pkgs; [
       _1password-cli
       home-manager
+      tree-sitter
       unstable.alacritty
       vim
       curl

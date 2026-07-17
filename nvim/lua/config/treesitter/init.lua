@@ -1,7 +1,7 @@
 local M = {}
 
 function M.setup()
-	require("nvim-treesitter.configs").setup({
+	require("nvim-treesitter").setup({
 		sync_install = false,
 		auto_install = true,
 		ignore_install = {},
@@ -28,9 +28,6 @@ function M.setup()
 			"bash",
 		},
 		highlight = { enable = true },
-		playground = {
-			enable = true,
-		},
 		indent = {
 			enable = true,
 		},
