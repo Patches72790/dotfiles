@@ -47,6 +47,7 @@
       glab
       httpie
       cmake
+      gitlab-ci-local
     ];
 
   programs.tmux.enable = true;
