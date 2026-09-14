@@ -29,6 +29,8 @@
     unstable.tinymist
     cairo
     pkg-config
+    lua
+    luarocks
   ];
 
   home.stateVersion = "24.11";

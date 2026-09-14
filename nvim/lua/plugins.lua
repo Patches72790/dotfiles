@@ -29,14 +29,24 @@ return {
 			require("config.telescope").setup()
 		end,
 	},
-
+	{
+		"folke/lazydev.nvim",
+		ft = "lua", -- only load on lua files
+		opts = {
+			library = {
+				-- See the configuration section for more details
+				-- Load luvit types when the `vim.uv` word is found
+				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+			},
+		},
+	},
 	{
 		"saghen/blink.cmp",
-		dependencies = "rafamadriz/friendly-snippets",
-
-		version = "*",
-		opts_extend = { "sources.default" },
-		config = function()
+		dependencies = {
+			"saghen/blink.lib",
+			"rafamadriz/friendly-snippets",
+		},
+		build = function()
 			require("config.blink").setup()
 		end,
 	},
@@ -96,13 +106,13 @@ return {
 			require("config.lsp").setup()
 		end,
 	},
-	{
-		"romus204/tree-sitter-manager.nvim",
-		dependencies = {}, -- tree-sitter CLI must be installed system-wide
-		config = function()
-			require("config.treesitter").setup()
-		end,
-	},
+	--	{
+	--		"romus204/tree-sitter-manager.nvim",
+	--		dependencies = {}, -- tree-sitter CLI must be installed system-wide
+	--		config = function()
+	--			require("config.treesitter").setup()
+	--		end,
+	--	},
 	{
 		"nvim-treesitter/nvim-treesitter",
 		branch = "main",
@@ -134,22 +144,6 @@ return {
 		"folke/which-key.nvim",
 		config = function()
 			require("which-key").setup()
-		end,
-	},
-
-	{
-		"folke/neodev.nvim",
-		opts = {},
-	},
-
-	{
-		"toppair/peek.nvim",
-		event = { "VeryLazy" },
-		build = "deno task --quiet build:fast",
-		config = function()
-			require("peek").setup()
-			vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
-			vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
 		end,
 	},
 

@@ -48,6 +48,7 @@
       httpie
       cmake
       gitlab-ci-local
+      wget
     ];
 
   programs.tmux.enable = true;

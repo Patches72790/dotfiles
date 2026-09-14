@@ -1,7 +1,7 @@
 local M = {}
 
 function M.setup()
-	require("tree-sitter-manager").setup()
+	require("nvim-treesitter").setup()
 end
 
 return M
