@@ -47,8 +47,10 @@ return {
 			"rafamadriz/friendly-snippets",
 		},
 		build = function()
-			require("config.blink").setup()
+			require("blink.cmp").build():pwait(5000)
 		end,
+
+		opts = require("config.blink").opts(),
 	},
 
 	{
@@ -106,13 +108,7 @@ return {
 			require("config.lsp").setup()
 		end,
 	},
-	--	{
-	--		"romus204/tree-sitter-manager.nvim",
-	--		dependencies = {}, -- tree-sitter CLI must be installed system-wide
-	--		config = function()
-	--			require("config.treesitter").setup()
-	--		end,
-	--	},
+
 	{
 		"nvim-treesitter/nvim-treesitter",
 		branch = "main",
@@ -161,5 +157,9 @@ return {
 				},
 			})
 		end,
+	},
+
+	{
+		"https://github.com/gavinleroy/earl-grey.nvim",
 	},
 }
