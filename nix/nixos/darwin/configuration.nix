@@ -49,7 +49,11 @@
       cmake
       gitlab-ci-local
       wget
+      ocaml
+      opam
     ];
+
+  services.tailscale.enable = true;
 
   programs.tmux.enable = true;
   programs.tmux.enableFzf = true;
