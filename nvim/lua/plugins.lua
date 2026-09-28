@@ -7,9 +7,7 @@ return {
 		dependencies = {
 			"neovim/nvim-lspconfig",
 			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim", -- for 2 Lean-specific pickers
-			-- 'andrewradev/switch.vim',        -- for switch support
-			-- 'tomtom/tcomment_vim',           -- for commenting
+			"nvim-telescope/telescope.nvim",
 		},
 
 		---@type lean.Config
@@ -157,9 +155,5 @@ return {
 				},
 			})
 		end,
-	},
-
-	{
-		"https://github.com/gavinleroy/earl-grey.nvim",
 	},
 }
