@@ -10,10 +10,9 @@ return {
 			"nvim-telescope/telescope.nvim",
 		},
 
-		---@type lean.Config
-		opts = { -- see below for full configuration options
-			mappings = true,
-		},
+		config = function()
+			vim.g.lean_config = { mappings = true }
+		end,
 	},
 	{
 		"nvim-telescope/telescope.nvim",
